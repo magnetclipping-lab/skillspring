@@ -50,6 +50,9 @@ export async function contactAction(_: ActionState, fd: FormData): Promise<Actio
   const { website: _w, ...row } = parsed.data;
   void _w;
   const { error } = await createAdminClient().from("contact_messages").insert({ ...row, user_id: user?.id ?? null });
-  if (error) return { ok: false, message: "Could not send your message. Please try again." };
+  if (error) {
+    console.error("[contact] insert failed", error.code, error.message);
+    return { ok: false, message: "Could not send your message. Please try again." };
+  }
   return { ok: true, message: "Thanks! Your message has been sent. We usually reply within two working days." };
 }
