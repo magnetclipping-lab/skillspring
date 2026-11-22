@@ -21,7 +21,7 @@ export default function AboutPage() {
           <div key={t} className="rounded-2xl border border-line bg-white p-6"><Icon className="size-6 text-brand-600" /><p className="mt-3 font-semibold">{t}</p><p className="mt-1 text-sm leading-6 text-ink-muted">{d}</p></div>
         ))}
       </div>
-      <div className="mt-12 flex flex-wrap gap-3"><ButtonLink href="/courses">Explore courses</ButtonLink><ButtonLink href="/contact" variant="secondary">Contact us</ButtonLink></div>
+      <div className="mt-12 flex flex-wrap gap-3"><ButtonLink href="/programs">Explore programs</ButtonLink><ButtonLink href="/contact" variant="secondary">Contact us</ButtonLink></div>
     </div>
   );
 }

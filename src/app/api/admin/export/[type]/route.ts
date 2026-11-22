@@ -32,6 +32,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     if (internship && /^[0-9a-f-]{36}$/.test(internship)) q = q.eq("internship_id", internship);
     const { data } = await q;
     rows = ((data ?? []) as unknown as { created_at: string; status: string; status_note: string | null; phone: string | null; portfolio_url: string | null; user: { full_name: string; email: string; college: string | null; degree: string | null; graduation_year: number | null } | null; internship: { title: string; kind: string } | null }[]).map((a) => ({ applied_at: a.created_at, opportunity: a.internship?.title, type: a.internship?.kind, name: a.user?.full_name, email: a.user?.email, phone: a.phone, college: a.user?.college, degree: a.user?.degree, graduation_year: a.user?.graduation_year, portfolio: a.portfolio_url, status: a.status, note: a.status_note }));
+  } else if (type === "ambassadors") {
+    const { data } = await supabase.from("ambassador_applications").select("created_at, full_name, email, phone, college, city, course_and_year, social_url, status, referral_code, admin_notes").order("created_at", { ascending: false });
+    rows = (data ?? []) as Record<string, unknown>[];
   } else {
     return NextResponse.json({ error: "Unknown export" }, { status: 404 });
   }

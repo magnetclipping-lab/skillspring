@@ -20,13 +20,13 @@ export function PriceTag({ course, size = "md" }: { course: Pick<CourseCardData,
 
 export function CourseCard({ course, priority }: { course: CourseCardData; priority?: boolean }) {
   return (
-    <Link href={`/courses/${course.slug}`} className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+    <Link href={`/programs/${course.slug}`} className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
       <div className="relative aspect-[16/9] overflow-hidden bg-brand-900">
         {course.thumbnail_url ? (
           <Image src={course.thumbnail_url} alt="" fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.03]" priority={priority} unoptimized={course.thumbnail_url.endsWith(".svg")} />
         ) : null}
         {course.is_demo ? (
-          <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-amber-700 shadow-sm">Demo · Not yet available</span>
+          <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[12px] font-semibold text-ink-soft shadow-sm">Enrolment opens soon</span>
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">

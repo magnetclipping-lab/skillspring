@@ -2,13 +2,13 @@
 
 /* ---------------------------------------------------------------------------
    SkillSpring design system
-   Typography: Plus Jakarta Sans (display) + Inter (text), self-hosted.
-   Colour: deep navy/indigo brand, violet accent, warm amber highlight.
+   Typography: Bricolage Grotesque (display, variable width) + Geist (text), self-hosted.
+   Colour: deep indigo ink, marigold signature accent, one hue per program.
    --------------------------------------------------------------------------- */
 
 @theme {
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Plus Jakarta Sans Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-brand-50: #f3f4fe;
   --color-brand-100: #e6e8fc;
@@ -26,13 +26,29 @@
   --color-accent-500: #8b5cf6;
   --color-accent-600: #7c3aed;
 
-  --color-highlight-400: #fbbf24;
-  --color-highlight-500: #f59e0b;
+  --color-highlight-400: #f8c65a;
+  --color-highlight-500: #f4b12e;
+
+  /* Signature accent: marigold */
+  --color-marigold-100: #fdf1d6;
+  --color-marigold-300: #f8c65a;
+  --color-marigold-400: #f4b12e;
+  --color-marigold-600: #c98a0b;
+
+  /* Program hues */
+  --color-stock: #0e9f6e;
+  --color-stock-tint: #e3f6ee;
+  --color-web: #5b5bd6;
+  --color-web-tint: #ebebfc;
+  --color-digital: #e2557a;
+  --color-digital-tint: #fde8ee;
+  --color-excel: #0b7fc1;
+  --color-excel-tint: #e2f0fa;
 
   --color-surface: #ffffff;
   --color-canvas: #f7f8fb;
   --color-line: #e5e7ef;
-  --color-ink: #0f1430;
+  --color-ink: #14163a;
   --color-ink-soft: #4a5072;
   --color-ink-muted: #7a8099;
 
@@ -57,7 +73,7 @@
     @apply bg-canvas text-ink font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
   }
-  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; font-stretch: 92%; }
   ::selection { background: var(--color-brand-200); }
   :focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) {
@@ -67,7 +83,8 @@
 
 @layer components {
   .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
-  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand-600; }
+  .eyebrow { @apply text-[15px] font-medium text-brand-600; }
+  .display { font-family: var(--font-display); font-stretch: 84%; letter-spacing: -0.035em; line-height: 0.95; font-weight: 700; }
   .hero-gradient {
     background:
       radial-gradient(60rem 30rem at 85% -10%, rgb(139 92 246 / 0.22), transparent 60%),

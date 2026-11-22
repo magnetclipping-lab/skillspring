@@ -35,7 +35,7 @@ export function renderTemplate(name: TemplateName, d: Data): { subject: string; 
     case "welcome":
       return {
         subject: "Welcome to SkillSpring",
-        html: layout(`Welcome, ${d.name || "there"}!`, `<p>Your SkillSpring account is ready. Explore practical courses and project-based experiences built for students.</p>`, { label: "Explore courses", url: d.url }),
+        html: layout(`Welcome, ${d.name || "there"}!`, `<p>Your SkillSpring account is ready. Explore practical programs and project-based experiences built for students.</p>`, { label: "Explore programs", url: d.url }),
       };
     case "payment_success":
       return {

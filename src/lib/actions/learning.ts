@@ -18,7 +18,7 @@ function dbMessage(e: { message?: string } | null, fallback = "Something went wr
 }
 
 export async function enrolFreeAction(courseId: string, slug: string): Promise<ActionState> {
-  await requireUser(`/courses/${slug}`);
+  await requireUser(`/programs/${slug}`);
   const supabase = await createClient();
   const { error } = await supabase.rpc("enrol_free_course", { p_course_id: courseId });
   if (error) return { ok: false, message: dbMessage(error) };
@@ -97,7 +97,7 @@ export async function saveReviewAction(_: ActionState, fd: FormData): Promise<Ac
   const supabase = await createClient();
   const { error } = await supabase.from("reviews").upsert({ course_id: parsed.data.course_id, user_id: user.id, rating: parsed.data.rating, comment: parsed.data.comment }, { onConflict: "course_id,user_id" });
   if (error) return { ok: false, message: dbMessage(error, "Only enrolled learners can review this course.") };
-  revalidatePath(`/courses/${String(fd.get("slug") ?? "")}`);
+  revalidatePath(`/programs/${String(fd.get("slug") ?? "")}`);
   return { ok: true, message: "Thanks for your review!" };
 }
 

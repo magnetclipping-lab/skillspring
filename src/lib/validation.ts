@@ -233,3 +233,25 @@ export function formDataToObject(fd: FormData) {
   for (const [k, v] of fd.entries()) if (typeof v === "string") o[k] = v;
   return o;
 }
+
+export const ambassadorSchema = z.object({
+  full_name: trimmed(120).min(2, "Enter your full name"),
+  email: emailSchema,
+  phone: z.string().trim().regex(/^\+?[0-9 \-]{7,20}$/, "Enter a valid phone number"),
+  college: trimmed(200).min(2, "Enter your college"),
+  city: trimmed(120).min(2, "Enter your city"),
+  course_and_year: trimmed(120).min(2, "For example, B.Com 2nd year"),
+  social_url: z
+    .union([z.string().trim().url("Enter a full link starting with https://").refine((v) => /^https?:\/\//.test(v), "Enter a full link starting with https://"), z.literal("")])
+    .optional()
+    .transform((v) => (v ? v : null)),
+  motivation: trimmed(2000).min(30, "Tell us a little more (at least 30 characters)"),
+  consent: z.literal("on", { message: "Please confirm so we can contact you" }),
+  website: z.string().max(0).optional(), // honeypot
+});
+
+export const ambassadorReviewSchema = z.object({
+  id: z.string().uuid(),
+  status: z.enum(["applied", "shortlisted", "active", "rejected", "inactive"]),
+  admin_notes: optionalText(2000),
+});

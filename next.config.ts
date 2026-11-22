@@ -54,6 +54,12 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: { bodySizeLimit: "2mb" },
   },
+  async redirects() {
+    return [
+      { source: "/courses", destination: "/programs", permanent: true },
+      { source: "/courses/:slug", destination: "/programs/:slug", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

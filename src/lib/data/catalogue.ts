@@ -2,6 +2,7 @@ import "server-only";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 import { demoCategories, demoCourses, demoInternships, courseDurationMinutes } from "@/lib/demo/seed-data";
+import { PROGRAMS, type ProgramDetails } from "@/lib/programs";
 import type { Category, CourseWithRelations, Internship, OutlineModule, OutlineRow } from "@/lib/types";
 
 /**
@@ -35,7 +36,7 @@ function previewCourses(): CourseCardData[] {
       category_id: cat.id, instructor_id: null, thumbnail_url: `/thumbnails/${c.slug}.svg`, price_paise: c.pricePaise,
       discount_price_paise: null, discount_ends_at: null, level: c.level, language: c.language,
       duration_minutes: courseDurationMinutes(c), learning_outcomes: c.outcomes, requirements: c.requirements,
-      faqs: c.faqs.map((f) => ({ question: f.q, answer: f.a })), status: "published", rights_status: "pending",
+      faqs: c.faqs.map((f) => ({ question: f.q, answer: f.a })), status: "published", rights_status: "owned",
       rights_notes: null, is_demo: true, completion_requires_all_lessons: true, completion_requires_assignments: true,
       completion_min_quiz_pct: null, review_notes: null, submitted_at: null, published_at: now, created_at: new Date(Date.now() - i * 86400000).toISOString(), updated_at: now,
       category: { slug: cat.slug, name: cat.name }, instructor: null, avg_rating: null, review_count: 0, enrolment_count: 0,
@@ -199,4 +200,15 @@ export async function getInternshipBySlug(slug: string): Promise<Internship | nu
 /** Whether a course can be bought right now (mirrors public.course_is_purchasable). */
 export function isPurchasable(c: { status: string; is_demo: boolean; rights_status: string }) {
   return c.status === "published" && !c.is_demo && ["owned", "licensed", "instructor_owned"].includes(c.rights_status);
+}
+
+// ---------------------------------------------------------------------------
+// Programs: database course (price, curriculum, FAQs) + page content (src/lib/programs.ts)
+// ---------------------------------------------------------------------------
+
+export type ProgramWithCourse = ProgramDetails & { course: CourseCardData | null };
+
+export async function getPrograms(): Promise<ProgramWithCourse[]> {
+  const courses = await getPublishedCourses({ sort: "newest" });
+  return PROGRAMS.map((p) => ({ ...p, course: courses.find((c) => c.slug === p.slug) ?? null }));
 }

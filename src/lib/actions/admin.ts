@@ -39,7 +39,8 @@ export async function adminPublishCourseAction(fd: FormData) {
   const supabase = await createClient();
   const { error } = await supabase.rpc("admin_publish_course", { p_course_id: id, p_publish: publish });
   revalidatePath(`/admin/courses/${id}`);
-  revalidatePath("/courses");
+  revalidatePath("/programs");
+  revalidatePath("/");
   redirect(`/admin/courses/${id}?${error ? `error=${encodeURIComponent(error.message)}` : `done=${publish ? "published" : "unpublished"}`}`);
 }
 

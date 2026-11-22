@@ -18,7 +18,7 @@ export async function getLearningContext(slug: string, user: SessionUser) {
 
   const { data: enrolment } = await supabase.from("enrolments").select("id, status, completed_at, last_lesson_id").eq("course_id", c.id).eq("user_id", user.id).maybeSingle();
   const isStaff = user.roles.includes("admin") || (user.instructor?.status === "approved" && c.instructor_id === user.instructor.id);
-  if (enrolment?.status !== "active" && !isStaff) redirect(`/courses/${slug}`);
+  if (enrolment?.status !== "active" && !isStaff) redirect(`/programs/${slug}`);
 
   const [{ data: modules }, { data: lessons }, { data: progress }, { data: certificate }] = await Promise.all([
     supabase.from("course_modules").select("id, title, position, created_at").eq("course_id", c.id).order("position").order("created_at"),

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Web Design &amp; Development Program">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1c5e"/><stop offset="1" stop-color="#5b5bd6"/></linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <rect width="1200" height="675" fill="url(#p)"/>
+  <circle cx="1100" cy="-40" r="320" fill="#c7c7ff" fill-opacity="0.12"/>
+  <g><rect x="830" y="180" width="240" height="150" rx="18" fill="#ffffff" fill-opacity="0.08" stroke="#c7c7ff" stroke-opacity="0.5"/><rect x="864" y="240" width="240" height="150" rx="18" fill="#ffffff" fill-opacity="0.15000000000000002" stroke="#c7c7ff" stroke-opacity="0.5"/><rect x="898" y="300" width="240" height="150" rx="18" fill="#ffffff" fill-opacity="0.22000000000000003" stroke="#c7c7ff" stroke-opacity="0.5"/><rect x="920" y="345" width="150" height="12" rx="6" fill="#c7c7ff"/></g>
+  <text x="80" y="140" font-family="Bricolage Grotesque, Segoe UI, Arial, sans-serif" font-size="30" font-weight="600" fill="#c7c7ff">Web Design &amp; Development</text>
+  <text x="80" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">Web Design &amp;</text>
+  <text x="80" y="328" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">Development Program</text>
+  <g transform="translate(80 560)"><rect width="44" height="44" rx="12" fill="#ffffff" fill-opacity="0.15"/><path d="M14 28c4 4 12 4 16-2s-6-8-10-12 2-8 8-4" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><text x="60" y="31" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#ffffff">SkillSpring</text></g>
+</svg>

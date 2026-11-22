@@ -61,7 +61,7 @@ beforeAll(async () => {
     ($1, 'Q1', '["a","b"]', 1, 1), ($1, 'Q2', '["a","b"]', 0, 2)`, [quizId]);
   assignmentId = (await one<{ id: string }>(`insert into assignments (course_id, title, instructions) values ($1, 'A1', 'do it') returning id`, [courseId])).id;
 
-  internshipId = (await one<{ id: string }>(`select id from internships where slug = 'equity-research-virtual-simulation'`)).id;
+  internshipId = (await one<{ id: string }>(`select id from internships where slug = 'stock-market-research-simulation'`)).id;
 });
 
 afterAll(async () => {
@@ -72,7 +72,7 @@ describe("seed & public catalogue", () => {
   it("anon sees published demo courses but none are purchasable", async () => {
     await as(db, anon, async () => {
       const { rows } = await db.query(`select slug, is_demo, public.course_is_purchasable(id) as buyable from courses where is_demo`);
-      expect(rows.length).toBe(15);
+      expect(rows.length).toBe(4);
       expect(rows.every((r) => r.buyable === false)).toBe(true);
     });
   });
@@ -172,7 +172,7 @@ describe("Journey 1: purchase → enrolment → lesson access", () => {
 
   it("demo courses cannot be enrolled for free or purchased", async () => {
     await as(db, student(bobId), async () => {
-      await expectDenied(db.query(`select public.enrol_free_course((select id from courses where slug = 'prompt-engineering'))`));
+      await expectDenied(db.query(`select public.enrol_free_course((select id from courses where slug = 'excel-program'))`));
     });
   });
 });
@@ -476,6 +476,34 @@ describe("storage policies", () => {
     });
     await as(db, student(bobId), async () => {
       await expectDenied(db.query(`insert into storage.objects (bucket_id, name) values ('course-resources', $1)`, [`${courseId}/x.pdf`]));
+    });
+  });
+});
+
+describe("campus ambassador applications", () => {
+  it("cannot be inserted directly by browsers; only the server (service role) can", async () => {
+    const row = `('Asha', 'asha@test.local', '9876543210', 'SRCC', 'Delhi', 'B.Com 2nd year', 'I want to lead the finance club and help students learn skills.')`;
+    await as(db, anon, async () => {
+      await expectDenied(db.query(`insert into ambassador_applications (full_name, email, phone, college, city, course_and_year, motivation) values ${row}`));
+    });
+    await as(db, student(aliceId), async () => {
+      await expectDenied(db.query(`insert into ambassador_applications (full_name, email, phone, college, city, course_and_year, motivation) values ${row}`));
+    });
+    await asCommit(db, service, () => db.query(`insert into ambassador_applications (full_name, email, phone, college, city, course_and_year, motivation, user_id) values ('Alice', 'alice@test.local', '9876543210', 'SRCC', 'Delhi', 'B.Com', 'I want to lead the finance club and help students learn skills.', $1)`, [aliceId]));
+  });
+
+  it("applicants see only their own application and cannot change its status", async () => {
+    await as(db, student(bobId), async () => {
+      expect((await db.query(`select * from ambassador_applications`)).rows).toHaveLength(0);
+    });
+    await as(db, student(aliceId), async () => {
+      expect((await db.query(`select * from ambassador_applications`)).rows).toHaveLength(1);
+      const r = await db.query(`update ambassador_applications set status = 'active'`);
+      expect(r.rowCount).toBe(0);
+    });
+    await as(db, student(adminId), async () => {
+      const r = await db.query(`update ambassador_applications set status = 'shortlisted'`);
+      expect(r.rowCount).toBe(1);
     });
   });
 });

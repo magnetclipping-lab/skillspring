@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Award, BarChart3, Bell, BookOpen, Bookmark, Briefcase, Building2, ClipboardList, CreditCard, FileClock, GraduationCap,
-  Inbox, LayoutDashboard, ScrollText, Settings, Users, Wallet,
+  Inbox, LayoutDashboard, Megaphone, ScrollText, Settings, Users, Wallet,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +11,7 @@ const icons = {
   dashboard: LayoutDashboard, learning: BookOpen, certificates: Award, applications: ClipboardList, saved: Bookmark,
   payments: CreditCard, notifications: Bell, settings: Settings, courses: GraduationCap, students: Users,
   instructors: Users, internships: Briefcase, employers: Building2, finance: Wallet, audit: ScrollText, analytics: BarChart3,
-  inbox: Inbox, pending: FileClock,
+  inbox: Inbox, pending: FileClock, ambassadors: Megaphone,
 } as const;
 
 export type NavItem = { href: string; label: string; icon: keyof typeof icons; exact?: boolean; badge?: number };

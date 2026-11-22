@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { buttonClass } from "@/components/ui/button";
 
-export function MobileNav({ items, signedIn }: { items: { href: string; label: string }[]; signedIn: boolean }) {
+export function MobileNav({ items, signedIn }: { items: { href: string; label: string; indent?: boolean; badge?: string }[]; signedIn: boolean }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   // eslint-disable-next-line react-hooks/set-state-in-effect -- close the menu on route change
@@ -27,8 +27,9 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
         <div id="mobile-nav" className="absolute inset-x-0 top-full border-b border-line bg-white px-4 pb-5 pt-2 shadow-lift animate-fade-up">
           <nav className="flex flex-col" aria-label="Mobile">
             {items.map((n) => (
-              <Link key={n.href} href={n.href} className="rounded-lg px-3 py-3 text-[15px] font-medium text-ink hover:bg-brand-50">
+              <Link key={n.href} href={n.href} className={n.indent ? "rounded-lg py-2.5 pl-7 pr-3 text-[14.5px] text-ink-soft hover:bg-canvas" : "flex items-center gap-2 rounded-lg px-3 py-3 text-[15px] font-medium text-ink hover:bg-canvas"}>
                 {n.label}
+                {n.badge ? <span className="rounded-full bg-marigold-100 px-2 py-0.5 text-[11px] font-semibold text-marigold-600">{n.badge}</span> : null}
               </Link>
             ))}
           </nav>

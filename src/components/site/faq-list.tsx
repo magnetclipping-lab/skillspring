@@ -2,14 +2,14 @@ import { ChevronDown } from "lucide-react";
 
 export function FaqList({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="divide-y divide-line rounded-2xl border border-line bg-white">
+    <div className="divide-y divide-ink/10 border-y border-ink/10">
       {items.map((f) => (
-        <details key={f.q} className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-ink">
+        <details key={f.q} className="group py-5 [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-lg font-display text-[18px] font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600">
             {f.q}
-            <ChevronDown className="size-4 shrink-0 text-ink-muted transition group-open:rotate-180" aria-hidden />
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink/5 transition group-open:rotate-180 group-open:bg-ink group-open:text-white"><ChevronDown className="size-4" aria-hidden /></span>
           </summary>
-          <p className="mt-3 text-sm leading-6 text-ink-soft">{f.a}</p>
+          <p className="mt-3 max-w-[68ch] pr-12 text-[15.5px] leading-7 text-ink-soft">{f.a}</p>
         </details>
       ))}
     </div>

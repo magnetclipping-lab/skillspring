@@ -5,41 +5,57 @@ import { expect, test } from "@playwright/test";
 test.describe("public website", () => {
   test("homepage has the hero, both CTAs and no fake statistics", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Learn Skills.");
-    await expect(page.getByRole("link", { name: /Explore Courses/ }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Explore Internships/ }).first()).toBeVisible();
-    await expect(page.getByText("Demo placeholder").first()).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Learn skills.");
+    await expect(page.getByRole("link", { name: /Explore programs/ }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /campus ambassador/i }).first()).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Excel" })).toBeVisible();
+    await page.getByRole("tab", { name: "Excel" }).click();
+    await expect(page.getByRole("tab", { name: "Excel" })).toHaveAttribute("aria-selected", "true");
     const text = await page.locator("main").innerText();
     expect(text).not.toMatch(/\d[\d,]*\+?\s*(students|learners|placements)/i);
   });
 
-  test("catalogue search and filters work", async ({ page }) => {
-    await page.goto("/courses");
-    await expect(page.getByText(/\d+ courses?/)).toBeVisible();
-    await page.getByPlaceholder("Search courses…").fill("excel");
-    await page.getByRole("button", { name: "Apply" }).click();
-    await expect(page).toHaveURL(/q=excel/);
-    await expect(page.getByRole("link", { name: /Advanced Excel for Finance/ })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Prompt Engineering/ })).toHaveCount(0);
-    await page.goto("/courses?category=career-development");
-    await expect(page.getByRole("link", { name: /Interview Preparation/ })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Stock Market Fundamentals/ })).toHaveCount(0);
+  test("programs page lists the four programs with prices", async ({ page }) => {
+    await page.goto("/programs");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Programs");
+    for (const name of ["Stock Market", "Web Design", "Digital Marketing", "Excel"]) {
+      await expect(page.getByRole("link", { name: new RegExp(name) }).first()).toBeVisible();
+    }
+    await expect(page.getByText("₹3,999").first()).toBeVisible();
+    await expect(page.getByText("₹1,999").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Compare programs" })).toBeVisible();
   });
 
-  test("demo course page shows curriculum and cannot be purchased", async ({ page }) => {
-    await page.goto("/courses/financial-modelling-with-excel");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Financial Modelling with Excel");
-    await expect(page.getByText("This is a demo course listing")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Not yet available for purchase" })).toBeDisabled();
-    await expect(page.getByRole("heading", { name: "Curriculum" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /Certificate eligibility/ })).toBeVisible();
+  test("old course URLs redirect to programs", async ({ page }) => {
+    await page.goto("/courses");
+    await expect(page).toHaveURL(/\/programs$/);
+    await page.goto("/courses/excel-program");
+    await expect(page).toHaveURL(/\/programs\/excel-program$/);
+  });
+
+  test("program page shows details, FAQs and cannot be bought before launch", async ({ page }) => {
+    await page.goto("/programs/excel-program");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Excel");
+    await expect(page.getByRole("button", { name: "Enrolment opens soon" })).toBeDisabled();
+    for (const h of ["About this program", "Curriculum", "Projects you'll build", "Your certificate", "Frequently asked questions"]) {
+      await expect(page.getByRole("heading", { name: h })).toBeVisible();
+    }
     await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
+  });
+
+  test("campus ambassador page validates the free application", async ({ page }) => {
+    await page.goto("/campus-ambassador");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Campus Ambassador Program");
+    await expect(page.getByText("Free to join").first()).toBeVisible();
+    await page.getByRole("button", { name: "Apply free" }).click();
+    await expect(page.getByText("Enter your full name")).toBeVisible();
+    await expect(page.getByText("Enter a valid phone number")).toBeVisible();
   });
 
   test("internships are clearly labelled as educational, not jobs", async ({ page }) => {
     await page.goto("/internships");
     await expect(page.getByText("Educational simulation").first()).toBeVisible();
-    await page.getByRole("link", { name: /Equity Research Virtual Simulation/ }).click();
+    await page.getByRole("link", { name: /Excel MIS Dashboard/ }).click();
     await expect(page.getByText("This is an educational experience, not a job")).toBeVisible();
   });
 
@@ -61,7 +77,8 @@ test.describe("public website", () => {
     const robots = await (await request.get("/robots.txt")).text();
     expect(robots).toContain("Disallow: /admin");
     const sitemap = await (await request.get("/sitemap.xml")).text();
-    expect(sitemap).toContain("/courses/stock-market-fundamentals");
+    expect(sitemap).toContain("/programs/excel-program");
+    expect(sitemap).toContain("/campus-ambassador");
   });
 
   test("security headers are set", async ({ request }) => {
@@ -75,7 +92,7 @@ test.describe("public website", () => {
   });
 
   test("layout does not overflow horizontally", async ({ page }) => {
-    for (const path of ["/", "/courses", "/courses/stock-market-fundamentals", "/internships", "/login"]) {
+    for (const path of ["/", "/programs", "/programs/web-development-program", "/campus-ambassador", "/internships", "/login"]) {
       await page.goto(path);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, path).toBeLessThanOrEqual(1);
@@ -84,7 +101,7 @@ test.describe("public website", () => {
 });
 
 test.describe("Journey 6 (signed out): protected areas deny access", () => {
-  for (const path of ["/admin", "/admin/finance", "/instructor", "/dashboard", "/dashboard/payments", "/checkout/stock-market-fundamentals"]) {
+  for (const path of ["/admin", "/admin/finance", "/instructor", "/dashboard", "/dashboard/payments", "/checkout/excel-program"]) {
     test(`${path} redirects to login`, async ({ page }) => {
       await page.goto(path);
       await expect(page).toHaveURL(/\/login/);

@@ -32,7 +32,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
           <h1 className="text-2xl font-bold sm:text-[28px]">Welcome back, {firstName} 👋</h1>
           <p className="mt-1 text-sm text-ink-muted">Here&apos;s where you left off.</p>
         </div>
-        <ButtonLink href="/courses" variant="secondary">Browse courses</ButtonLink>
+        <ButtonLink href="/programs" variant="secondary">Browse programs</ButtonLink>
       </div>
 
       {resume ? (
@@ -77,7 +77,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
               ))}
             </ul>
           ) : (
-            <div className="p-5"><EmptyState icon={<BookOpen className="size-5" />} title="No courses yet" description="Courses you purchase or enrol in will appear here." action={<ButtonLink href="/courses">Explore courses</ButtonLink>} /></div>
+            <div className="p-5"><EmptyState icon={<BookOpen className="size-5" />} title="No courses yet" description="Courses you purchase or enrol in will appear here." action={<ButtonLink href="/programs">Explore programs</ButtonLink>} /></div>
           )}
         </Card>
 

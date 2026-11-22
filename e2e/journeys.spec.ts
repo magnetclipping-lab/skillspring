@@ -81,8 +81,8 @@ test("registration form creates an account (email verification flow)", async ({ 
 
 test("Journey 1: student logs in → buys a course in Razorpay test mode → enrolled → opens lessons", async ({ page }) => {
   await login(page, users.student.email);
-  await page.goto(`/courses/${courseSlug}`);
-  await page.getByRole("link", { name: "Buy now" }).click();
+  await page.goto(`/programs/${courseSlug}`);
+  await page.getByRole("link", { name: "Enrol now" }).click();
   await expect(page).toHaveURL(new RegExp(`/checkout/${courseSlug}`));
   await expect(page.getByRole("button", { name: /Pay ₹499/ })).toBeVisible();
 
@@ -168,7 +168,7 @@ test("Journey 4: admin creates → approves → publishes → course appears in 
   await expect(page.getByText("Course approved.")).toBeVisible();
   await page.getByRole("button", { name: "Publish course" }).click();
   await expect(page.getByText("Course published.")).toBeVisible();
-  await page.goto(`/courses?q=${encodeURIComponent(`Admin E2E ${run}`)}`);
+  await page.goto("/programs");
   await expect(page.getByRole("link", { name: new RegExp(`Admin E2E ${run}`) })).toBeVisible();
 });
 

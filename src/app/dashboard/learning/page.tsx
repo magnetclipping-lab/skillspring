@@ -35,7 +35,7 @@ export default async function MyLearningPage() {
           ))}
         </div>
       ) : (
-        <EmptyState icon={<BookOpen className="size-5" />} title="You haven't enrolled in any courses yet" description="Find a course that fits your goals." action={<ButtonLink href="/courses">Explore courses</ButtonLink>} />
+        <EmptyState icon={<BookOpen className="size-5" />} title="You haven't enrolled in any courses yet" description="Find a course that fits your goals." action={<ButtonLink href="/programs">Explore programs</ButtonLink>} />
       )}
     </>
   );

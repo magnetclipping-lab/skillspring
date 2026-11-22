@@ -36,7 +36,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ slug:
         </div>
       </header>
       <div className="container-page max-w-4xl py-10">
-        <Link href={`/courses/${slug}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />Back to course</Link>
+        <Link href={`/programs/${slug}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />Back to program</Link>
         <h1 className="mt-4 text-2xl font-bold sm:text-3xl">Complete your enrolment</h1>
         <div className="mt-6 grid gap-6 md:grid-cols-[1.3fr_1fr]">
           <Card className="overflow-hidden">

@@ -36,7 +36,7 @@ export async function saveCourseAction(_: ActionState, fd: FormData): Promise<Ac
     if (error) return err(error, "Could not save the course.");
     await audit(user.id, "course.updated", "course", id, { by: b });
     revalidatePath(`${b}/courses/${id}`);
-    revalidatePath(`/courses/${row.slug}`);
+    revalidatePath(`/programs/${row.slug}`);
     return { ok: true, message: "Course saved." };
   }
   const { data, error } = await supabase.from("courses").insert(row).select("id").single();

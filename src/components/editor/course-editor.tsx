@@ -38,7 +38,7 @@ export function CourseEditorView({ base, data, editable, notice, adminPanel }: {
           <h1 className="mt-2 text-2xl font-bold">{course.title}</h1>
         </div>
         <div className="flex flex-wrap gap-2">
-          {course.status === "published" ? <Link href={`/courses/${course.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-50"><Eye className="size-4" />View live</Link> : null}
+          {course.status === "published" ? <Link href={`/programs/${course.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-50"><Eye className="size-4" />View live</Link> : null}
           <Link href={`${base}/courses/${course.id}/submissions`} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-50"><ClipboardList className="size-4" />Submissions</Link>
           {base === "/instructor" && editable ? (
             <form action={submitForReviewAction}><input type="hidden" name="_base" value={base} /><input type="hidden" name="course_id" value={course.id} /><SubmitButton pendingText="Submitting…"><Send className="size-4" />Submit for review</SubmitButton></form>

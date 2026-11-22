@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource-variable/geist";
+import "@fontsource-variable/bricolage-grotesque/standard.css";
 import "./globals.css";
 import { publicEnv } from "@/lib/env";
 

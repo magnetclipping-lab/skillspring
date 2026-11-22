@@ -10,6 +10,7 @@ export const LIMITS = {
   createOrder: { max: 15, windowSeconds: 10 * 60 },
   verifyPayment: { max: 30, windowSeconds: 10 * 60 },
   apply: { max: 20, windowSeconds: 60 * 60 },
+  ambassador: { max: 3, windowSeconds: 60 * 60 },
   upload: { max: 40, windowSeconds: 60 * 60 },
   verifyCertificate: { max: 60, windowSeconds: 10 * 60 },
   quiz: { max: 30, windowSeconds: 10 * 60 },
