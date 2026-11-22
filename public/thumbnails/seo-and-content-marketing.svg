@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="SEO and Content Marketing">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e1b4b"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <rect width="1200" height="675" fill="url(#p)"/>
+  <circle cx="1100" cy="-40" r="320" fill="#f0abfc" fill-opacity="0.12"/>
+  <g fill="none" stroke="#f0abfc"><circle cx="980" cy="330" r="60" stroke-opacity="0.6" stroke-width="3"/><circle cx="980" cy="330" r="110" stroke-opacity="0.48" stroke-width="3"/><circle cx="980" cy="330" r="160" stroke-opacity="0.36" stroke-width="3"/><circle cx="980" cy="330" r="210" stroke-opacity="0.24" stroke-width="3"/></g><circle cx="980" cy="330" r="28" fill="#f0abfc"/>
+  <text x="80" y="140" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" font-weight="600" fill="#f0abfc" letter-spacing="3">BUSINESS &amp; MARKETING</text>
+  <text x="80" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">SEO and Content</text>
+  <text x="80" y="328" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">Marketing</text>
+  <g transform="translate(80 560)"><rect width="44" height="44" rx="12" fill="#ffffff" fill-opacity="0.15"/><path d="M14 28c4 4 12 4 16-2s-6-8-10-12 2-8 8-4" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/><text x="60" y="31" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="600" fill="#ffffff">SkillSpring</text></g>
+</svg>

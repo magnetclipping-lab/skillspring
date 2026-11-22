@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ---------------------------------------------------------------------------
+   SkillSpring design system
+   Typography: Plus Jakarta Sans (display) + Inter (text), self-hosted.
+   Colour: deep navy/indigo brand, violet accent, warm amber highlight.
+   --------------------------------------------------------------------------- */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Plus Jakarta Sans Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-brand-50: #f3f4fe;
+  --color-brand-100: #e6e8fc;
+  --color-brand-200: #c9cef8;
+  --color-brand-300: #a3acf1;
+  --color-brand-400: #7480e6;
+  --color-brand-500: #4f5bd5;
+  --color-brand-600: #3b45b8;
+  --color-brand-700: #2b3494;
+  --color-brand-800: #1e2670;
+  --color-brand-900: #141a4d;
+  --color-brand-950: #0b1033;
+
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+
+  --color-highlight-400: #fbbf24;
+  --color-highlight-500: #f59e0b;
+
+  --color-surface: #ffffff;
+  --color-canvas: #f7f8fb;
+  --color-line: #e5e7ef;
+  --color-ink: #0f1430;
+  --color-ink-soft: #4a5072;
+  --color-ink-muted: #7a8099;
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-soft: 0 1px 2px rgb(15 20 48 / 0.04), 0 4px 16px rgb(15 20 48 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(15 20 48 / 0.05), 0 16px 40px rgb(15 20 48 / 0.10);
+  --shadow-glow: 0 10px 40px -10px rgb(79 91 213 / 0.55);
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html { color-scheme: light; }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; }
+  ::selection { background: var(--color-brand-200); }
+  :focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand-600; }
+  .hero-gradient {
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, rgb(139 92 246 / 0.22), transparent 60%),
+      radial-gradient(50rem 30rem at -10% 10%, rgb(79 91 213 / 0.25), transparent 60%),
+      linear-gradient(180deg, var(--color-brand-950), var(--color-brand-900));
+  }
+  .grid-fade {
+    background-image: linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .prose-lesson { @apply max-w-none text-[15px] leading-7 text-ink-soft; }
+  .prose-lesson h2 { @apply mt-8 mb-3 text-xl font-semibold text-ink; }
+  .prose-lesson h3 { @apply mt-6 mb-2 text-lg font-semibold text-ink; }
+  .prose-lesson p { @apply my-3; }
+  .prose-lesson ul { @apply my-3 list-disc pl-6; }
+  .prose-lesson ol { @apply my-3 list-decimal pl-6; }
+  .prose-lesson blockquote { @apply my-4 rounded-xl border-l-4 border-brand-400 bg-brand-50 px-4 py-3 text-ink; }
+  .prose-lesson code { @apply rounded bg-brand-50 px-1.5 py-0.5 text-[13px] text-brand-800; }
+  .prose-lesson a { @apply font-medium text-brand-600 underline underline-offset-2; }
+  .prose-legal { @apply text-[15px] leading-7 text-ink-soft; }
+  .prose-legal h2 { @apply mt-10 mb-3 text-xl font-semibold text-ink; }
+  .prose-legal p, .prose-legal li { @apply my-2; }
+  .prose-legal ul { @apply list-disc pl-6; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
 }
