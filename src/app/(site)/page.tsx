@@ -64,8 +64,7 @@ export default async function HomePage() {
             <span className="text-sheen">Learn skills.</span>
             <br />
             <span className="text-sheen">Build </span>
-            <span className="serif-accent text-gold">proof</span>
-            <span className="text-sheen">.</span>
+            <span className="serif-accent text-gold">proof.</span>
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-[17px] leading-8 text-ink-soft sm:text-[19px]">
             Practical programs in the stock market, web development, digital marketing and Excel for college students and fresh graduates across India. Build real projects and earn a certificate employers can verify.
