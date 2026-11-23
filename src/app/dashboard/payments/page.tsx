@@ -19,7 +19,7 @@ export default async function PaymentsPage() {
   const rows = (orders ?? []) as unknown as Row[];
   return (
     <>
-      <PageHeader title="Payment history" description="Every payment attempt and refund on your account. Card details are never stored by SkillSpring." />
+      <PageHeader title="Payment history" description="Every payment attempt and refund on your account. Card details are never stored by Proofwork." />
       {rows.length ? (
         <Table>
           <thead><tr><th>Date</th><th>Course</th><th>Amount</th><th>Method</th><th>Status</th><th>Reference</th></tr></thead>
@@ -31,7 +31,7 @@ export default async function PaymentsPage() {
                 <tr key={o.id}>
                   <td>{formatDate(o.paid_at ?? o.created_at)}</td>
                   <td className="font-medium">{o.course?.title}</td>
-                  <td>{formatINR(o.amount_paise, true)}{rf.map((r) => <p key={r.id} className="text-[12px] text-violet-700">Refund {formatINR(r.amount_paise, true)} · {titleCase(r.status)}</p>)}</td>
+                  <td>{formatINR(o.amount_paise, true)}{rf.map((r) => <p key={r.id} className="text-[12px] text-violet-300">Refund {formatINR(r.amount_paise, true)} · {titleCase(r.status)}</p>)}</td>
                   <td>{pay?.method ? titleCase(pay.method) : "—"}</td>
                   <td><Badge tone={tone[o.status]}>{titleCase(o.status)}</Badge></td>
                   <td className="font-mono text-[12px] text-ink-muted">{pay?.razorpay_payment_id ?? o.receipt}</td>

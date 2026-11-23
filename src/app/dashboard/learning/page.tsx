@@ -18,13 +18,13 @@ export default async function MyLearningPage() {
       {courses.length ? (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((c) => (
-            <Link key={c.enrolment_id} href={`/dashboard/learning/${c.course.slug}`} className="group overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition hover:shadow-lift">
+            <Link key={c.enrolment_id} href={`/dashboard/learning/${c.course.slug}`} className="group overflow-hidden rounded-2xl border border-line bg-surface shadow-soft transition hover:shadow-lift">
               <div className="relative aspect-[16/9] bg-brand-900">
                 {c.course.thumbnail_url ? <Image src={c.course.thumbnail_url} alt="" fill className="object-cover" sizes="(min-width:1024px) 33vw, 50vw" unoptimized={c.course.thumbnail_url.endsWith(".svg")} /> : null}
               </div>
               <div className="p-5">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-display font-semibold group-hover:text-brand-700">{c.course.title}</p>
+                  <p className="font-display font-semibold group-hover:text-white">{c.course.title}</p>
                   {c.completed_at ? <Badge tone="success"><CheckCircle2 className="size-3" />Completed</Badge> : null}
                 </div>
                 <p className="mt-1 text-[12.5px] text-ink-muted">{formatDuration(c.course.duration_minutes)} · Enrolled {formatDate(c.enrolled_at)}</p>

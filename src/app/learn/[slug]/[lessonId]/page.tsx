@@ -46,17 +46,17 @@ export default async function LessonPlayerPage({ params }: { params: Promise<{ s
   return (
     <div className="flex min-h-screen flex-col bg-canvas">
       {enrolled ? <TouchLesson lessonId={lesson.id} /> : null}
-      <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-line bg-white px-4">
+      <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-line bg-surface px-4">
         <Logo className="hidden sm:flex" />
         <div className="min-w-0 flex-1 border-l border-line pl-4">
           <p className="truncate text-sm font-semibold">{ctx.course.title}</p>
           <div className="mt-1 flex max-w-xs items-center gap-2"><Progress value={ctx.percent} className="h-1.5" /><span className="text-[11px] font-semibold text-ink-muted">{ctx.percent}%</span></div>
         </div>
-        <Link href={`/dashboard/learning/${slug}`} className="grid size-9 place-items-center rounded-lg text-ink-muted hover:bg-slate-100" aria-label="Exit lesson"><X className="size-5" /></Link>
+        <Link href={`/dashboard/learning/${slug}`} className="grid size-9 place-items-center rounded-lg text-ink-muted hover:bg-white/[0.06]" aria-label="Exit lesson"><X className="size-5" /></Link>
       </header>
 
       <div className="flex flex-1">
-        <aside className="hidden w-80 shrink-0 overflow-y-auto border-r border-line bg-white lg:block" style={{ maxHeight: "calc(100vh - 56px)", position: "sticky", top: 56 }}>
+        <aside className="hidden w-80 shrink-0 overflow-y-auto border-r border-line bg-surface lg:block" style={{ maxHeight: "calc(100vh - 56px)", position: "sticky", top: 56 }}>
           <nav aria-label="Course contents" className="py-3">
             {ctx.modules.map((m, mi) => (
               <div key={m.id} className="mb-2">
@@ -64,7 +64,7 @@ export default async function LessonPlayerPage({ params }: { params: Promise<{ s
                 <ul>
                   {m.lessons.map((l) => (
                     <li key={l.id}>
-                      <Link href={`/learn/${slug}/${l.id}`} aria-current={l.id === lesson.id ? "page" : undefined} className={cn("flex items-start gap-2.5 px-4 py-2 text-[13px]", l.id === lesson.id ? "bg-brand-50 font-semibold text-brand-800" : "text-ink-soft hover:bg-slate-50")}>
+                      <Link href={`/learn/${slug}/${l.id}`} aria-current={l.id === lesson.id ? "page" : undefined} className={cn("flex items-start gap-2.5 px-4 py-2 text-[13px]", l.id === lesson.id ? "bg-brand-500/10 font-semibold text-brand-300" : "text-ink-soft hover:bg-white/[0.03]")}>
                         {l.completed ? <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-500" /> : <Circle className="mt-0.5 size-4 shrink-0 text-slate-300" />}
                         <span>{l.title}</span>
                       </Link>
@@ -82,10 +82,10 @@ export default async function LessonPlayerPage({ params }: { params: Promise<{ s
 
           <div className="mt-6 space-y-6">
             {lesson.type === "video" ? <LessonVideo provider={lesson.video_provider} assetId={lesson.video_asset_id} title={lesson.title} /> : null}
-            {lesson.content_md ? <div className="rounded-2xl border border-line bg-white p-6"><Markdown source={lesson.content_md} /></div> : null}
+            {lesson.content_md ? <div className="rounded-2xl border border-line bg-surface p-6"><Markdown source={lesson.content_md} /></div> : null}
             {lesson.type === "external" && lesson.external_url ? (
-              <a href={lesson.external_url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-2xl border border-line bg-white p-5 hover:border-brand-300">
-                <span className="font-medium">Open external resource</span><ExternalLink className="size-4 text-brand-600" />
+              <a href={lesson.external_url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-2xl border border-line bg-surface p-5 hover:border-brand-300">
+                <span className="font-medium">Open external resource</span><ExternalLink className="size-4 text-brand-300" />
               </a>
             ) : null}
 
@@ -93,13 +93,13 @@ export default async function LessonPlayerPage({ params }: { params: Promise<{ s
             {assignment ? <AssignmentPanel assignment={assignment} submission={submission} courseId={ctx.course.id} enrolled={enrolled} /> : null}
 
             {resources?.length ? (
-              <section className="rounded-2xl border border-line bg-white p-5">
+              <section className="rounded-2xl border border-line bg-surface p-5">
                 <h2 className="text-[15px] font-semibold">Resources</h2>
                 <ul className="mt-3 space-y-2">
                   {resources.map((r) => (
                     <li key={r.id}>
-                      <a href={`/api/resources/${r.id}`} className="flex items-center gap-3 rounded-xl border border-line px-4 py-3 text-sm hover:border-brand-300 hover:bg-brand-50/40" rel="noopener">
-                        <FileText className="size-4 text-brand-600" /><span className="flex-1">{r.title}</span>
+                      <a href={`/api/resources/${r.id}`} className="flex items-center gap-3 rounded-xl border border-line px-4 py-3 text-sm hover:border-brand-300 hover:bg-brand-500/[0.06]" rel="noopener">
+                        <FileText className="size-4 text-brand-300" /><span className="flex-1">{r.title}</span>
                         {r.kind === "link" ? <ExternalLink className="size-4 text-ink-muted" /> : <Download className="size-4 text-ink-muted" />}
                       </a>
                     </li>

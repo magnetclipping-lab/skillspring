@@ -225,7 +225,7 @@ describe("Journey 2: completion → certificate → verification", () => {
 
     await as(db, anon, async () => {
       const v = await db.query(`select * from public.verify_certificate($1)`, [cert.c.certificate_code.toLowerCase()]);
-      expect(v.rows[0]).toMatchObject({ student_name: "Alice Student", course_title: "Test Course", status: "valid", issuer: "SkillSpring" });
+      expect(v.rows[0]).toMatchObject({ student_name: "Alice Student", course_title: "Test Course", status: "valid", issuer: "Proofwork" });
       const none = await db.query(`select * from public.verify_certificate('SS-0000-NOTREAL00')`);
       expect(none.rows).toHaveLength(0);
     });

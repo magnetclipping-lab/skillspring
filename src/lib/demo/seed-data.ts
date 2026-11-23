@@ -1,5 +1,5 @@
 /**
- * SkillSpring catalogue: the four programs.
+ * Proofwork catalogue: the four programs.
  *
  * Single source of truth used by:
  *  - scripts/generate-seed.ts  → supabase/seed.sql
@@ -8,7 +8,7 @@
  * Programs are seeded with `is_demo = true` ("Enrolment opens soon") because the
  * lesson videos have not been uploaded yet. When a program's content is ready, an
  * admin unticks "Demo" in Admin → Courses and it becomes purchasable.
- * Internships here are SkillSpring-run projects, never presented as employer vacancies.
+ * Internships here are Proofwork-run projects, never presented as employer vacancies.
  */
 
 export type DemoLesson = { title: string; type: "video" | "text" | "pdf" | "quiz" | "assignment"; minutes: number; preview?: boolean };
@@ -40,7 +40,7 @@ const quiz = (title: string): DemoLesson => ({ title, type: "quiz", minutes: 10 
 const task = (title: string, minutes = 60): DemoLesson => ({ title, type: "assignment", minutes });
 const pdf = (title: string, minutes = 10): DemoLesson => ({ title, type: "pdf", minutes });
 
-const certificateFaq = { q: "Will I get a certificate?", a: "Yes. When you finish every mandatory lesson, submit the required assignments and pass the quizzes, you receive a SkillSpring certificate with a unique ID that anyone can verify online." };
+const certificateFaq = { q: "Will I get a certificate?", a: "Yes. When you finish every mandatory lesson, submit the required assignments and pass the quizzes, you receive a Proofwork certificate with a unique ID that anyone can verify online." };
 const accessFaq = { q: "How long can I access the program?", a: "Your access doesn't expire. Watch lessons at your own pace and come back to them whenever you need a refresher." };
 const paymentFaq = { q: "How do I pay?", a: "Pay securely with UPI, debit or credit card, net banking or wallets through Razorpay. You get access as soon as your payment is confirmed." };
 const refundFaq = { q: "Can I get a refund?", a: "Yes, within 7 days of purchase if you have completed less than 25% of the program. See our refund policy for the full conditions." };
@@ -205,13 +205,13 @@ export type DemoInternship = {
   positions: number | null;
 };
 
-/** SkillSpring-run educational experiences. Clearly NOT employer vacancies. */
+/** Proofwork-run educational experiences. Clearly NOT employer vacancies. */
 export const demoInternships: DemoInternship[] = [
   {
     slug: "stock-market-research-simulation",
     title: "Stock Market Research Simulation",
     kind: "simulation",
-    description: "Work like an equity research analyst for four weeks: pick a listed company, study its filings and price history, and publish a research note with a clear view. Run by SkillSpring for learning purposes. This is not a job or an employer internship.",
+    description: "Work like an equity research analyst for four weeks: pick a listed company, study its filings and price history, and publish a research note with a clear view. Run by Proofwork for learning purposes. This is not a job or an employer internship.",
     responsibilities: ["Study an annual report and recent filings", "Analyse price charts and key ratios", "Write a one-page research note", "Present your thesis in a short recorded pitch"],
     skills: ["Financial statements", "Technical analysis", "Report writing"],
     eligibility: "Open to all students. The Stock Market Program is recommended.",
@@ -241,7 +241,7 @@ export const demoInternships: DemoInternship[] = [
     slug: "excel-mis-dashboard-project",
     title: "Excel MIS Dashboard Project",
     kind: "project",
-    description: "Turn a raw sales dataset into a clean monthly MIS report and dashboard, the way finance teams do every month. Educational project run by SkillSpring.",
+    description: "Turn a raw sales dataset into a clean monthly MIS report and dashboard, the way finance teams do every month. Educational project run by Proofwork.",
     responsibilities: ["Clean and structure the raw data", "Summarise it with pivot tables", "Build a one-page dashboard", "Write three insights for management"],
     skills: ["Excel", "Pivot tables", "Data visualisation"],
     eligibility: "Open to all students. The Excel for Finance & Business program is recommended.",

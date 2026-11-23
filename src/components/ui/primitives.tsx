@@ -19,12 +19,12 @@ export function CardHeader({ title, description, action, className }: { title: R
 }
 
 const badgeTones = {
-  neutral: "bg-slate-100 text-slate-700 ring-slate-200",
-  brand: "bg-brand-50 text-brand-700 ring-brand-200",
-  success: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  warning: "bg-amber-50 text-amber-800 ring-amber-200",
-  danger: "bg-red-50 text-red-700 ring-red-200",
-  violet: "bg-violet-50 text-violet-700 ring-violet-200",
+  neutral: "bg-white/[0.06] text-ink-soft ring-white/10",
+  brand: "bg-brand-500/10 text-brand-300 ring-brand-400/30",
+  success: "bg-emerald-500/10 text-emerald-300 ring-emerald-400/25",
+  warning: "bg-amber-500/10 text-amber-300 ring-amber-400/25",
+  danger: "bg-red-500/10 text-red-300 ring-red-400/25",
+  violet: "bg-violet-500/10 text-violet-300 ring-violet-400/25",
   dark: "bg-white/10 text-white ring-white/20",
 } as const;
 
@@ -35,10 +35,10 @@ export function Badge({ tone = "neutral", className, children }: { tone?: BadgeT
 }
 
 const alertTones = {
-  info: { cls: "border-brand-200 bg-brand-50 text-brand-900", Icon: Info },
-  success: { cls: "border-emerald-200 bg-emerald-50 text-emerald-900", Icon: CheckCircle2 },
-  warning: { cls: "border-amber-200 bg-amber-50 text-amber-900", Icon: TriangleAlert },
-  danger: { cls: "border-red-200 bg-red-50 text-red-900", Icon: AlertCircle },
+  info: { cls: "border-brand-400/30 bg-brand-500/10 text-brand-300", Icon: Info },
+  success: { cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300", Icon: CheckCircle2 },
+  warning: { cls: "border-amber-400/25 bg-amber-500/10 text-amber-300", Icon: TriangleAlert },
+  danger: { cls: "border-red-500/30 bg-red-500/10 text-red-300", Icon: AlertCircle },
 } as const;
 
 export function Alert({ tone = "info", title, children, className }: { tone?: keyof typeof alertTones; title?: ReactNode; children?: ReactNode; className?: string }) {
@@ -59,7 +59,7 @@ export function Label({ className, ...props }: ComponentProps<"label">) {
 }
 
 const fieldBase =
-  "block w-full rounded-xl border border-line bg-white px-3.5 text-sm text-ink placeholder:text-ink-muted/70 shadow-[inset_0_1px_1px_rgb(15_20_48/0.03)] transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100 focus:outline-none disabled:bg-slate-50 aria-[invalid=true]:border-red-400";
+  "block w-full rounded-xl border border-white/10 px-3.5 text-sm text-ink placeholder:text-ink-muted/70 bg-white/[0.02] transition focus:border-marigold-400/60 focus:ring-4 focus:ring-marigold-400/10 focus:outline-none disabled:bg-white/[0.03] aria-[invalid=true]:border-red-400";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input className={cn(fieldBase, "h-10", className)} {...props} />;
@@ -80,11 +80,11 @@ export function Field({ label, name, error, help, children, className, required 
     <div className={className}>
       <Label htmlFor={name}>
         {label}
-        {required ? <span className="text-red-500"> *</span> : null}
+        {required ? <span className="text-red-400"> *</span> : null}
       </Label>
       {children}
       {msg ? (
-        <p id={`${name}-error`} className="mt-1.5 text-[12.5px] text-red-600">
+        <p id={`${name}-error`} className="mt-1.5 text-[12.5px] text-red-400">
           {msg}
         </p>
       ) : help ? (
@@ -97,7 +97,7 @@ export function Field({ label, name, error, help, children, className, required 
 export function Checkbox({ label, className, ...props }: ComponentProps<"input"> & { label: ReactNode }) {
   return (
     <label className={cn("flex cursor-pointer items-start gap-2.5 text-sm text-ink-soft", className)}>
-      <input type="checkbox" className="mt-0.5 size-4 rounded border-line accent-brand-600" {...props} />
+      <input type="checkbox" className="mt-0.5 size-4 rounded border-line accent-marigold-400" {...props} />
       <span>{label}</span>
     </label>
   );
@@ -106,16 +106,16 @@ export function Checkbox({ label, className, ...props }: ComponentProps<"input">
 export function Progress({ value, className, label }: { value: number; className?: string; label?: string }) {
   const v = Math.max(0, Math.min(100, Math.round(value)));
   return (
-    <div className={cn("h-2 w-full overflow-hidden rounded-full bg-brand-100", className)} role="progressbar" aria-valuenow={v} aria-valuemin={0} aria-valuemax={100} aria-label={label ?? "Progress"}>
-      <div className="h-full rounded-full bg-gradient-to-r from-brand-500 to-accent-500 transition-[width] duration-500" style={{ width: `${v}%` }} />
+    <div className={cn("h-2 w-full overflow-hidden rounded-full bg-brand-500/15", className)} role="progressbar" aria-valuenow={v} aria-valuemin={0} aria-valuemax={100} aria-label={label ?? "Progress"}>
+      <div className="h-full rounded-full bg-gradient-to-r from-marigold-400 to-marigold-300 transition-[width] duration-500" style={{ width: `${v}%` }} />
     </div>
   );
 }
 
 export function EmptyState({ icon, title, description, action, className }: { icon?: ReactNode; title: string; description?: ReactNode; action?: ReactNode; className?: string }) {
   return (
-    <div className={cn("flex flex-col items-center rounded-2xl border border-dashed border-line bg-white px-6 py-12 text-center", className)}>
-      {icon ? <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">{icon}</div> : null}
+    <div className={cn("flex flex-col items-center rounded-2xl border border-dashed border-line bg-surface px-6 py-12 text-center", className)}>
+      {icon ? <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-brand-500/10 text-brand-300">{icon}</div> : null}
       <p className="font-display text-base font-semibold text-ink">{title}</p>
       {description ? <p className="mt-1 max-w-md text-sm text-ink-muted">{description}</p> : null}
       {action ? <div className="mt-5">{action}</div> : null}
@@ -141,7 +141,7 @@ export function StatCard({ label, value, hint, icon }: { label: string; value: R
     <Card className="p-5">
       <div className="flex items-center justify-between">
         <p className="text-[13px] font-medium text-ink-muted">{label}</p>
-        {icon ? <span className="grid size-8 place-items-center rounded-lg bg-brand-50 text-brand-600">{icon}</span> : null}
+        {icon ? <span className="grid size-8 place-items-center rounded-lg bg-brand-500/10 text-brand-300">{icon}</span> : null}
       </div>
       <p className="mt-2 font-display text-2xl font-bold text-ink">{value}</p>
       {hint ? <p className="mt-1 text-[12.5px] text-ink-muted">{hint}</p> : null}
@@ -151,8 +151,8 @@ export function StatCard({ label, value, hint, icon }: { label: string; value: R
 
 export function Table({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-x-auto rounded-2xl border border-line bg-white", className)}>
-      <table className="w-full min-w-[640px] text-left text-sm [&_td]:px-4 [&_td]:py-3 [&_th]:px-4 [&_th]:py-2.5 [&_th]:text-[12px] [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-ink-muted [&_thead]:bg-slate-50/70 [&_tbody_tr]:border-t [&_tbody_tr]:border-line [&_tbody_tr:hover]:bg-brand-50/30">
+    <div className={cn("overflow-x-auto rounded-2xl border border-line bg-surface", className)}>
+      <table className="w-full min-w-[640px] text-left text-sm [&_td]:px-4 [&_td]:py-3 [&_th]:px-4 [&_th]:py-2.5 [&_th]:text-[12px] [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-ink-muted [&_thead]:bg-white/[0.03]/70 [&_tbody_tr]:border-t [&_tbody_tr]:border-line [&_tbody_tr:hover]:bg-brand-500/10/30">
         {children}
       </table>
     </div>

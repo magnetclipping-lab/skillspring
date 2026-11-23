@@ -24,7 +24,7 @@ export function InstructorApplicationForm({ existing, defaultName }: { existing?
       </div>
       <div>
         <Checkbox name="rights_confirmation" defaultChecked={Boolean(existing)} label="I confirm that any material I upload is my original work or that I hold the rights to use it commercially. I understand every course is reviewed for content rights before publication." />
-        {e.rights_confirmation ? <p className="mt-1.5 text-[12.5px] text-red-600">{e.rights_confirmation[0]}</p> : null}
+        {e.rights_confirmation ? <p className="mt-1.5 text-[12.5px] text-red-400">{e.rights_confirmation[0]}</p> : null}
       </div>
       <SubmitButton>{existing ? "Update profile" : "Submit application"}</SubmitButton>
     </form>

@@ -32,7 +32,7 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
 
   return (
     <div className="space-y-6">
-      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />Back to course</Link>
+      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />Back to course</Link>
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-2xl font-bold">{l.title}</h1>
         {editable ? <form action={deleteLessonAction}>{hidden({ id: l.id })}<SubmitButton variant="danger" pendingText="Deleting…"><Trash2 className="size-4" />Delete lesson</SubmitButton></form> : null}
@@ -49,7 +49,7 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
                 {resources.map((r) => (
                   <li key={r.id} className="flex items-center gap-3 rounded-xl border border-line px-3 py-2 text-sm">
                     <Download className="size-4 text-ink-muted" /><span className="flex-1">{r.title}</span><Badge>{r.kind}</Badge>
-                    {editable ? <form action={deleteResourceAction}>{hidden({ id: r.id })}<button className="text-ink-muted hover:text-red-600" aria-label="Delete resource"><Trash2 className="size-4" /></button></form> : null}
+                    {editable ? <form action={deleteResourceAction}>{hidden({ id: r.id })}<button className="text-ink-muted hover:text-red-400" aria-label="Delete resource"><Trash2 className="size-4" /></button></form> : null}
                   </li>
                 ))}
               </ul>
@@ -69,9 +69,9 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
                     {(questions ?? []).map((q, i) => (
                       <li key={q.id} className="rounded-xl border border-line p-3 text-sm">
                         <div className="flex items-start gap-2"><span className="font-semibold">{i + 1}.</span><span className="flex-1">{q.prompt}</span>
-                          {editable ? <form action={deleteQuestionAction}>{hidden({ id: q.id })}<button className="text-ink-muted hover:text-red-600" aria-label="Delete question"><Trash2 className="size-4" /></button></form> : null}
+                          {editable ? <form action={deleteQuestionAction}>{hidden({ id: q.id })}<button className="text-ink-muted hover:text-red-400" aria-label="Delete question"><Trash2 className="size-4" /></button></form> : null}
                         </div>
-                        <ul className="mt-2 space-y-1 pl-5">{(q.options as string[]).map((o, oi) => <li key={oi} className={oi === q.correct_index ? "font-semibold text-emerald-700" : "text-ink-soft"}>{oi === q.correct_index ? "✓ " : "• "}{o}</li>)}</ul>
+                        <ul className="mt-2 space-y-1 pl-5">{(q.options as string[]).map((o, oi) => <li key={oi} className={oi === q.correct_index ? "font-semibold text-emerald-300" : "text-ink-soft"}>{oi === q.correct_index ? "✓ " : "• "}{o}</li>)}</ul>
                       </li>
                     ))}
                   </ol>

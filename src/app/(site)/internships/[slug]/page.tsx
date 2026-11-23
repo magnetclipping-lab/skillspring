@@ -50,7 +50,7 @@ export default async function InternshipPage({ params }: Props) {
   return (
     <div className="container-page py-10">
       {jsonLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} /> : null}
-      <Link href="/internships" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />All opportunities</Link>
+      <Link href="/internships" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />All opportunities</Link>
       <div className="mt-5 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         <div className="space-y-8">
           <div>
@@ -58,14 +58,14 @@ export default async function InternshipPage({ params }: Props) {
             <h1 className="mt-3 text-3xl font-bold sm:text-4xl">{i.title}</h1>
             <p className="mt-2 flex items-center gap-2 text-ink-muted">
               {i.kind === "employer" && i.employer ? (
-                <>{i.employer.name}{i.employer.website ? <a href={i.employer.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-brand-600 hover:underline">Website <ExternalLink className="size-3" /></a> : null}</>
-              ) : "Run by SkillSpring"}
+                <>{i.employer.name}{i.employer.website ? <a href={i.employer.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-brand-300 hover:underline">Website <ExternalLink className="size-3" /></a> : null}</>
+              ) : "Run by Proofwork"}
             </p>
           </div>
 
           {i.kind !== "employer" ? (
             <Alert tone="info" title="This is an educational experience, not a job">
-              {i.kind === "simulation" ? "This simulation" : "This project"} is designed and run by SkillSpring to help you practise real-world skills and build your portfolio. It is not an employer internship, placement or offer of employment.
+              {i.kind === "simulation" ? "This simulation" : "This project"} is designed and run by Proofwork to help you practise real-world skills and build your portfolio. It is not an employer internship, placement or offer of employment.
             </Alert>
           ) : null}
 
@@ -82,7 +82,7 @@ export default async function InternshipPage({ params }: Props) {
           {i.skills.length ? (
             <section>
               <h2 className="text-xl font-bold">Skills required</h2>
-              <div className="mt-3 flex flex-wrap gap-2">{i.skills.map((s) => <span key={s} className="rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-ink-soft ring-1 ring-line">{s}</span>)}</div>
+              <div className="mt-3 flex flex-wrap gap-2">{i.skills.map((s) => <span key={s} className="rounded-lg bg-surface px-3 py-1.5 text-sm font-medium text-ink-soft ring-1 ring-line">{s}</span>)}</div>
             </section>
           ) : null}
           {i.eligibility ? (

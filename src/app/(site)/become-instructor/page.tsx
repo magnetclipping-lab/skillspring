@@ -5,7 +5,7 @@ import { Alert, Card } from "@/components/ui/primitives";
 import { ButtonLink } from "@/components/ui/button";
 import { InstructorApplicationForm } from "./form";
 
-export const metadata: Metadata = { title: "Become an instructor", description: "Teach practical skills to students across India with SkillSpring." };
+export const metadata: Metadata = { title: "Become an instructor", description: "Teach practical skills to students across India with Proofwork." };
 
 export default async function BecomeInstructorPage() {
   const user = await getSessionUser();
@@ -13,7 +13,7 @@ export default async function BecomeInstructorPage() {
     <>
       <section className="hero-gradient text-white">
         <div className="container-page py-16">
-          <p className="eyebrow !text-brand-300">Teach with SkillSpring</p>
+          <p className="eyebrow !text-brand-300">Teach with Proofwork</p>
           <h1 className="mt-2 max-w-2xl text-4xl font-bold text-white">Share what you know. Help students get job-ready.</h1>
           <p className="mt-3 max-w-2xl text-brand-100/90">We partner with practitioners — chartered accountants, analysts, marketers, engineers and recruiters — to build affordable, practical courses.</p>
         </div>
@@ -28,7 +28,7 @@ export default async function BecomeInstructorPage() {
               { icon: ShieldCheck, t: "Review", d: "Our team checks quality and confirms you hold the rights to all material." },
               { icon: IndianRupee, t: "Earn", d: "Receive the agreed revenue share on every verified sale, tracked in your portal." },
             ].map(({ icon: Icon, t, d }) => (
-              <li key={t} className="flex gap-4"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600"><Icon className="size-5" /></span><div><p className="font-semibold">{t}</p><p className="text-sm text-ink-muted">{d}</p></div></li>
+              <li key={t} className="flex gap-4"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-300"><Icon className="size-5" /></span><div><p className="font-semibold">{t}</p><p className="text-sm text-ink-muted">{d}</p></div></li>
             ))}
           </ol>
           <ul className="space-y-2 text-sm text-ink-soft">

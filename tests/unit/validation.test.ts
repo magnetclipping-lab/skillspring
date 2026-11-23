@@ -65,7 +65,7 @@ describe("email templates", () => {
     for (const t of ["welcome", "payment_success", "course_completed", "certificate_issued", "application_received", "application_status", "instructor_application"] as const) {
       const r = renderTemplate(t, { name: "A", title: "T", courseTitle: "C", code: "SS-2026-X", url: "https://e.x", verifyUrl: "https://e.x/v", status: "Shortlisted", amount: "₹1" });
       expect(r.subject.length).toBeGreaterThan(5);
-      expect(r.html).toContain("SkillSpring");
+      expect(r.html).toContain("Proofwork");
     }
   });
 });

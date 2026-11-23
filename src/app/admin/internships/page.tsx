@@ -23,7 +23,7 @@ export default async function AdminInternships() {
       <Table>
         <thead><tr><th>Title</th><th>Type</th><th>Employer</th><th>Status</th><th>Deadline</th><th>Applications</th></tr></thead>
         <tbody>{((data ?? []) as Internship[]).map((i) => (
-          <tr key={i.id}><td><Link href={`/admin/internships/${i.id}`} className="font-medium hover:text-brand-700">{i.title}</Link>{i.is_demo ? <Badge tone="warning" className="ml-2">Demo</Badge> : null}</td><td><InternshipKindBadge kind={i.kind} /></td><td>{i.employer?.name ?? "SkillSpring"}</td><td><Badge tone={i.status === "open" ? "success" : "neutral"}>{titleCase(i.status)}</Badge></td><td>{formatDate(i.deadline)}</td><td><Link href={`/admin/applications?internship=${i.id}`} className="font-semibold text-brand-600 hover:underline">{(apps ?? []).filter((a) => a.internship_id === i.id).length}</Link></td></tr>
+          <tr key={i.id}><td><Link href={`/admin/internships/${i.id}`} className="font-medium hover:text-white">{i.title}</Link>{i.is_demo ? <Badge tone="warning" className="ml-2">Demo</Badge> : null}</td><td><InternshipKindBadge kind={i.kind} /></td><td>{i.employer?.name ?? "Proofwork"}</td><td><Badge tone={i.status === "open" ? "success" : "neutral"}>{titleCase(i.status)}</Badge></td><td>{formatDate(i.deadline)}</td><td><Link href={`/admin/applications?internship=${i.id}`} className="font-semibold text-brand-300 hover:underline">{(apps ?? []).filter((a) => a.internship_id === i.id).length}</Link></td></tr>
         ))}</tbody>
       </Table>
     </>

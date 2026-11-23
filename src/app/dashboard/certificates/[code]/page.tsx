@@ -20,7 +20,7 @@ export default async function CertificatePage({ params }: { params: Promise<{ co
   return (
     <div className="space-y-5">
       <div className="no-print flex flex-wrap items-center justify-between gap-3">
-        <Link href="/dashboard/certificates" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />All certificates</Link>
+        <Link href="/dashboard/certificates" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />All certificates</Link>
         <div className="flex gap-2">
           <ButtonLink href={`/verify/${cert.certificate_code}`} variant="secondary" target="_blank"><ExternalLink className="size-4" />Public verification page</ButtonLink>
           <PrintButton />

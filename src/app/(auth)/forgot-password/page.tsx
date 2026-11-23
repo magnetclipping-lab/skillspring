@@ -10,7 +10,7 @@ export default function ForgotPasswordPage() {
       <h1 className="text-2xl font-bold">Forgot your password?</h1>
       <p className="mb-6 mt-1 text-sm text-ink-muted">Enter your email and we&apos;ll send you a secure reset link.</p>
       <ForgotForm />
-      <p className="mt-6 text-center text-sm"><Link href="/login" className="font-semibold text-brand-600 hover:underline">Back to log in</Link></p>
+      <p className="mt-6 text-center text-sm"><Link href="/login" className="font-semibold text-brand-300 hover:underline">Back to log in</Link></p>
     </>
   );
 }

@@ -13,7 +13,7 @@ export function ReviewSubmissionForm({ base, courseId, id, status, feedback }: {
       <input type="hidden" name="id" value={id} />
       <Select name="status" defaultValue={status}><option value="submitted">Submitted</option><option value="approved">Approve</option><option value="needs_revision">Needs revision</option></Select>
       <Textarea name="feedback" rows={2} defaultValue={feedback ?? ""} placeholder="Feedback for the learner" className="min-h-0" />
-      <div className="flex items-center gap-2"><SubmitButton size="sm" variant="secondary">Save</SubmitButton>{state?.message ? <span className={state.ok ? "text-[12px] text-emerald-700" : "text-[12px] text-red-600"}>{state.message}</span> : null}</div>
+      <div className="flex items-center gap-2"><SubmitButton size="sm" variant="secondary">Save</SubmitButton>{state?.message ? <span className={state.ok ? "text-[12px] text-emerald-300" : "text-[12px] text-red-400"}>{state.message}</span> : null}</div>
     </form>
   );
 }

@@ -23,7 +23,7 @@ export function ReviewForm({ courseId, slug, existing }: { courseId: string; slu
   const [state, action] = useActionState<ActionState, FormData>(saveReviewAction, null);
   const [rating, setRating] = useState(existing?.rating ?? 0);
   return (
-    <form action={action} className="space-y-3 rounded-2xl border border-line bg-white p-5">
+    <form action={action} className="space-y-3 rounded-2xl border border-line bg-surface p-5">
       <p className="font-semibold">{existing ? "Update your review" : "Review this course"}</p>
       <FormMessage state={state} />
       <input type="hidden" name="course_id" value={courseId} />

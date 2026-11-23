@@ -31,7 +31,7 @@ export default async function AdminOverview() {
       </div>
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.6fr_1fr]">
         <Card>
-          <CardHeader title="Recent transactions" action={<Link href="/admin/finance" className="text-sm font-semibold text-brand-600 hover:underline">Finance →</Link>} />
+          <CardHeader title="Recent transactions" action={<Link href="/admin/finance" className="text-sm font-semibold text-brand-300 hover:underline">Finance →</Link>} />
           {(tx ?? []).length ? <div className="p-3"><Table className="border-0"><thead><tr><th>Date</th><th>Student</th><th>Course</th><th>Amount</th><th>Status</th></tr></thead><tbody>
             {(tx as unknown as Tx[]).map((t) => <tr key={t.id}><td>{formatDate(t.created_at)}</td><td>{t.user?.full_name || t.user?.email}</td><td>{t.order?.course?.title}</td><td>{formatINR(t.amount_paise, true)}</td><td><Badge tone={t.status === "captured" ? "success" : t.status === "failed" ? "danger" : "violet"}>{titleCase(t.status)}</Badge></td></tr>)}
           </tbody></Table></div> : <p className="px-5 py-4 text-sm text-ink-muted">No transactions yet.</p>}
@@ -48,7 +48,7 @@ export default async function AdminOverview() {
               ["Mux direct uploads", integrations.muxUploads],
               ["Cloudflare Stream", integrations.cloudflareStream],
             ].map(([k, v]) => (
-              <li key={String(k)} className="flex items-center justify-between px-5 py-3">{k}{v ? <span className="flex items-center gap-1.5 font-medium text-emerald-700"><CheckCircle2 className="size-4" />Configured</span> : <span className="flex items-center gap-1.5 font-medium text-amber-700"><AlertTriangle className="size-4" />Not configured</span>}</li>
+              <li key={String(k)} className="flex items-center justify-between px-5 py-3">{k}{v ? <span className="flex items-center gap-1.5 font-medium text-emerald-300"><CheckCircle2 className="size-4" />Configured</span> : <span className="flex items-center gap-1.5 font-medium text-amber-300"><AlertTriangle className="size-4" />Not configured</span>}</li>
             ))}
           </ul>
         </Card>

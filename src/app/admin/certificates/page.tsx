@@ -25,7 +25,7 @@ export default async function AdminCertificates({ searchParams }: { searchParams
       <Table>
         <thead><tr><th>ID</th><th>Student</th><th>Course</th><th>Issued</th><th>Status</th><th>Revoke</th></tr></thead>
         <tbody>{(data ?? []).map((c) => (
-          <tr key={c.id}><td><Link href={`/verify/${c.certificate_code}`} target="_blank" className="font-mono text-[12.5px] text-brand-600 hover:underline">{c.certificate_code}</Link></td><td>{c.student_name}</td><td>{c.course_title}</td><td>{formatDate(c.issued_at)}</td><td><Badge tone={c.status === "valid" ? "success" : "danger"}>{c.status}</Badge>{c.revoked_reason ? <p className="text-[12px] text-ink-muted">{c.revoked_reason}</p> : null}</td>
+          <tr key={c.id}><td><Link href={`/verify/${c.certificate_code}`} target="_blank" className="font-mono text-[12.5px] text-brand-300 hover:underline">{c.certificate_code}</Link></td><td>{c.student_name}</td><td>{c.course_title}</td><td>{formatDate(c.issued_at)}</td><td><Badge tone={c.status === "valid" ? "success" : "danger"}>{c.status}</Badge>{c.revoked_reason ? <p className="text-[12px] text-ink-muted">{c.revoked_reason}</p> : null}</td>
             <td>{c.status === "valid" ? <ActionForm action={adminRevokeCertificateAction} className="flex gap-1" compact><input type="hidden" name="id" value={c.id} /><Input name="reason" placeholder="Reason" required className="h-8 w-36 text-xs" /><SubmitButton size="sm" variant="danger">Revoke</SubmitButton></ActionForm> : null}</td></tr>
         ))}</tbody>
       </Table>

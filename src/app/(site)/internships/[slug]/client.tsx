@@ -38,7 +38,7 @@ export function SaveButton({ internshipId, slug, saved }: { internshipId: string
   const [pending, start] = useTransition();
   return (
     <Button variant="secondary" disabled={pending} onClick={() => start(async () => { setOptimistic(!optimistic); await toggleSaveInternshipAction(internshipId, slug); })}>
-      {optimistic ? <BookmarkCheck className="size-4 text-brand-600" /> : <Bookmark className="size-4" />}
+      {optimistic ? <BookmarkCheck className="size-4 text-brand-300" /> : <Bookmark className="size-4" />}
       {optimistic ? "Saved" : "Save for later"}
     </Button>
   );

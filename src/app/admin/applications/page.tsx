@@ -24,8 +24,8 @@ export default async function AdminApplications({ searchParams }: { searchParams
   const exportHref = `/api/admin/export/applications${sp.internship ? `?internship=${sp.internship}` : ""}`;
   return (
     <>
-      <PageHeader title="Applications" actions={<a href={exportHref} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold ring-1 ring-line hover:bg-brand-50"><Download className="size-4" />Export CSV</a>} />
-      <div className="mb-4 flex flex-wrap gap-2">{["", ...statuses].map((s) => <Link key={s} href={`/admin/applications?${new URLSearchParams({ ...(s ? { status: s } : {}), ...(sp.internship ? { internship: sp.internship } : {}) })}`} className={cn("rounded-full px-3 py-1.5 text-[13px] font-medium ring-1 ring-inset", (sp.status ?? "") === s ? "bg-brand-600 text-white ring-brand-600" : "bg-white text-ink-soft ring-line")}>{s ? titleCase(s) : "All"}</Link>)}</div>
+      <PageHeader title="Applications" actions={<a href={exportHref} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold ring-1 ring-line hover:bg-brand-500/10"><Download className="size-4" />Export CSV</a>} />
+      <div className="mb-4 flex flex-wrap gap-2">{["", ...statuses].map((s) => <Link key={s} href={`/admin/applications?${new URLSearchParams({ ...(s ? { status: s } : {}), ...(sp.internship ? { internship: sp.internship } : {}) })}`} className={cn("rounded-full px-3 py-1.5 text-[13px] font-medium ring-1 ring-inset", (sp.status ?? "") === s ? "bg-brand-600 text-white ring-brand-600" : "bg-surface text-ink-soft ring-line")}>{s ? titleCase(s) : "All"}</Link>)}</div>
       {rows.length ? (
         <Table>
           <thead><tr><th>Applicant</th><th>Opportunity</th><th>Details</th><th>Status</th><th>Update</th></tr></thead>
@@ -33,7 +33,7 @@ export default async function AdminApplications({ searchParams }: { searchParams
             <tr key={a.id} className="align-top">
               <td><p className="font-medium">{a.user?.full_name}</p><p className="text-[12px] text-ink-muted">{a.user?.email}</p><p className="text-[12px] text-ink-muted">{[a.user?.degree, a.user?.college].filter(Boolean).join(" · ")}</p></td>
               <td>{a.internship?.title}<p className="text-[12px] text-ink-muted">{formatDate(a.created_at)}</p></td>
-              <td className="max-w-xs text-[13px]"><p className="line-clamp-3">{a.cover_letter}</p>{a.resume_path ? <a href={`/api/files?type=resume&id=${a.id}`} className="mt-1 inline-flex items-center gap-1 font-semibold text-brand-600 hover:underline"><Paperclip className="size-3.5" />Resume</a> : null}{a.portfolio_url ? <a href={a.portfolio_url} target="_blank" rel="noopener noreferrer nofollow" className="ml-3 font-semibold text-brand-600 hover:underline">Portfolio</a> : null}</td>
+              <td className="max-w-xs text-[13px]"><p className="line-clamp-3">{a.cover_letter}</p>{a.resume_path ? <a href={`/api/files?type=resume&id=${a.id}`} className="mt-1 inline-flex items-center gap-1 font-semibold text-brand-300 hover:underline"><Paperclip className="size-3.5" />Resume</a> : null}{a.portfolio_url ? <a href={a.portfolio_url} target="_blank" rel="noopener noreferrer nofollow" className="ml-3 font-semibold text-brand-300 hover:underline">Portfolio</a> : null}</td>
               <td><Badge tone={a.status === "selected" ? "success" : a.status === "rejected" ? "danger" : "brand"}>{titleCase(a.status)}</Badge></td>
               <td className="min-w-56">{a.status !== "withdrawn" ? (
                 <ActionForm action={adminUpdateApplicationAction} className="space-y-2" compact>

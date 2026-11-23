@@ -49,13 +49,13 @@ export function FileUpload({ kind, name, accept, courseId, label, help, onUpload
     <div>
       <p className="mb-1.5 text-[13px] font-medium text-ink">{label}</p>
       <input type="hidden" name={name} value={path} />
-      <div className={cn("flex items-center gap-3 rounded-xl border border-dashed px-4 py-3", error ? "border-red-300 bg-red-50/40" : "border-line bg-slate-50/50")}>
-        {progress !== null ? <Loader2 className="size-5 animate-spin text-brand-600" /> : path ? <CheckCircle2 className="size-5 text-emerald-600" /> : <FileUp className="size-5 text-ink-muted" />}
+      <div className={cn("flex items-center gap-3 rounded-xl border border-dashed px-4 py-3", error ? "border-red-400/25 bg-red-500/10/40" : "border-line bg-white/[0.03]/50")}>
+        {progress !== null ? <Loader2 className="size-5 animate-spin text-brand-300" /> : path ? <CheckCircle2 className="size-5 text-emerald-400" /> : <FileUp className="size-5 text-ink-muted" />}
         <div className="min-w-0 flex-1 text-sm">
           {progress !== null ? (
             <div>
               <p className="text-ink-soft">Uploading… {progress}%</p>
-              <div className="mt-1.5 h-1.5 rounded-full bg-brand-100"><div className="h-full rounded-full bg-brand-500 transition-[width]" style={{ width: `${progress}%` }} /></div>
+              <div className="mt-1.5 h-1.5 rounded-full bg-brand-500/15"><div className="h-full rounded-full bg-brand-500 transition-[width]" style={{ width: `${progress}%` }} /></div>
             </div>
           ) : path ? (
             <p className="truncate font-medium text-ink">{fileName}</p>
@@ -64,14 +64,14 @@ export function FileUpload({ kind, name, accept, courseId, label, help, onUpload
           )}
         </div>
         {path && progress === null ? (
-          <button type="button" className="rounded-lg p-1 text-ink-muted hover:bg-white" onClick={() => { setPath(""); setFileName(null); if (inputRef.current) inputRef.current.value = ""; }} aria-label="Remove file"><X className="size-4" /></button>
+          <button type="button" className="rounded-lg p-1 text-ink-muted hover:bg-white/[0.06]" onClick={() => { setPath(""); setFileName(null); if (inputRef.current) inputRef.current.value = ""; }} aria-label="Remove file"><X className="size-4" /></button>
         ) : null}
-        <label className="cursor-pointer rounded-lg bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-700 ring-1 ring-line hover:ring-brand-300">
+        <label className="cursor-pointer rounded-lg bg-surface px-3 py-1.5 text-[13px] font-semibold text-brand-300 ring-1 ring-line hover:ring-brand-300">
           {path ? "Replace" : "Browse"}
           <input ref={inputRef} type="file" accept={accept} className="sr-only" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} disabled={progress !== null} />
         </label>
       </div>
-      {error ? <p className="mt-1.5 text-[12.5px] text-red-600" role="alert">{error}</p> : null}
+      {error ? <p className="mt-1.5 text-[12.5px] text-red-400" role="alert">{error}</p> : null}
     </div>
   );
 }

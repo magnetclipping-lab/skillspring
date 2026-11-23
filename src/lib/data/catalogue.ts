@@ -60,7 +60,7 @@ function previewInternships(): Internship[] {
     id: `preview-int-${idx}`, slug: i.slug, title: i.title, employer_id: null, kind: i.kind, description: i.description,
     responsibilities: i.responsibilities, skills: i.skills, eligibility: i.eligibility, location: i.location, work_mode: i.workMode,
     duration_weeks: i.durationWeeks, is_paid: false, stipend_min_inr: null, stipend_max_inr: null,
-    stipend_notes: "Unpaid educational experience run by SkillSpring.",
+    stipend_notes: "Unpaid educational experience run by Proofwork.",
     deadline: new Date(Date.now() + i.deadlineInDays * 86400000).toISOString().slice(0, 10), positions: i.positions,
     status: "open", is_demo: true, created_at: new Date().toISOString(), employer: null,
   }));

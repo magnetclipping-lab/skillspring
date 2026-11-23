@@ -61,12 +61,12 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
 
       <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <Card>
-          <CardHeader title="My courses" action={<Link href="/dashboard/learning" className="text-sm font-semibold text-brand-600 hover:underline">View all</Link>} />
+          <CardHeader title="My courses" action={<Link href="/dashboard/learning" className="text-sm font-semibold text-brand-300 hover:underline">View all</Link>} />
           {courses.length ? (
             <ul className="divide-y divide-line">
               {courses.slice(0, 5).map((c) => (
                 <li key={c.enrolment_id}>
-                  <Link href={`/dashboard/learning/${c.course.slug}`} className="flex items-center gap-4 px-5 py-4 hover:bg-slate-50">
+                  <Link href={`/dashboard/learning/${c.course.slug}`} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.03]">
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-medium">{c.course.title}</p>
                       <div className="mt-2 flex items-center gap-3"><Progress value={c.percent} /><span className="w-10 text-right text-[13px] font-semibold text-ink-soft">{c.percent}%</span></div>
@@ -84,15 +84,15 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
         <div className="space-y-6">
           <Card className="p-5">
             <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-brand-600"><UserRound className="size-5" /></span>
+              <span className="grid size-10 place-items-center rounded-xl bg-brand-500/10 text-brand-300"><UserRound className="size-5" /></span>
               <div className="min-w-0"><p className="truncate font-semibold">{p.full_name || "Your profile"}</p><p className="truncate text-[13px] text-ink-muted">{[p.degree, p.college].filter(Boolean).join(" · ") || user.email}</p></div>
             </div>
             <div className="mt-4"><div className="mb-1.5 flex justify-between text-[12.5px] text-ink-muted"><span>Profile completeness</span><span className="font-semibold text-ink">{completeness}%</span></div><Progress value={completeness} /></div>
-            {completeness < 100 ? <Link href="/dashboard/settings" className="mt-3 inline-block text-[13px] font-semibold text-brand-600 hover:underline">Complete your profile →</Link> : null}
+            {completeness < 100 ? <Link href="/dashboard/settings" className="mt-3 inline-block text-[13px] font-semibold text-brand-300 hover:underline">Complete your profile →</Link> : null}
           </Card>
 
           <Card>
-            <CardHeader title="Recent applications" action={<Link href="/dashboard/applications" className="text-sm font-semibold text-brand-600 hover:underline">All</Link>} />
+            <CardHeader title="Recent applications" action={<Link href="/dashboard/applications" className="text-sm font-semibold text-brand-300 hover:underline">All</Link>} />
             {apps?.length ? (
               <ul className="divide-y divide-line">
                 {(apps as unknown as { id: string; status: string; created_at: string; internship: { title: string; slug: string } | null }[]).map((a) => (
@@ -102,11 +102,11 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
                   </li>
                 ))}
               </ul>
-            ) : <p className="px-5 py-4 text-sm text-ink-muted">No applications yet. <Link href="/internships" className="font-semibold text-brand-600 hover:underline">Browse opportunities</Link></p>}
+            ) : <p className="px-5 py-4 text-sm text-ink-muted">No applications yet. <Link href="/internships" className="font-semibold text-brand-300 hover:underline">Browse opportunities</Link></p>}
           </Card>
 
           <Card>
-            <CardHeader title="Notifications" action={<Link href="/dashboard/notifications" className="text-sm font-semibold text-brand-600 hover:underline">All</Link>} />
+            <CardHeader title="Notifications" action={<Link href="/dashboard/notifications" className="text-sm font-semibold text-brand-300 hover:underline">All</Link>} />
             {notes?.length ? (
               <ul className="divide-y divide-line">
                 {notes.map((n) => (

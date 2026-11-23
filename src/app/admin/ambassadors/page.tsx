@@ -33,7 +33,7 @@ export default async function AmbassadorsPage({ searchParams }: { searchParams: 
       <PageHeader
         title="Campus ambassadors"
         description="Free applications from students. Setting someone to Active gives them a referral code."
-        actions={<a href={"/api/admin/export/ambassadors"} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-50"><Download className="size-4" />Export CSV</a>}
+        actions={<a href={"/api/admin/export/ambassadors"} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-500/10"><Download className="size-4" />Export CSV</a>}
       />
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <StatCard label="Applications" value={total ?? 0} />
@@ -43,7 +43,7 @@ export default async function AmbassadorsPage({ searchParams }: { searchParams: 
       <nav className="mb-5 flex flex-wrap gap-2" aria-label="Filter by status">
         {FILTERS.map((f) => (
           <Link key={f} href={f === "all" ? "/admin/ambassadors" : `/admin/ambassadors?status=${f}`} aria-current={status === f ? "page" : undefined}
-            className={`rounded-full px-3.5 py-1.5 text-sm font-medium ${status === f ? "bg-ink text-white" : "bg-white text-ink-soft ring-1 ring-line hover:bg-brand-50"}`}>{titleCase(f)}</Link>
+            className={`rounded-full px-3.5 py-1.5 text-sm font-medium ${status === f ? "bg-ink text-canvas" : "bg-surface text-ink-soft ring-1 ring-line hover:bg-brand-500/10"}`}>{titleCase(f)}</Link>
         ))}
       </nav>
       {rows.length ? (
@@ -54,7 +54,7 @@ export default async function AmbassadorsPage({ searchParams }: { searchParams: 
                 <div>
                   <p className="font-semibold text-ink">{r.full_name}</p>
                   <p className="text-[13px] text-ink-muted">{r.college}, {r.city}. {r.course_and_year}</p>
-                  <p className="mt-1 text-[13px] text-ink-muted"><a className="hover:underline" href={`mailto:${r.email}`}>{r.email}</a>, {r.phone}{r.social_url ? <>, <a href={r.social_url} target="_blank" rel="noopener noreferrer nofollow" className="text-brand-600 hover:underline">profile</a></> : null}</p>
+                  <p className="mt-1 text-[13px] text-ink-muted"><a className="hover:underline" href={`mailto:${r.email}`}>{r.email}</a>, {r.phone}{r.social_url ? <>, <a href={r.social_url} target="_blank" rel="noopener noreferrer nofollow" className="text-brand-300 hover:underline">profile</a></> : null}</p>
                 </div>
                 <div className="text-right">
                   <Badge tone={tone[r.status] ?? "neutral"}>{titleCase(r.status)}</Badge>
@@ -68,7 +68,7 @@ export default async function AmbassadorsPage({ searchParams }: { searchParams: 
           ))}
         </div>
       ) : (
-        <EmptyState icon={<Megaphone className="size-5" />} title="No applications yet" description="Share the Campus Ambassador page with student communities to get your first applicants." action={<Link href="/campus-ambassador" target="_blank" className="text-sm font-semibold text-brand-600 hover:underline">Open the public page</Link>} />
+        <EmptyState icon={<Megaphone className="size-5" />} title="No applications yet" description="Share the Campus Ambassador page with student communities to get your first applicants." action={<Link href="/campus-ambassador" target="_blank" className="text-sm font-semibold text-brand-300 hover:underline">Open the public page</Link>} />
       )}
     </>
   );

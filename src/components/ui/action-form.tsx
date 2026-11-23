@@ -8,9 +8,9 @@ export function ActionForm({ action, children, className, compact }: { action: (
   const [state, formAction] = useActionState<ActionState, FormData>(action, null);
   return (
     <form action={formAction} className={className}>
-      {compact ? (state?.message ? <p className={`mb-2 text-[12.5px] ${state.ok ? "text-emerald-700" : "text-red-600"}`}>{state.message}</p> : null) : <div className={state?.message ? "mb-3" : ""}><FormMessage state={state} /></div>}
+      {compact ? (state?.message ? <p className={`mb-2 text-[12.5px] ${state.ok ? "text-emerald-300" : "text-red-400"}`}>{state.message}</p> : null) : <div className={state?.message ? "mb-3" : ""}><FormMessage state={state} /></div>}
       {state?.errors ? (
-        <ul className="mb-3 list-disc pl-5 text-[12.5px] text-red-600">
+        <ul className="mb-3 list-disc pl-5 text-[12.5px] text-red-400">
           {Object.entries(state.errors).map(([k, v]) => (v?.length ? <li key={k}><strong>{k.replace(/_/g, " ")}</strong>: {v[0]}</li> : null))}
         </ul>
       ) : null}

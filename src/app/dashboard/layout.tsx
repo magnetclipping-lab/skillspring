@@ -4,7 +4,7 @@ import type { NavItem } from "@/components/app/sidebar-nav";
 import { requireUser } from "@/lib/auth/dal";
 import { getUnreadCount } from "@/lib/data/student";
 
-export const metadata: Metadata = { title: { default: "Dashboard", template: "%s · Dashboard · SkillSpring" }, robots: { index: false } };
+export const metadata: Metadata = { title: { default: "Dashboard", template: "%s · Dashboard · Proofwork" }, robots: { index: false } };
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser("/dashboard");

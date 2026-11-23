@@ -31,7 +31,7 @@ export default async function InstructorHome() {
         {rows.length ? (
           <ul className="divide-y divide-line">
             {rows.map((r) => (
-              <li key={r.course_id}><Link href={`/instructor/courses/${r.course_id}`} className="grid gap-2 px-5 py-4 hover:bg-slate-50 sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] sm:items-center">
+              <li key={r.course_id}><Link href={`/instructor/courses/${r.course_id}`} className="grid gap-2 px-5 py-4 hover:bg-white/[0.03] sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] sm:items-center">
                 <span className="font-medium">{r.title}</span><span><Badge tone={statusTone[r.status]}>{titleCase(r.status)}</Badge></span>
                 <span className="text-sm text-ink-soft">{r.enrolments} enrolments</span><span className="text-sm text-ink-soft">{r.completions} certificates</span><span className="text-sm font-semibold">{formatINR(Number(r.earnings_paise))}</span>
               </Link></li>

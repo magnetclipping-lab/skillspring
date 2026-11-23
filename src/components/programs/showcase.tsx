@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
  * Illustrative, clearly-labelled sample visuals for each program.
  * They depict the kind of work students do — not real market or campaign data.
  */
-const HEX: Record<ProgramHue, string> = { stock: "#0e9f6e", web: "#5b5bd6", digital: "#e2557a", excel: "#0b7fc1" };
+const HEX: Record<ProgramHue, string> = { stock: "#2fd394", web: "#8b8dff", digital: "#ff6f98", excel: "#45b3f5" };
 
 function Frame({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-[22px] bg-white ring-1 ring-ink/10", className)}>
+    <div className={cn("overflow-hidden rounded-[22px] bg-surface ring-1 ring-ink/10", className)}>
       <div className="flex items-center gap-2 border-b border-ink/8 px-4 py-2.5">
         <span className="size-2.5 rounded-full bg-[#ff6159]" />
         <span className="size-2.5 rounded-full bg-[#ffbd2e]" />
@@ -36,7 +36,7 @@ function Chart({ hue }: { hue: ProgramHue }) {
           <p className="text-[12px] font-medium" style={{ color: HEX[hue] }}>Uptrend</p>
         </div>
         <svg viewBox={`0 0 ${w} ${h}`} className="mt-2 w-full" role="img" aria-label="Illustrative candlestick chart showing an uptrend">
-          {[0.25, 0.5, 0.75].map((f) => <line key={f} x1={0} x2={w} y1={h * f} y2={h * f} stroke="#14163a" strokeOpacity="0.06" />)}
+          {[0.25, 0.5, 0.75].map((f) => <line key={f} x1={0} x2={w} y1={h * f} y2={h * f} stroke="#ffffff" strokeOpacity="0.06" />)}
           <line x1={pad} x2={w - pad} y1={y(47.5)} y2={y(47.5)} stroke={HEX[hue]} strokeDasharray="5 5" strokeOpacity="0.6" />
           {closes.map((c, i) => {
             const o = i === 0 ? c - 2 : closes[i - 1];
@@ -45,12 +45,12 @@ function Chart({ hue }: { hue: ProgramHue }) {
             const hi = Math.max(o, c) + 1.6, lo = Math.min(o, c) - 1.6;
             return (
               <g key={i}>
-                <line x1={x} x2={x} y1={y(hi)} y2={y(lo)} stroke={up ? HEX[hue] : "#e2557a"} strokeWidth="1.5" />
-                <rect x={x - step * 0.3} width={step * 0.6} y={y(Math.max(o, c))} height={Math.max(2, Math.abs(y(o) - y(c)))} rx="1.5" fill={up ? HEX[hue] : "#e2557a"} />
+                <line x1={x} x2={x} y1={y(hi)} y2={y(lo)} stroke={up ? HEX[hue] : "#ff6f98"} strokeWidth="1.5" />
+                <rect x={x - step * 0.3} width={step * 0.6} y={y(Math.max(o, c))} height={Math.max(2, Math.abs(y(o) - y(c)))} rx="1.5" fill={up ? HEX[hue] : "#ff6f98"} />
               </g>
             );
           })}
-          <polyline fill="none" stroke="#f4b12e" strokeWidth="2.5" points={ma.map((m, i) => `${pad + i * step + step / 2},${y(m)}`).join(" ")} />
+          <polyline fill="none" stroke="#f0b544" strokeWidth="2.5" points={ma.map((m, i) => `${pad + i * step + step / 2},${y(m)}`).join(" ")} />
         </svg>
         <div className="mt-1 flex gap-4 text-[11.5px] text-ink-muted">
           <span className="flex items-center gap-1.5"><span className="h-0.5 w-4 bg-marigold-400" />5-day average</span>
@@ -64,7 +64,7 @@ function Chart({ hue }: { hue: ProgramHue }) {
 function Code({ hue }: { hue: ProgramHue }) {
   return (
     <div className="grid gap-3 sm:grid-cols-[1.15fr_1fr]">
-      <div className="overflow-hidden rounded-[22px] bg-[#1b1d3f] ring-1 ring-ink/10">
+      <div className="overflow-hidden rounded-[22px] bg-[#0b0d14] ring-1 ring-ink/10">
         <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5 text-[12.5px] text-white/60">
           <span className="rounded-md bg-white/10 px-2 py-0.5 text-white/80">Hero.jsx</span>
           <span className="ml-auto rounded-md bg-white/10 px-1.5 py-0.5 text-[10.5px]">Sample</span>

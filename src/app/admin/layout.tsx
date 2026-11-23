@@ -4,7 +4,7 @@ import type { NavItem } from "@/components/app/sidebar-nav";
 import { requireAdmin } from "@/lib/auth/dal";
 import { getUnreadCount } from "@/lib/data/student";
 
-export const metadata: Metadata = { title: { default: "Admin", template: "%s · Admin · SkillSpring" }, robots: { index: false } };
+export const metadata: Metadata = { title: { default: "Admin", template: "%s · Admin · Proofwork" }, robots: { index: false } };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const user = await requireAdmin();

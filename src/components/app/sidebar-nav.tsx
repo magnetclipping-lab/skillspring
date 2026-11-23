@@ -31,10 +31,10 @@ export function SidebarNav({ items, horizontal }: { items: NavItem[]; horizontal
             className={cn(
               "flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition",
               horizontal && "shrink-0 whitespace-nowrap",
-              active ? "bg-brand-50 text-brand-700" : "text-ink-soft hover:bg-slate-50 hover:text-ink",
+              active ? "bg-brand-500/10 text-brand-300" : "text-ink-soft hover:bg-white/[0.03] hover:text-ink",
             )}
           >
-            <Icon className={cn("size-4", active ? "text-brand-600" : "text-ink-muted")} />
+            <Icon className={cn("size-4", active ? "text-brand-300" : "text-ink-muted")} />
             {it.label}
             {it.badge ? <span className="ml-auto rounded-full bg-brand-600 px-1.5 text-[10.5px] font-bold text-white">{it.badge}</span> : null}
           </Link>

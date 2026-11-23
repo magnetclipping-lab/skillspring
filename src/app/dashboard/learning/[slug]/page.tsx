@@ -20,7 +20,7 @@ export default async function CourseHomePage({ params, searchParams }: { params:
 
   return (
     <div className="space-y-6">
-      <Link href="/dashboard/learning" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />My learning</Link>
+      <Link href="/dashboard/learning" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />My learning</Link>
       {welcome ? <Alert tone="success" title="Payment verified — you're enrolled!">A confirmation has been sent to your email. Enjoy the course.</Alert> : null}
       {ctx.isStaff && ctx.enrolment?.status !== "active" ? <Alert tone="info">You&apos;re viewing this course as staff. Progress isn&apos;t tracked.</Alert> : null}
 
@@ -45,7 +45,7 @@ export default async function CourseHomePage({ params, searchParams }: { params:
                   const Icon = icon[l.type];
                   return (
                     <li key={l.id}>
-                      <Link href={`/learn/${slug}/${l.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-slate-50">
+                      <Link href={`/learn/${slug}/${l.id}`} className="flex items-center gap-3 px-5 py-3 text-sm hover:bg-white/[0.03]">
                         {l.completed ? <CheckCircle2 className="size-4 shrink-0 text-emerald-500" /> : <Circle className="size-4 shrink-0 text-slate-300" />}
                         <Icon className="size-4 shrink-0 text-ink-muted" />
                         <span className="flex-1">{l.title}{!l.is_mandatory ? <span className="ml-2 text-[11px] text-ink-muted">(optional)</span> : null}</span>

@@ -31,7 +31,7 @@ export function LoginForm({ next }: { next?: string }) {
         <PasswordInput name="password" autoComplete="current-password" invalid={Boolean(state?.errors?.password)} />
       </Field>
       <div className="flex justify-end">
-        <Link href="/forgot-password" className="text-[13px] font-medium text-brand-600 hover:underline">Forgot password?</Link>
+        <Link href="/forgot-password" className="text-[13px] font-medium text-brand-300 hover:underline">Forgot password?</Link>
       </div>
       <SubmitButton className="w-full" size="lg" pendingText="Signing in…">Log in</SubmitButton>
     </form>
@@ -55,8 +55,8 @@ export function RegisterForm({ next }: { next?: string }) {
         <PasswordInput name="password" autoComplete="new-password" invalid={Boolean(state?.errors?.password)} />
       </Field>
       <div>
-        <Checkbox name="acceptTerms" label={<>I agree to the <Link href="/terms" className="font-medium text-brand-600 hover:underline">Terms</Link> and <Link href="/privacy" className="font-medium text-brand-600 hover:underline">Privacy Policy</Link>.</>} />
-        {state?.errors?.acceptTerms ? <p className="mt-1.5 text-[12.5px] text-red-600">{state.errors.acceptTerms[0]}</p> : null}
+        <Checkbox name="acceptTerms" label={<>I agree to the <Link href="/terms" className="font-medium text-brand-300 hover:underline">Terms</Link> and <Link href="/privacy" className="font-medium text-brand-300 hover:underline">Privacy Policy</Link>.</>} />
+        {state?.errors?.acceptTerms ? <p className="mt-1.5 text-[12.5px] text-red-400">{state.errors.acceptTerms[0]}</p> : null}
       </div>
       <SubmitButton className="w-full" size="lg" pendingText="Creating account…">Create account</SubmitButton>
     </form>

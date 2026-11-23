@@ -16,16 +16,16 @@ export default async function SettingsPage() {
           <Card className="p-5">
             <p className="font-semibold">Sign-in</p>
             <p className="mt-1 text-sm text-ink-muted">{user.email}</p>
-            <Link href="/forgot-password" className="mt-3 inline-block text-sm font-semibold text-brand-600 hover:underline">Change password</Link>
+            <Link href="/forgot-password" className="mt-3 inline-block text-sm font-semibold text-brand-300 hover:underline">Change password</Link>
           </Card>
           <Card className="p-5">
-            <p className="font-semibold">Teach on SkillSpring</p>
+            <p className="font-semibold">Teach on Proofwork</p>
             <p className="mt-1 text-sm text-ink-muted">{user.instructor ? `Instructor application: ${user.instructor.status}` : "Share your expertise with students."}</p>
-            <Link href={user.instructor ? "/dashboard/instructor-application" : "/become-instructor"} className="mt-3 inline-block text-sm font-semibold text-brand-600 hover:underline">{user.instructor ? "View application" : "Apply to teach"}</Link>
+            <Link href={user.instructor ? "/dashboard/instructor-application" : "/become-instructor"} className="mt-3 inline-block text-sm font-semibold text-brand-300 hover:underline">{user.instructor ? "View application" : "Apply to teach"}</Link>
           </Card>
           <Card className="p-5">
             <p className="font-semibold">Your data</p>
-            <p className="mt-1 text-sm text-ink-muted">To request a copy or deletion of your data, contact us via the <Link href="/contact" className="font-medium text-brand-600 hover:underline">contact page</Link>. See our <Link href="/privacy" className="font-medium text-brand-600 hover:underline">Privacy Policy</Link>.</p>
+            <p className="mt-1 text-sm text-ink-muted">To request a copy or deletion of your data, contact us via the <Link href="/contact" className="font-medium text-brand-300 hover:underline">contact page</Link>. See our <Link href="/privacy" className="font-medium text-brand-300 hover:underline">Privacy Policy</Link>.</p>
           </Card>
         </div>
       </div>

@@ -80,22 +80,22 @@ export default async function ProgramPage({ params }: Props) {
     description: course.subtitle ?? course.description.slice(0, 300),
     url: `${publicEnv.siteUrl}/programs/${course.slug}`,
     inLanguage: course.language,
-    provider: { "@type": "Organization", name: "SkillSpring", sameAs: publicEnv.siteUrl },
+    provider: { "@type": "Organization", name: "Proofwork", sameAs: publicEnv.siteUrl },
     ...(purchasable ? { offers: { "@type": "Offer", price: (course.effective_price / 100).toFixed(2), priceCurrency: "INR" } } : {}),
     ...(course.review_count > 0 && course.avg_rating ? { aggregateRating: { "@type": "AggregateRating", ratingValue: course.avg_rating, reviewCount: course.review_count } } : {}),
   };
 
   const cta = enrolled ? (
-    <Link href={`/dashboard/learning/${course.slug}`} className="flex h-13 w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-white hover:bg-brand-800">Continue learning</Link>
+    <Link href={`/dashboard/learning/${course.slug}`} className="flex h-13 w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-canvas hover:bg-white">Continue learning</Link>
   ) : !purchasable ? (
     <div className="space-y-3">
       <button disabled className="h-13 w-full cursor-not-allowed rounded-full bg-ink/8 py-3.5 text-[15px] font-semibold text-ink-soft">Enrolment opens soon</button>
-      <Link href="/contact?topic=general" className="block text-center text-[14px] font-semibold text-brand-600 hover:underline">Ask us about this program</Link>
+      <Link href="/contact?topic=general" className="block text-center text-[14px] font-semibold text-brand-300 hover:underline">Ask us about this program</Link>
     </div>
   ) : course.effective_price === 0 ? (
-    user ? <EnrolFreeButton courseId={course.id} slug={course.slug} /> : <Link href={`/login?next=/programs/${course.slug}`} className="flex w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-white">Log in to enrol free</Link>
+    user ? <EnrolFreeButton courseId={course.id} slug={course.slug} /> : <Link href={`/login?next=/programs/${course.slug}`} className="flex w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-canvas">Log in to enrol free</Link>
   ) : (
-    <Link href={user ? `/checkout/${course.slug}` : `/login?next=/checkout/${course.slug}`} className="flex w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-white hover:bg-brand-800">Enrol now</Link>
+    <Link href={user ? `/checkout/${course.slug}` : `/login?next=/checkout/${course.slug}`} className="flex w-full items-center justify-center rounded-full bg-ink py-3.5 text-[15px] font-semibold text-canvas hover:bg-white">Enrol now</Link>
   );
 
   const others = allPrograms.filter((o) => o.slug !== slug);
@@ -105,8 +105,10 @@ export default async function ProgramPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       {/* Hero */}
-      <section className={cn("relative", h.tint)}>
-        <div className="container-page grid gap-12 pb-16 pt-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pb-20 lg:pt-14">
+      <section className="relative overflow-hidden border-b border-white/[0.06]">
+        <div className={cn("pointer-events-none absolute -left-40 -top-40 size-[36rem] rounded-full opacity-25 blur-3xl", h.solid)} aria-hidden />
+        <div className="grid-fade pointer-events-none absolute inset-0" aria-hidden />
+        <div className="container-page relative grid gap-12 pb-16 pt-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pb-20 lg:pt-14">
           <div>
             <nav aria-label="Breadcrumb" className="text-[14px] text-ink-muted">
               <Link href="/programs" className="hover:text-ink">Programs</Link>
@@ -161,7 +163,7 @@ export default async function ProgramPage({ params }: Props) {
 
           <Section id="curriculum" title="Curriculum">
             <p className="-mt-2 mb-6 text-[15px] text-ink-muted">{outline.length} modules, {lessonCount} lessons, {formatDuration(course.duration_minutes)} of content</p>
-            <div className="divide-y divide-ink/8 overflow-hidden rounded-[24px] bg-white ring-1 ring-ink/8">
+            <div className="divide-y divide-ink/8 overflow-hidden rounded-[24px] bg-surface ring-1 ring-ink/8">
               {outline.map((m, mi) => (
                 <details key={m.id} open={mi === 0} className="group">
                   <summary className="flex cursor-pointer list-none items-center gap-4 px-6 py-5 hover:bg-canvas [&::-webkit-details-marker]:hidden">
@@ -180,7 +182,7 @@ export default async function ProgramPage({ params }: Props) {
                         <li key={l.id} className="flex items-center justify-between gap-3 py-3 text-[15px]">
                           <span className="flex items-center gap-3 text-ink-soft"><Icon className="size-4 shrink-0 text-ink-muted" />{l.title}</span>
                           <span className="flex shrink-0 items-center gap-3 text-[13px] text-ink-muted">
-                            {l.is_preview ? (canPreview ? <Link href={`/courses/${course.slug}/preview/${l.id}`} className="font-semibold text-brand-600 hover:underline">Preview</Link> : <span className="font-medium text-brand-600">Free preview</span>) : <Lock className="size-3.5" aria-label="Unlocks after enrolment" />}
+                            {l.is_preview ? (canPreview ? <Link href={`/courses/${course.slug}/preview/${l.id}`} className="font-semibold text-brand-300 hover:underline">Preview</Link> : <span className="font-medium text-brand-300">Free preview</span>) : <Lock className="size-3.5" aria-label="Unlocks after enrolment" />}
                             {l.duration_minutes ? `${l.duration_minutes} min` : null}
                           </span>
                         </li>
@@ -196,7 +198,7 @@ export default async function ProgramPage({ params }: Props) {
             <Section id="projects" title="Projects you'll build">
               <ol className="grid gap-4 sm:grid-cols-2">
                 {p.projects.map((pr, i) => (
-                  <li key={pr.title} className={cn("rounded-[22px] p-6", i === p.projects.length - 1 ? "bg-ink text-white sm:col-span-2" : "bg-white ring-1 ring-ink/8")}>
+                  <li key={pr.title} className={cn("rounded-[22px] p-6", i === p.projects.length - 1 ? "border border-marigold-400/25 bg-[linear-gradient(135deg,#1a150b,#0e1015_60%)] sm:col-span-2" : "card")}>
                     <p className={cn("text-[13px] font-semibold", i === p.projects.length - 1 ? "text-marigold-300" : h.text)}>{i === p.projects.length - 1 ? "Capstone" : `Project ${i + 1}`}</p>
                     <p className={cn("mt-2 font-display text-[20px] font-semibold", i === p.projects.length - 1 ? "text-white" : "text-ink")}>{pr.title}</p>
                     <p className={cn("mt-1.5 text-[15px] leading-6", i === p.projects.length - 1 ? "text-white/70" : "text-ink-muted")}>{pr.description}</p>
@@ -209,7 +211,7 @@ export default async function ProgramPage({ params }: Props) {
           {p.tools.length ? (
             <Section id="tools" title="Tools you'll use">
               <ul className="flex flex-wrap gap-2.5">
-                {p.tools.map((t) => <li key={t} className="flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[15px] font-medium text-ink ring-1 ring-ink/10"><Wrench className={cn("size-4", h.text)} />{t}</li>)}
+                {p.tools.map((t) => <li key={t} className="flex items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-[15px] font-medium text-ink ring-1 ring-ink/10"><Wrench className={cn("size-4", h.text)} />{t}</li>)}
               </ul>
             </Section>
           ) : null}
@@ -223,9 +225,9 @@ export default async function ProgramPage({ params }: Props) {
                   {course.completion_requires_assignments && assignmentCount ? <li className="flex gap-3"><BadgeCheck className={cn("size-5 shrink-0", h.text)} />Submit all {assignmentCount} assignments</li> : null}
                   {quizCount ? <li className="flex gap-3"><BadgeCheck className={cn("size-5 shrink-0", h.text)} />Pass the {quizCount} module quizzes{course.completion_min_quiz_pct ? ` with at least ${course.completion_min_quiz_pct}%` : ""}</li> : null}
                 </ul>
-                <p className="mt-5 text-[14px] text-ink-muted">Each certificate has a unique ID that recruiters can check on our <Link href="/verify" className="font-medium text-brand-600 hover:underline">verification page</Link>.</p>
+                <p className="mt-5 text-[14px] text-ink-muted">Each certificate has a unique ID that recruiters can check on our <Link href="/verify" className="font-medium text-brand-300 hover:underline">verification page</Link>.</p>
               </div>
-              <div className="max-w-2xl rounded-[22px] bg-white p-2.5 ring-1 ring-ink/8">
+              <div className="max-w-2xl rounded-[22px] bg-surface p-2.5 ring-1 ring-ink/8">
                 <CertificateView cert={{ certificate_code: "SS-2026-SAMPLE0001", student_name: "Your name here", course_title: course.title, issued_at: "2026-11-23", status: "valid" }} />
               </div>
             </div>
@@ -235,7 +237,7 @@ export default async function ProgramPage({ params }: Props) {
             <Section id="careers" title="Where it can take you">
               <p className="-mt-2 mb-5 max-w-[60ch] text-[15px] text-ink-muted">Roles that use these skills. A program builds your skills and portfolio; it isn&apos;t a job guarantee.</p>
               <ul className="grid gap-3 sm:grid-cols-2">
-                {p.careers.map((c) => <li key={c} className="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 text-[15.5px] font-medium text-ink ring-1 ring-ink/8"><Briefcase className={cn("size-5", h.text)} />{c}</li>)}
+                {p.careers.map((c) => <li key={c} className="flex items-center gap-3 rounded-2xl bg-surface px-5 py-4 text-[15.5px] font-medium text-ink ring-1 ring-ink/8"><Briefcase className={cn("size-5", h.text)} />{c}</li>)}
               </ul>
             </Section>
           ) : null}
@@ -250,7 +252,7 @@ export default async function ProgramPage({ params }: Props) {
             {reviews.length ? (
               <ul className="space-y-3">
                 {reviews.map((r) => (
-                  <li key={r.id} className="rounded-[22px] bg-white p-6 ring-1 ring-ink/8">
+                  <li key={r.id} className="rounded-[22px] bg-surface p-6 ring-1 ring-ink/8">
                     <div className="flex items-center gap-1" aria-label={`${r.rating} out of 5 stars`}>
                       {Array.from({ length: 5 }, (_, i) => <Star key={i} className={i < r.rating ? "size-4 fill-marigold-400 text-marigold-400" : "size-4 text-ink/15"} />)}
                       <span className="ml-2 text-[13px] text-ink-muted">Verified learner, {formatDate(r.created_at)}</span>
@@ -268,7 +270,7 @@ export default async function ProgramPage({ params }: Props) {
 
         {/* Price card */}
         <aside className="lg:order-none">
-          <div className="sticky top-24 rounded-[28px] bg-white p-7 shadow-[0_30px_70px_-40px_rgb(20_22_58/0.45)] ring-1 ring-ink/8">
+          <div className="sticky top-24 rounded-[28px] bg-surface p-7 shadow-[0_30px_70px_-40px_rgb(20_22_58/0.45)] ring-1 ring-ink/8">
             <p className="text-[14px] font-medium text-ink-muted">{course.is_demo ? "Price at launch" : "One-time payment"}</p>
             <div className="mt-1 flex items-baseline gap-3">
               <span className="font-display text-[48px] font-bold tracking-tight text-ink">{formatINR(course.effective_price)}</span>
@@ -290,12 +292,12 @@ export default async function ProgramPage({ params }: Props) {
 
       {/* Other programs */}
       {others.length ? (
-        <section className="border-t border-ink/8 bg-white py-16" aria-labelledby="others-heading">
+        <section className="border-t border-ink/8 bg-surface py-16" aria-labelledby="others-heading">
           <div className="container-page">
             <h2 id="others-heading" className="display text-[32px] sm:text-[38px]">Explore other programs</h2>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {others.map((o) => (
-                <Link key={o.slug} href={`/programs/${o.slug}`} className={cn("rounded-[24px] p-6 transition-transform hover:-translate-y-0.5", HUE[o.hue].tint)}>
+                <Link key={o.slug} href={`/programs/${o.slug}`} className="card card-hover p-6">
                   <span className={cn("block h-1.5 w-8 rounded-full", HUE[o.hue].solid)} />
                   <p className="mt-5 font-display text-[22px] font-semibold text-ink">{o.name}</p>
                   <p className="mt-1.5 text-[14.5px] text-ink-soft">{o.pitch}</p>

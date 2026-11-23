@@ -20,13 +20,13 @@ export function PriceTag({ course, size = "md" }: { course: Pick<CourseCardData,
 
 export function CourseCard({ course, priority }: { course: CourseCardData; priority?: boolean }) {
   return (
-    <Link href={`/programs/${course.slug}`} className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+    <Link href={`/programs/${course.slug}`} className="card card-hover group flex flex-col overflow-hidden hover:shadow-lift">
       <div className="relative aspect-[16/9] overflow-hidden bg-brand-900">
         {course.thumbnail_url ? (
           <Image src={course.thumbnail_url} alt="" fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.03]" priority={priority} unoptimized={course.thumbnail_url.endsWith(".svg")} />
         ) : null}
         {course.is_demo ? (
-          <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[12px] font-semibold text-ink-soft shadow-sm">Enrolment opens soon</span>
+          <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-canvas/80 px-2.5 py-1 text-[12px] font-semibold text-ink-soft backdrop-blur">Enrolment opens soon</span>
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
@@ -34,7 +34,7 @@ export function CourseCard({ course, priority }: { course: CourseCardData; prior
           {course.category ? <Badge tone="brand">{course.category.name}</Badge> : null}
           <Badge>{titleCase(course.level)}</Badge>
         </div>
-        <h3 className="font-display text-[17px] font-semibold leading-snug text-ink group-hover:text-brand-700">{course.title}</h3>
+        <h3 className="font-display text-[17px] font-semibold leading-snug text-ink group-hover:text-white">{course.title}</h3>
         {course.subtitle ? <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-ink-muted">{course.subtitle}</p> : null}
         <div className="mt-4 flex items-center gap-4 text-[12.5px] text-ink-muted">
           <span className="flex items-center gap-1"><Clock className="size-3.5" />{formatDuration(course.duration_minutes)}</span>
@@ -48,7 +48,7 @@ export function CourseCard({ course, priority }: { course: CourseCardData; prior
             <PriceTag course={course} />
             <p className="mt-0.5 text-[12px] text-ink-muted">{course.instructor?.display_name ?? "Instructor to be announced"}</p>
           </div>
-          <span className="text-sm font-semibold text-brand-600 group-hover:underline">View course →</span>
+          <span className="text-sm font-semibold text-marigold-400 group-hover:underline">View course →</span>
         </div>
       </div>
     </Link>
@@ -70,13 +70,13 @@ export function stipendLabel(i: Internship) {
 export function InternshipCard({ internship: i }: { internship: Internship }) {
   const closed = i.status !== "open" || (i.deadline && new Date(i.deadline + "T23:59:59+05:30") < new Date());
   return (
-    <Link href={`/internships/${i.slug}`} className="group flex flex-col rounded-2xl border border-line bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-lift">
+    <Link href={`/internships/${i.slug}`} className="card card-hover group flex flex-col p-6">
       <div className="flex flex-wrap items-center gap-1.5">
         <InternshipKindBadge kind={i.kind} />
         {closed ? <Badge tone="neutral">Closed</Badge> : null}
       </div>
-      <h3 className="mt-3 font-display text-[17px] font-semibold text-ink group-hover:text-brand-700">{i.title}</h3>
-      <p className="mt-1 text-sm text-ink-muted">{i.kind === "employer" ? i.employer?.name : "Run by SkillSpring"}</p>
+      <h3 className="mt-3 font-display text-[17px] font-semibold text-ink group-hover:text-white">{i.title}</h3>
+      <p className="mt-1 text-sm text-ink-muted">{i.kind === "employer" ? i.employer?.name : "Run by Proofwork"}</p>
       <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-[12.5px] text-ink-soft">
         <span className="flex items-center gap-1.5"><MapPin className="size-3.5 text-ink-muted" />{titleCase(i.work_mode)}{i.location ? ` · ${i.location}` : ""}</span>
         <span className="flex items-center gap-1.5"><Clock className="size-3.5 text-ink-muted" />{i.duration_weeks ? `${i.duration_weeks} weeks` : "Flexible"}</span>
@@ -85,7 +85,7 @@ export function InternshipCard({ internship: i }: { internship: Internship }) {
       </div>
       {i.skills.length ? (
         <div className="mt-4 flex flex-wrap gap-1.5">
-          {i.skills.slice(0, 4).map((s) => <span key={s} className="rounded-md bg-slate-100 px-2 py-0.5 text-[11.5px] font-medium text-slate-700">{s}</span>)}
+          {i.skills.slice(0, 4).map((s) => <span key={s} className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[11.5px] font-medium text-ink-soft">{s}</span>)}
         </div>
       ) : null}
     </Link>

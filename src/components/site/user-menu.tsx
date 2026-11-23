@@ -18,17 +18,17 @@ export function UserMenu({ name, email, isAdmin, isInstructor }: { name: string;
     };
   }, []);
   const initials = name.split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase() || "U";
-  const item = "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-ink-soft hover:bg-brand-50 hover:text-ink";
+  const item = "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-ink-soft hover:bg-brand-500/10 hover:text-ink";
 
   return (
     <div className="relative" ref={ref}>
-      <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-xl py-1 pl-1 pr-2 hover:bg-brand-50">
+      <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-xl py-1 pl-1 pr-2 hover:bg-brand-500/10">
         <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 text-xs font-bold text-white">{initials}</span>
         <ChevronDown className="size-4 text-ink-muted" aria-hidden />
         <span className="sr-only">Account menu</span>
       </button>
       {open ? (
-        <div role="menu" className="absolute right-0 mt-2 w-64 rounded-2xl border border-line bg-white p-2 shadow-lift animate-fade-up">
+        <div role="menu" className="absolute right-0 mt-2 w-64 rounded-2xl border border-line bg-surface p-2 shadow-lift animate-fade-up">
           <div className="border-b border-line px-3 pb-2.5 pt-1.5">
             <p className="truncate text-sm font-semibold text-ink">{name}</p>
             <p className="truncate text-xs text-ink-muted">{email}</p>

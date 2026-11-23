@@ -26,7 +26,7 @@ export default async function AdminFinance() {
   const gross = pays.filter((p) => p.status !== "failed").reduce((s, p) => s + p.amount_paise, 0);
   const refunded = (refunds ?? []).filter((r) => r.status === "processed").reduce((s, r) => s + r.amount_paise, 0);
   const balance = (id: string) => (earnings ?? []).filter((e) => e.instructor_id === id).reduce((s, e) => s + e.amount_paise, 0) - (payouts ?? []).filter((p) => p.instructor_id === id && p.status === "paid").reduce((s, p) => s + p.amount_paise, 0);
-  const exp = (t: string) => <a href={`/api/admin/export/${t}`} className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand-600 hover:underline"><Download className="size-3.5" />CSV</a>;
+  const exp = (t: string) => <a href={`/api/admin/export/${t}`} className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand-300 hover:underline"><Download className="size-3.5" />CSV</a>;
 
   return (
     <>

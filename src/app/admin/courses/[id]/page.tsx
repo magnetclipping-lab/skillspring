@@ -32,7 +32,7 @@ export default async function AdminCourseEditor({ params, searchParams }: { para
             <div className="flex flex-wrap gap-2">
               <button name="decision" value="approve" className="h-9 rounded-lg bg-emerald-600 px-3 text-[13px] font-semibold text-white hover:bg-emerald-700 disabled:opacity-40" disabled={!["pending_review", "draft", "changes_requested"].includes(c.status)}>Approve</button>
               <button name="decision" value="request_changes" className="h-9 rounded-lg bg-amber-500 px-3 text-[13px] font-semibold text-white hover:bg-amber-600 disabled:opacity-40" disabled={!["pending_review", "draft"].includes(c.status)}>Request changes</button>
-              <button name="decision" value="archive" className="h-9 rounded-lg px-3 text-[13px] font-semibold text-ink-soft ring-1 ring-line hover:bg-slate-50">Archive</button>
+              <button name="decision" value="archive" className="h-9 rounded-lg px-3 text-[13px] font-semibold text-ink-soft ring-1 ring-line hover:bg-white/[0.03]">Archive</button>
             </div>
           </form>
         </div>
@@ -61,7 +61,7 @@ export default async function AdminCourseEditor({ params, searchParams }: { para
         </div>
       ) : null}
       <div className="flex justify-end border-t border-line p-4">
-        <form action={adminDeleteCourseAction}>{hidden}<button className="text-[13px] font-semibold text-red-600 hover:underline">Delete course (archives if it has sales)</button></form>
+        <form action={adminDeleteCourseAction}>{hidden}<button className="text-[13px] font-semibold text-red-400 hover:underline">Delete course (archives if it has sales)</button></form>
       </div>
     </Card>
   );

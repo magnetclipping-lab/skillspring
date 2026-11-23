@@ -3,11 +3,11 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 const variants = {
-  primary: "bg-brand-600 text-white shadow-sm hover:bg-brand-700 active:bg-brand-800 disabled:bg-brand-300",
-  secondary: "bg-white text-ink ring-1 ring-inset ring-line hover:bg-brand-50 hover:ring-brand-200 disabled:text-ink-muted",
-  ghost: "text-ink-soft hover:bg-brand-50 hover:text-ink",
+  primary: "bg-ink text-canvas hover:bg-white active:bg-ink-soft disabled:bg-ink-muted disabled:text-canvas/70",
+  secondary: "bg-white/[0.03] text-ink ring-1 ring-inset ring-white/10 hover:bg-white/[0.06] hover:ring-white/20 disabled:text-ink-muted",
+  ghost: "text-ink-soft hover:bg-white/[0.06] hover:text-ink",
   danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300",
-  light: "bg-white text-brand-900 hover:bg-brand-50 shadow-sm",
+  light: "bg-ink text-canvas hover:bg-white",
   outlineLight: "text-white ring-1 ring-inset ring-white/30 hover:bg-white/10",
 } as const;
 
@@ -23,7 +23,7 @@ export type ButtonSize = keyof typeof sizes;
 
 export function buttonClass(variant: ButtonVariant = "primary", size: ButtonSize = "md", className?: string) {
   return cn(
-    "inline-flex shrink-0 items-center justify-center font-semibold transition-colors duration-150 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500",
+    "inline-flex shrink-0 items-center justify-center font-semibold transition-colors duration-150 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marigold-400",
     variants[variant],
     sizes[size],
     className,

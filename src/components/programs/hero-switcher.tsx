@@ -30,7 +30,7 @@ export function HeroSwitcher({ programs }: { programs: SwitcherProgram[] }) {
             onClick={() => setActive(i)}
             className={cn(
               "flex items-center gap-2 rounded-full px-4 py-2 text-[14px] font-medium transition-colors",
-              i === active ? "bg-ink text-white" : "bg-white text-ink-soft ring-1 ring-ink/10 hover:text-ink hover:ring-ink/25",
+              i === active ? "bg-ink text-canvas" : "bg-white/[0.03] text-ink-soft ring-1 ring-white/10 hover:text-ink hover:ring-white/25",
             )}
           >
             <span className={cn("size-2 rounded-full", dot[prog.hue])} />
@@ -38,7 +38,7 @@ export function HeroSwitcher({ programs }: { programs: SwitcherProgram[] }) {
           </button>
         ))}
       </div>
-      <div id="program-panel" role="tabpanel" aria-labelledby={`tab-${p.slug}`} className={cn("mt-4 rounded-[28px] p-4 transition-colors duration-300 sm:p-5", tint[p.hue])}>
+      <div id="program-panel" role="tabpanel" aria-labelledby={`tab-${p.slug}`} className={cn("mt-4 rounded-[24px] p-3 ring-1 ring-white/[0.06] transition-colors duration-300 sm:p-4", tint[p.hue])}>
         <div key={p.slug} className="animate-fade-up">
           <ProgramShowcase kind={p.showcase} hue={p.hue} />
           <div className="mt-4 flex flex-wrap items-end justify-between gap-3 px-1">
@@ -46,9 +46,9 @@ export function HeroSwitcher({ programs }: { programs: SwitcherProgram[] }) {
               <p className={cn("text-[13px] font-semibold", text[p.hue])}>{p.duration}, self-paced</p>
               <p className="mt-0.5 max-w-sm font-display text-[19px] font-semibold leading-snug text-ink">{p.pitch}</p>
             </div>
-            <Link href={`/programs/${p.slug}`} className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[14px] font-semibold text-ink ring-1 ring-ink/10 hover:ring-ink/30">
+            <Link href={`/programs/${p.slug}`} className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[14px] font-semibold text-canvas hover:bg-white">
               View program
-              <span className="rounded-full bg-canvas px-2 py-0.5 text-[13px] text-ink-soft">{p.price}</span>
+              <span className="rounded-full bg-canvas/10 px-2 py-0.5 text-[13px] text-canvas/70">{p.price}</span>
               <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>

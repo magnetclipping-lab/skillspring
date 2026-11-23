@@ -20,8 +20,8 @@ export default async function NotificationsPage() {
       {data?.length ? (
         <Card><ul className="divide-y divide-line">
           {data.map((n) => (
-            <li key={n.id} className={n.read_at ? "" : "bg-brand-50/40"}>
-              <Link href={n.link ?? "/dashboard"} className="flex gap-3 px-5 py-4 hover:bg-slate-50">
+            <li key={n.id} className={n.read_at ? "" : "bg-brand-500/[0.06]"}>
+              <Link href={n.link ?? "/dashboard"} className="flex gap-3 px-5 py-4 hover:bg-white/[0.03]">
                 <span className={`mt-2 size-2 shrink-0 rounded-full ${n.read_at ? "bg-transparent" : "bg-brand-600"}`} />
                 <div className="min-w-0"><p className="font-medium">{n.title}</p>{n.body ? <p className="mt-0.5 text-sm text-ink-muted">{n.body}</p> : null}<p className="mt-1 text-[12px] text-ink-muted">{formatDate(n.created_at, { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}</p></div>
               </Link>

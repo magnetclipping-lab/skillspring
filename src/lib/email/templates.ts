@@ -21,12 +21,12 @@ function layout(title: string, bodyHtml: string, cta?: { label: string; url?: st
   return `<!doctype html><html><body style="margin:0;background:#f3f4fe;font-family:Inter,Segoe UI,Arial,sans-serif;color:#0f1430">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e5e7ef">
-<tr><td style="background:#141a4d;padding:22px 28px;color:#fff;font-size:18px;font-weight:700">SkillSpring</td></tr>
+<tr><td style="background:#141a4d;padding:22px 28px;color:#fff;font-size:18px;font-weight:700">Proofwork</td></tr>
 <tr><td style="padding:28px">
 <h1 style="margin:0 0 12px;font-size:22px;line-height:1.3">${esc(title)}</h1>
 <div style="font-size:15px;line-height:1.65;color:#4a5072">${bodyHtml}</div>${button}
 </td></tr>
-<tr><td style="padding:18px 28px;border-top:1px solid #e5e7ef;font-size:12px;color:#7a8099">You are receiving this email because of activity on your SkillSpring account.</td></tr>
+<tr><td style="padding:18px 28px;border-top:1px solid #e5e7ef;font-size:12px;color:#7a8099">You are receiving this email because of activity on your Proofwork account.</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
@@ -34,8 +34,8 @@ export function renderTemplate(name: TemplateName, d: Data): { subject: string; 
   switch (name) {
     case "welcome":
       return {
-        subject: "Welcome to SkillSpring",
-        html: layout(`Welcome, ${d.name || "there"}!`, `<p>Your SkillSpring account is ready. Explore practical programs and project-based experiences built for students.</p>`, { label: "Explore programs", url: d.url }),
+        subject: "Welcome to Proofwork",
+        html: layout(`Welcome, ${d.name || "there"}!`, `<p>Your Proofwork account is ready. Explore practical programs and project-based experiences built for students.</p>`, { label: "Explore programs", url: d.url }),
       };
     case "payment_success":
       return {

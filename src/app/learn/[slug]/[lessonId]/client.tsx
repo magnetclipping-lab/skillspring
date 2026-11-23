@@ -31,10 +31,10 @@ export function CompleteButton({ lessonId, completed, path }: { lessonId: string
           else setError(r.message ?? "Could not update progress.");
         })}
       >
-        {pending ? <Loader2 className="size-4 animate-spin" /> : done ? <CheckCircle2 className="size-4 text-emerald-600" /> : <Circle className="size-4" />}
+        {pending ? <Loader2 className="size-4 animate-spin" /> : done ? <CheckCircle2 className="size-4 text-emerald-400" /> : <Circle className="size-4" />}
         {done ? "Completed" : "Mark as complete"}
       </Button>
-      {error ? <p className="mt-1 text-[12px] text-red-600">{error}</p> : null}
+      {error ? <p className="mt-1 text-[12px] text-red-400">{error}</p> : null}
     </div>
   );
 }
@@ -56,7 +56,7 @@ export function QuizRunner({ quiz, enrolled }: { quiz: QuizData; enrolled: boole
   const byId = new Map(result?.results.map((r) => [r.question_id, r]));
 
   return (
-    <section className="rounded-2xl border border-line bg-white p-6">
+    <section className="rounded-2xl border border-line bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold">{quiz.title}</h2>
@@ -80,10 +80,10 @@ export function QuizRunner({ quiz, enrolled }: { quiz: QuizData; enrolled: boole
           return (
             <li key={q.id}>
               <fieldset>
-                <legend className="flex gap-2 font-medium"><span className="text-ink-muted">{qi + 1}.</span>{q.prompt}{r ? (r.correct ? <CheckCircle2 className="size-4 text-emerald-500" aria-label="Correct" /> : <XCircle className="size-4 text-red-500" aria-label="Incorrect" />) : null}</legend>
+                <legend className="flex gap-2 font-medium"><span className="text-ink-muted">{qi + 1}.</span>{q.prompt}{r ? (r.correct ? <CheckCircle2 className="size-4 text-emerald-500" aria-label="Correct" /> : <XCircle className="size-4 text-red-400" aria-label="Incorrect" />) : null}</legend>
                 <div className="mt-2 grid gap-2">
                   {q.options.map((o, oi) => (
-                    <label key={oi} className={cn("flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 text-sm transition", answers[q.id] === oi ? "border-brand-400 bg-brand-50" : "border-line hover:border-brand-200")}>
+                    <label key={oi} className={cn("flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 text-sm transition", answers[q.id] === oi ? "border-brand-400 bg-brand-500/10" : "border-line hover:border-brand-400/30")}>
                       <input type="radio" name={q.id} className="accent-brand-600" checked={answers[q.id] === oi} onChange={() => setAnswers((a) => ({ ...a, [q.id]: oi }))} disabled={!enrolled || pending} />
                       {o}
                     </label>
@@ -120,9 +120,9 @@ export function AssignmentPanel({ assignment, submission, courseId, enrolled }: 
   const [state, action] = useActionState<ActionState, FormData>(submitAssignmentAction, null);
   const locked = submission?.status === "approved";
   return (
-    <section className="rounded-2xl border border-line bg-white p-6">
+    <section className="rounded-2xl border border-line bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="flex items-center gap-2 text-lg font-semibold"><ClipboardList className="size-5 text-brand-600" />{assignment.title}</h2>
+        <h2 className="flex items-center gap-2 text-lg font-semibold"><ClipboardList className="size-5 text-brand-300" />{assignment.title}</h2>
         {submission ? <Badge tone={submission.status === "approved" ? "success" : submission.status === "needs_revision" ? "warning" : "brand"}>{titleCase(submission.status)}</Badge> : assignment.is_mandatory ? <Badge tone="warning">Required</Badge> : null}
       </div>
       <p className="mt-3 whitespace-pre-line text-sm leading-6 text-ink-soft">{assignment.instructions}</p>
@@ -135,7 +135,7 @@ export function AssignmentPanel({ assignment, submission, courseId, enrolled }: 
           {assignment.allow_file ? <FileUpload kind="assignment" name="file_path" courseId={courseId} accept=".pdf,.png,.jpg,.jpeg,.zip,.xlsx,.docx" label="Attach a file (optional, max 10 MB)" defaultPath={submission?.file_path} /> : null}
           <SubmitButton pendingText="Submitting…">{submission ? "Resubmit" : "Submit assignment"}</SubmitButton>
         </form>
-      ) : locked ? <p className="mt-4 text-sm text-emerald-700">Your submission was approved.</p> : null}
+      ) : locked ? <p className="mt-4 text-sm text-emerald-300">Your submission was approved.</p> : null}
     </section>
   );
 }

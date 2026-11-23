@@ -45,7 +45,7 @@ export function CheckoutButton({ slug, amountLabel, testMode }: { slug: string; 
       order_id: order.razorpayOrderId,
       amount: order.amount,
       currency: order.currency,
-      name: "SkillSpring",
+      name: "Proofwork",
       description: order.courseTitle,
       prefill: order.prefill,
       theme: { color: "#3b45b8" },
@@ -84,7 +84,7 @@ export function CheckoutButton({ slug, amountLabel, testMode }: { slug: string; 
         {state === "idle" ? <Lock className="size-4" /> : <Loader2 className="size-4 animate-spin" />}
         {state === "verifying" ? "Verifying payment…" : state === "starting" ? "Opening Razorpay…" : `Pay ${amountLabel}`}
       </Button>
-      {testMode ? <p className="text-center text-[12px] font-medium text-amber-700">Razorpay test mode — use Razorpay test cards/UPI. No real money moves.</p> : null}
+      {testMode ? <p className="text-center text-[12px] font-medium text-amber-300">Razorpay test mode — use Razorpay test cards/UPI. No real money moves.</p> : null}
     </div>
   );
 }

@@ -9,5 +9,5 @@ export default async function NewInternship() {
   await requireAdmin();
   const supabase = await createClient();
   const { data } = await supabase.from("employers").select("id, name, status").order("name");
-  return (<><PageHeader title="New listing" description="Only link real employers that you have verified. Use “simulation” or “project” for SkillSpring-run experiences." /><Card className="p-6"><InternshipForm employers={data ?? []} /></Card></>);
+  return (<><PageHeader title="New listing" description="Only link real employers that you have verified. Use “simulation” or “project” for Proofwork-run experiences." /><Card className="p-6"><InternshipForm employers={data ?? []} /></Card></>);
 }

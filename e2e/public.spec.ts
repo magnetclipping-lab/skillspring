@@ -67,7 +67,7 @@ test.describe("public website", () => {
   });
 
   test("legal and info pages render", async ({ page }) => {
-    for (const [path, heading] of [["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"], ["/refund-policy", "Refund policy"], ["/disclaimer", "Disclaimer"], ["/about", "Practical skills for every student"], ["/faq", "Frequently asked questions"], ["/contact", "We're here to help"], ["/become-instructor", "Share what you know"], ["/partners", "Partner with SkillSpring"]]) {
+    for (const [path, heading] of [["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"], ["/refund-policy", "Refund policy"], ["/disclaimer", "Disclaimer"], ["/about", "Practical skills for every student"], ["/faq", "Frequently asked questions"], ["/contact", "We're here to help"], ["/become-instructor", "Share what you know"], ["/partners", "Partner with Proofwork"]]) {
       await page.goto(path);
       await expect(page.getByRole("heading", { level: 1 })).toContainText(heading);
     }

@@ -32,7 +32,7 @@ export default async function ApplicationsPage() {
             {apps.map((a) => (
               <tr key={a.id}>
                 <td>
-                  <Link href={`/internships/${a.internship?.slug}`} className="font-medium hover:text-brand-700">{a.internship?.title}</Link>
+                  <Link href={`/internships/${a.internship?.slug}`} className="font-medium hover:text-white">{a.internship?.title}</Link>
                   <div className="mt-1">{a.internship ? <InternshipKindBadge kind={a.internship.kind} /> : null}</div>
                 </td>
                 <td>{formatDate(a.created_at)}</td>

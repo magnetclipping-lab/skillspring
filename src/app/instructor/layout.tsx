@@ -4,7 +4,7 @@ import type { NavItem } from "@/components/app/sidebar-nav";
 import { requireInstructor } from "@/lib/auth/dal";
 import { getUnreadCount } from "@/lib/data/student";
 
-export const metadata: Metadata = { title: { default: "Instructor portal", template: "%s · Instructor · SkillSpring" }, robots: { index: false } };
+export const metadata: Metadata = { title: { default: "Instructor portal", template: "%s · Instructor · Proofwork" }, robots: { index: false } };
 
 export default async function InstructorLayout({ children }: { children: React.ReactNode }) {
   const user = await requireInstructor();

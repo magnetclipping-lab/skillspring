@@ -25,7 +25,7 @@ export default async function CertificatesPage() {
                 <td className="font-mono text-[13px]">{c.certificate_code}</td>
                 <td>{formatDate(c.issued_at)}</td>
                 <td>{c.status === "valid" ? <Badge tone="success">Valid</Badge> : <Badge tone="danger">Revoked</Badge>}</td>
-                <td className="text-right"><Link href={`/dashboard/certificates/${c.certificate_code}`} className="text-sm font-semibold text-brand-600 hover:underline">View</Link></td>
+                <td className="text-right"><Link href={`/dashboard/certificates/${c.certificate_code}`} className="text-sm font-semibold text-brand-300 hover:underline">View</Link></td>
               </tr>
             ))}
           </tbody>

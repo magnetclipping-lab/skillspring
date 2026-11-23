@@ -31,10 +31,10 @@ export function AmbassadorForm({ defaultName, defaultEmail }: { defaultName?: st
       <Field label="LinkedIn or Instagram profile (optional)" name="social_url" error={e.social_url}><Input id="social_url" name="social_url" type="url" placeholder="https://linkedin.com/in/yourname" maxLength={300} /></Field>
       <Field label="Why do you want to be a Campus Ambassador?" name="motivation" error={e.motivation} required help="Tell us about clubs, events or communities you're part of."><Textarea id="motivation" name="motivation" rows={5} maxLength={2000} /></Field>
       <div>
-        <Checkbox name="consent" label="SkillSpring can contact me by email, phone or WhatsApp about this application." />
-        {e.consent ? <p className="mt-1 text-[12.5px] text-red-600">{e.consent[0]}</p> : null}
+        <Checkbox name="consent" label="Proofwork can contact me by email, phone or WhatsApp about this application." />
+        {e.consent ? <p className="mt-1 text-[12.5px] text-red-400">{e.consent[0]}</p> : null}
       </div>
-      <SubmitButton pendingText="Submitting…" className="h-12 w-full rounded-full bg-ink text-[15px] hover:bg-brand-800">Apply free</SubmitButton>
+      <SubmitButton pendingText="Submitting…" className="h-12 w-full rounded-full bg-ink text-[15px] hover:bg-white">Apply free</SubmitButton>
     </form>
   );
 }

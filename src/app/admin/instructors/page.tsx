@@ -31,7 +31,7 @@ export default async function AdminInstructors() {
                 <div className="flex flex-wrap items-center gap-2"><p className="font-semibold">{i.display_name}</p><Badge tone={i.status === "approved" ? "success" : i.status === "pending" ? "warning" : "danger"}>{titleCase(i.status)}</Badge></div>
                 <p className="text-sm text-ink-muted">{i.headline} · {i.profile?.email} · applied {formatDate(i.created_at)}</p>
                 {i.bio ? <p className="mt-2 line-clamp-3 text-sm text-ink-soft">{i.bio}</p> : null}
-                <p className="mt-2 text-[13px] text-ink-muted">Expertise: {i.expertise.join(", ") || "—"} {i.linkedin_url ? <>· <a href={i.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">LinkedIn</a></> : null} {i.website ? <>· <a href={i.website} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">Website</a></> : null}</p>
+                <p className="mt-2 text-[13px] text-ink-muted">Expertise: {i.expertise.join(", ") || "—"} {i.linkedin_url ? <>· <a href={i.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-brand-300 hover:underline">LinkedIn</a></> : null} {i.website ? <>· <a href={i.website} target="_blank" rel="noopener noreferrer" className="text-brand-300 hover:underline">Website</a></> : null}</p>
                 <p className="mt-2 text-[13px]">Courses: {mine.length ? mine.map((c) => `${c.title} (${titleCase(c.status)})`).join(", ") : "none"} · Earnings: <strong>{formatINR(earned)}</strong></p>
               </div>
               <ActionForm action={adminReviewInstructorAction} className="space-y-2" compact>

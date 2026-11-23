@@ -25,10 +25,10 @@ export default async function AdminStudents({ searchParams }: { searchParams: Pr
       <Table>
         <thead><tr><th>Name</th><th>Email</th><th>College</th><th>Roles</th><th>Joined</th></tr></thead>
         <tbody>{((data ?? []) as unknown as Row[]).map((u) => (
-          <tr key={u.id}><td><Link href={`/admin/students/${u.id}`} className="font-medium hover:text-brand-700">{u.full_name || "—"}</Link>{u.is_suspended ? <Badge tone="danger" className="ml-2">Suspended</Badge> : null}</td><td>{u.email}</td><td>{u.college ?? "—"}</td><td className="space-x-1">{u.user_roles.map((r) => <Badge key={r.role} tone={r.role === "admin" ? "danger" : r.role === "instructor" ? "violet" : "neutral"}>{r.role}</Badge>)}</td><td>{formatDate(u.created_at)}</td></tr>
+          <tr key={u.id}><td><Link href={`/admin/students/${u.id}`} className="font-medium hover:text-white">{u.full_name || "—"}</Link>{u.is_suspended ? <Badge tone="danger" className="ml-2">Suspended</Badge> : null}</td><td>{u.email}</td><td>{u.college ?? "—"}</td><td className="space-x-1">{u.user_roles.map((r) => <Badge key={r.role} tone={r.role === "admin" ? "danger" : r.role === "instructor" ? "violet" : "neutral"}>{r.role}</Badge>)}</td><td>{formatDate(u.created_at)}</td></tr>
         ))}</tbody>
       </Table>
-      <div className="mt-4 flex gap-3 text-sm">{p > 1 ? <Link href={`/admin/students?q=${encodeURIComponent(q)}&page=${p - 1}`} className="font-semibold text-brand-600">← Previous</Link> : null}{(count ?? 0) > p * 50 ? <Link href={`/admin/students?q=${encodeURIComponent(q)}&page=${p + 1}`} className="font-semibold text-brand-600">Next →</Link> : null}</div>
+      <div className="mt-4 flex gap-3 text-sm">{p > 1 ? <Link href={`/admin/students?q=${encodeURIComponent(q)}&page=${p - 1}`} className="font-semibold text-brand-300">← Previous</Link> : null}{(count ?? 0) > p * 50 ? <Link href={`/admin/students?q=${encodeURIComponent(q)}&page=${p + 1}`} className="font-semibold text-brand-300">Next →</Link> : null}</div>
     </>
   );
 }

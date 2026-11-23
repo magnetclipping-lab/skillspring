@@ -36,14 +36,14 @@ export default async function AdminStudentDetail({ params, searchParams }: { par
   type En = { id: string; status: string; source: string; enrolled_at: string; completed_at: string | null; course: { id: string; title: string } };
   return (
     <div className="space-y-6">
-      <Link href="/admin/students" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />Students</Link>
+      <Link href="/admin/students" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />Students</Link>
       {error ? <Alert tone="danger">{error}</Alert> : null}
       <div className="flex flex-wrap items-center gap-3"><h1 className="text-2xl font-bold">{p.full_name || p.email}</h1>{r.map((x) => <Badge key={x} tone={x === "admin" ? "danger" : x === "instructor" ? "violet" : "neutral"}>{x}</Badge>)}{p.is_suspended ? <Badge tone="danger">Suspended</Badge> : null}</div>
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-6">
           <Card><CardHeader title="Courses & progress" />
             <div className="p-3"><Table className="border-0"><thead><tr><th>Course</th><th>Source</th><th>Status</th><th>Progress</th><th /></tr></thead><tbody>
-              {((enrolments ?? []) as unknown as En[]).map((e) => <tr key={e.id}><td>{e.course.title}</td><td>{titleCase(e.source)}</td><td><Badge tone={e.status === "active" ? "success" : "neutral"}>{titleCase(e.status)}</Badge></td><td>{pct(e.course.id)}%</td><td>{e.status === "active" ? <form action={adminRevokeEnrolmentAction}><input type="hidden" name="enrolment_id" value={e.id} /><input type="hidden" name="user_id" value={id} /><button className="text-[12.5px] font-semibold text-red-600 hover:underline">Revoke</button></form> : null}</td></tr>)}
+              {((enrolments ?? []) as unknown as En[]).map((e) => <tr key={e.id}><td>{e.course.title}</td><td>{titleCase(e.source)}</td><td><Badge tone={e.status === "active" ? "success" : "neutral"}>{titleCase(e.status)}</Badge></td><td>{pct(e.course.id)}%</td><td>{e.status === "active" ? <form action={adminRevokeEnrolmentAction}><input type="hidden" name="enrolment_id" value={e.id} /><input type="hidden" name="user_id" value={id} /><button className="text-[12.5px] font-semibold text-red-400 hover:underline">Revoke</button></form> : null}</td></tr>)}
             </tbody></Table></div>
             <div className="border-t border-line p-4">
               <ActionForm action={adminGrantEnrolmentAction} className="flex flex-wrap items-center gap-2" compact>

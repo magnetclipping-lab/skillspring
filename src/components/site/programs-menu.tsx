@@ -30,13 +30,13 @@ export function ProgramsMenu({ programs }: { programs: { slug: string; name: str
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
         onMouseEnter={() => setOpen(true)}
-        className={cn("flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[14.5px] font-medium transition-colors", open ? "bg-white text-ink" : "text-ink-soft hover:bg-white hover:text-ink")}
+        className={cn("flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[14.5px] font-medium transition-colors", open ? "bg-white/[0.06] text-ink" : "text-ink-soft hover:bg-white/[0.06] hover:text-ink")}
       >
         Programs <ChevronDown className={cn("size-4 transition-transform", open && "rotate-180")} />
       </button>
       {open ? (
         <div className="absolute left-0 top-full pt-2">
-          <div className="w-[560px] rounded-3xl bg-white p-3 shadow-[0_24px_60px_-20px_rgb(20_22_58/0.35)] ring-1 ring-ink/8">
+          <div className="w-[560px] glass rounded-3xl border border-white/10 p-3 shadow-lift">
             <div className="grid grid-cols-2 gap-1">
               {programs.map((p) => (
                 <Link key={p.slug} href={`/programs/${p.slug}`} className={cn("group rounded-2xl p-4 transition-colors", tint[p.hue])}>
@@ -46,7 +46,7 @@ export function ProgramsMenu({ programs }: { programs: { slug: string; name: str
                 </Link>
               ))}
             </div>
-            <Link href="/programs" className="mt-1 block rounded-2xl px-4 py-3 text-[13.5px] font-semibold text-brand-600 hover:bg-canvas">Compare all programs</Link>
+            <Link href="/programs" className="mt-1 block rounded-2xl px-4 py-3 text-[13.5px] font-semibold text-marigold-400 hover:bg-white/[0.04]">Compare all programs</Link>
           </div>
         </div>
       ) : null}

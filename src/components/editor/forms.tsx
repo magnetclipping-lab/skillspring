@@ -35,7 +35,7 @@ export function CourseForm({ base, categories, course, readOnly }: { base: Base;
           <Field label="Language" name="language" error={e.language}><Input id="language" name="language" defaultValue={course?.language ?? "English"} /></Field>
         </div>
         <div className="grid gap-4 sm:grid-cols-4">
-          <Field label="Price (₹)" name="price" error={e.price} required help={base === "/instructor" ? "Final pricing is confirmed by SkillSpring" : undefined}><Input id="price" name="price" type="number" min={0} step="1" defaultValue={rupees(course?.price_paise) || "0"} /></Field>
+          <Field label="Price (₹)" name="price" error={e.price} required help={base === "/instructor" ? "Final pricing is confirmed by Proofwork" : undefined}><Input id="price" name="price" type="number" min={0} step="1" defaultValue={rupees(course?.price_paise) || "0"} /></Field>
           <Field label="Discount price (₹)" name="discount_price" error={e.discount_price}><Input id="discount_price" name="discount_price" type="number" min={0} step="1" defaultValue={rupees(course?.discount_price_paise)} /></Field>
           <Field label="Discount ends" name="discount_ends_at"><Input id="discount_ends_at" name="discount_ends_at" type="datetime-local" defaultValue={course?.discount_ends_at?.slice(0, 16) ?? ""} /></Field>
           <Field label="Total duration (min)" name="duration_minutes" error={e.duration_minutes}><Input id="duration_minutes" name="duration_minutes" type="number" min={0} defaultValue={course?.duration_minutes ?? 0} /></Field>
@@ -49,7 +49,7 @@ export function CourseForm({ base, categories, course, readOnly }: { base: Base;
           <input type="hidden" name="thumbnail_url" value={thumb} />
           {course ? <FileUpload kind="thumbnail" name="thumbnail_path" courseId={course.id} accept="image/png,image/jpeg,image/webp" label="Thumbnail (16:9, max 3 MB)" help={thumb ? `Current: ${thumb.split("/").pop()}` : "Upload a course thumbnail"} onUploaded={(r) => r.url && setThumb(r.url)} /> : <p className="text-[13px] text-ink-muted">You can upload a thumbnail after creating the course.</p>}
         </div>
-        <div className="rounded-xl border border-line bg-slate-50/50 p-4">
+        <div className="rounded-xl border border-line bg-white/[0.03]/50 p-4">
           <p className="text-sm font-semibold">Completion rules</p>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             <Checkbox name="completion_requires_all_lessons" defaultChecked={course?.completion_requires_all_lessons ?? true} label="All mandatory lessons" />
@@ -73,7 +73,7 @@ export function ModuleForm({ base, courseId, module, nextPosition }: { base: Bas
       <label className="min-w-48 flex-1"><span className="sr-only">Module title</span><Input name="title" placeholder="Module title" defaultValue={module?.title} required /></label>
       <label className="w-20"><span className="sr-only">Position</span><Input name="position" type="number" min={0} defaultValue={module?.position ?? nextPosition ?? 1} title="Position" /></label>
       <SubmitButton variant={module ? "secondary" : "primary"} size="md">{module ? "Save" : "Add module"}</SubmitButton>
-      {state?.message && !state.ok ? <p className="w-full text-[12.5px] text-red-600">{state.message}</p> : null}
+      {state?.message && !state.ok ? <p className="w-full text-[12.5px] text-red-400">{state.message}</p> : null}
     </form>
   );
 }
@@ -93,7 +93,7 @@ export function NewLessonForm({ base, courseId, moduleId, nextPosition }: { base
         <option value="video">Video</option><option value="text">Text</option><option value="pdf">PDF</option><option value="external">External link</option><option value="quiz">Quiz</option><option value="assignment">Assignment</option>
       </Select></label>
       <SubmitButton variant="secondary">Add lesson</SubmitButton>
-      {state?.message && !state.ok ? <p className="w-full text-[12.5px] text-red-600">{state.message}</p> : null}
+      {state?.message && !state.ok ? <p className="w-full text-[12.5px] text-red-400">{state.message}</p> : null}
     </form>
   );
 }

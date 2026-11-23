@@ -42,7 +42,7 @@ export default async function ProgramsPage() {
 
       <section className="container-page mt-24" aria-labelledby="compare-heading">
         <h2 id="compare-heading" className="display text-[40px] sm:text-[48px]">Compare programs</h2>
-        <div className="mt-8 overflow-x-auto rounded-[28px] bg-white ring-1 ring-ink/8">
+        <div className="mt-8 overflow-x-auto rounded-[28px] bg-surface ring-1 ring-ink/8">
           <table className="w-full min-w-[820px] text-left text-[15px]">
             <thead>
               <tr>
@@ -50,7 +50,7 @@ export default async function ProgramsPage() {
                 {programs.map((p) => (
                   <th key={p.slug} scope="col" className="px-5 py-5 align-bottom">
                     <span className={cn("mb-2 block h-1.5 w-10 rounded-full", HUE[p.hue].solid)} />
-                    <Link href={`/programs/${p.slug}`} className="font-display text-[18px] font-semibold text-ink hover:text-brand-600">{p.shortName}</Link>
+                    <Link href={`/programs/${p.slug}`} className="font-display text-[18px] font-semibold text-ink hover:text-white">{p.shortName}</Link>
                   </th>
                 ))}
               </tr>

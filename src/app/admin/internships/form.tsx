@@ -15,7 +15,7 @@ export function InternshipForm({ internship, employers }: { internship?: Interns
       </div>
       <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Type" name="kind" help="Employer = real vacancy from a verified employer"><Select id="kind" name="kind" defaultValue={i?.kind ?? "simulation"}><option value="employer">Employer internship</option><option value="simulation">Educational simulation</option><option value="project">Project-based experience</option></Select></Field>
-        <Field label="Employer" name="employer_id" help="Required for employer internships"><Select id="employer_id" name="employer_id" defaultValue={i?.employer_id ?? ""}><option value="">— SkillSpring —</option>{employers.map((e) => <option key={e.id} value={e.id} disabled={e.status !== "verified"}>{e.name}{e.status !== "verified" ? ` (${e.status})` : ""}</option>)}</Select></Field>
+        <Field label="Employer" name="employer_id" help="Required for employer internships"><Select id="employer_id" name="employer_id" defaultValue={i?.employer_id ?? ""}><option value="">— Proofwork —</option>{employers.map((e) => <option key={e.id} value={e.id} disabled={e.status !== "verified"}>{e.name}{e.status !== "verified" ? ` (${e.status})` : ""}</option>)}</Select></Field>
         <Field label="Status" name="status"><Select id="status" name="status" defaultValue={i?.status ?? "draft"}><option value="draft">Draft</option><option value="open">Open</option><option value="closed">Closed</option><option value="archived">Archived</option></Select></Field>
       </div>
       <Field label="Description" name="description" required><Textarea id="description" name="description" rows={5} defaultValue={i?.description} /></Field>

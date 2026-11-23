@@ -239,7 +239,7 @@ export async function adminAddEmployerMemberAction(_: ActionState, fd: FormData)
   const email = String(fd.get("email") ?? "").trim().toLowerCase();
   const supabase = await createClient();
   const { data: profile } = await supabase.from("profiles").select("id").ilike("email", email).maybeSingle();
-  if (!profile) return { ok: false, message: "No SkillSpring account with that email. Ask them to register first." };
+  if (!profile) return { ok: false, message: "No Proofwork account with that email. Ask them to register first." };
   const { error } = await supabase.from("employer_members").insert({ employer_id: employerId, user_id: profile.id });
   if (error) return { ok: false, message: error.code === "23505" ? "Already a member." : "Could not add member." };
   await audit(admin.id, "employer.member_added", "employer", employerId, { user_id: profile.id });

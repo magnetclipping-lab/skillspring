@@ -25,14 +25,14 @@ export default async function PreviewLessonPage({ params }: { params: Promise<{ 
 
   return (
     <div className="container-page max-w-4xl py-10">
-      <Link href={`/courses/${slug}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />{course.title}</Link>
+      <Link href={`/courses/${slug}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />{course.title}</Link>
       <div className="mt-4 flex items-center gap-2"><Badge tone="brand">Free preview</Badge></div>
       <h1 className="mt-2 text-3xl font-bold">{lesson.title}</h1>
       <div className="mt-6 space-y-6">
         {lesson.type === "video" ? <LessonVideo provider={lesson.video_provider} assetId={lesson.video_asset_id} title={lesson.title} /> : null}
         {lesson.content_md ? <Markdown source={lesson.content_md} /> : null}
       </div>
-      <div className="mt-10 rounded-2xl border border-line bg-white p-6 text-center">
+      <div className="mt-10 rounded-2xl border border-line bg-surface p-6 text-center">
         <p className="font-semibold">Enjoyed the preview?</p>
         <p className="mt-1 text-sm text-ink-muted">Enrol to unlock every lesson, assignment and your certificate.</p>
         <ButtonLink href={`/courses/${slug}`} className="mt-4">View course</ButtonLink>

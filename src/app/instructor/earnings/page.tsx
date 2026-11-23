@@ -28,7 +28,7 @@ export default async function EarningsPage() {
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <Card><CardHeader title="Earnings ledger" />
           {rows.length ? <div className="p-3"><Table className="border-0"><thead><tr><th>Date</th><th>Course</th><th>Sale</th><th>Share</th><th>Amount</th></tr></thead><tbody>
-            {rows.map((r) => <tr key={r.id}><td>{formatDate(r.created_at)}</td><td>{r.course?.title}{r.refund_id ? <Badge tone="violet" className="ml-2">Refund</Badge> : null}</td><td>{formatINR(r.gross_paise, true)}</td><td>{Number(r.share_pct)}%</td><td className={r.amount_paise < 0 ? "text-red-600" : "font-semibold"}>{formatINR(r.amount_paise, true)}</td></tr>)}
+            {rows.map((r) => <tr key={r.id}><td>{formatDate(r.created_at)}</td><td>{r.course?.title}{r.refund_id ? <Badge tone="violet" className="ml-2">Refund</Badge> : null}</td><td>{formatINR(r.gross_paise, true)}</td><td>{Number(r.share_pct)}%</td><td className={r.amount_paise < 0 ? "text-red-400" : "font-semibold"}>{formatINR(r.amount_paise, true)}</td></tr>)}
           </tbody></Table></div> : <div className="p-5"><EmptyState title="No earnings yet" description="Earnings appear after verified sales of your published courses." /></div>}
         </Card>
         <div className="space-y-6">

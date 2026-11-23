@@ -15,7 +15,7 @@ export function ProfileForm({ profile }: { profile: Profile }) {
     <form action={action} className="space-y-4">
       <FormMessage state={state} />
       <div className="flex items-center gap-4">
-        <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-brand-100">{avatar ? <Image src={avatar} alt="Profile photo" fill className="object-cover" sizes="64px" /> : null}</div>
+        <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-brand-500/15">{avatar ? <Image src={avatar} alt="Profile photo" fill className="object-cover" sizes="64px" /> : null}</div>
         <div className="flex-1"><FileUpload kind="avatar" name="avatar_path" accept="image/png,image/jpeg,image/webp" label="Profile photo (max 2 MB)" onUploaded={(r) => r.url && setAvatar(r.url)} /></div>
         <input type="hidden" name="avatar_url" value={avatar} />
       </div>

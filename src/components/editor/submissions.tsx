@@ -16,7 +16,7 @@ export async function SubmissionsView({ base, courseId }: { base: "/admin" | "/i
   const rows = (subs ?? []) as unknown as Row[];
   return (
     <div className="space-y-6">
-      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline"><ArrowLeft className="size-4" />{course?.title ?? "Course"}</Link>
+      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />{course?.title ?? "Course"}</Link>
       <h1 className="text-2xl font-bold">Assignment submissions</h1>
       {rows.length ? (
         <Table>
@@ -28,7 +28,7 @@ export async function SubmissionsView({ base, courseId }: { base: "/admin" | "/i
                 <td className="font-mono text-[12px] text-ink-muted">{s.user_id.slice(0, 8)}</td>
                 <td className="max-w-sm">
                   {s.text_response ? <p className="line-clamp-4 whitespace-pre-line text-[13px]">{s.text_response}</p> : null}
-                  {s.file_path ? <a href={`/api/files?type=submission&id=${s.id}`} className="mt-1 inline-flex items-center gap-1 text-[13px] font-semibold text-brand-600 hover:underline"><Paperclip className="size-3.5" />Download file</a> : null}
+                  {s.file_path ? <a href={`/api/files?type=submission&id=${s.id}`} className="mt-1 inline-flex items-center gap-1 text-[13px] font-semibold text-brand-300 hover:underline"><Paperclip className="size-3.5" />Download file</a> : null}
                 </td>
                 <td><Badge tone={s.status === "approved" ? "success" : s.status === "needs_revision" ? "warning" : "brand"}>{titleCase(s.status)}</Badge></td>
                 <td className="min-w-64"><ReviewSubmissionForm base={base} courseId={courseId} id={s.id} status={s.status} feedback={s.feedback} /></td>

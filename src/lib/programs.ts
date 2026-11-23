@@ -30,8 +30,8 @@ const sharedIncludes = [
   "Downloadable notes and practice files",
   "Quizzes after every module",
   "Graded assignments and a capstone project",
-  "Verifiable SkillSpring certificate",
-  "Access to SkillSpring project experiences",
+  "Verifiable Proofwork certificate",
+  "Access to Proofwork project experiences",
 ];
 
 export const PROGRAMS: ProgramDetails[] = [

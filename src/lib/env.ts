@@ -9,7 +9,7 @@ export const publicEnv = {
   supabaseUrl: (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim().replace(/\/(rest\/v1\/?)?$/, ""),
   supabaseAnonKey: (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "").trim(),
   razorpayKeyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ?? "",
-  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@skillspring.example",
+  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@proofwork.example",
 };
 
 /** True when Supabase URL + anon key are present. Otherwise the app runs in preview mode. */

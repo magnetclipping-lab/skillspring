@@ -16,7 +16,7 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="grid size-10 place-items-center rounded-xl text-ink hover:bg-brand-50"
+        className="grid size-10 place-items-center rounded-xl text-ink hover:bg-brand-500/10"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -24,7 +24,7 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
         {open ? <X className="size-5" /> : <Menu className="size-5" />}
       </button>
       {open ? (
-        <div id="mobile-nav" className="absolute inset-x-0 top-full border-b border-line bg-white px-4 pb-5 pt-2 shadow-lift animate-fade-up">
+        <div id="mobile-nav" className="absolute inset-x-0 top-full border-b border-line bg-surface px-4 pb-5 pt-2 shadow-lift animate-fade-up">
           <nav className="flex flex-col" aria-label="Mobile">
             {items.map((n) => (
               <Link key={n.href} href={n.href} className={n.indent ? "rounded-lg py-2.5 pl-7 pr-3 text-[14.5px] text-ink-soft hover:bg-canvas" : "flex items-center gap-2 rounded-lg px-3 py-3 text-[15px] font-medium text-ink hover:bg-canvas"}>
