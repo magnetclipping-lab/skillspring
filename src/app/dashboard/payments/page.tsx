@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { CreditCard } from "lucide-react";
 import { requireUser } from "@/lib/auth/dal";
 import { createClient } from "@/lib/supabase/server";
 import { Badge, type BadgeTone, EmptyState, PageHeader, Table } from "@/components/ui/primitives";
 import { formatDate, formatINR, titleCase } from "@/lib/utils";
 
-export const metadata = { title: "Payment history" };
+export const metadata = { title: "Payments & receipts" };
 
 const tone: Record<string, BadgeTone> = { paid: "success", created: "neutral", attempted: "warning", failed: "danger", refunded: "violet", partially_refunded: "violet" };
 
@@ -19,10 +20,10 @@ export default async function PaymentsPage() {
   const rows = (orders ?? []) as unknown as Row[];
   return (
     <>
-      <PageHeader title="Payment history" description="Every payment attempt and refund on your account. Card details are never stored by Proofwork." />
+      <PageHeader eyebrow="Account" title="Payments & receipts" description={<>Every payment attempt and refund on your account. Card details are never stored by Proofwork. See the <Link href="/refund-policy" className="text-violet-300 hover:underline">refund policy</Link>.</>} />
       {rows.length ? (
         <Table>
-          <thead><tr><th>Date</th><th>Course</th><th>Amount</th><th>Method</th><th>Status</th><th>Reference</th></tr></thead>
+          <thead><tr><th>Date</th><th>Course</th><th>Amount</th><th>Method</th><th>Status</th><th>Reference</th><th><span className="sr-only">Receipt</span></th></tr></thead>
           <tbody>
             {rows.map((o) => {
               const pay = o.payments.find((p) => p.status !== "failed") ?? o.payments[0];
@@ -35,6 +36,7 @@ export default async function PaymentsPage() {
                   <td>{pay?.method ? titleCase(pay.method) : "—"}</td>
                   <td><Badge tone={tone[o.status]}>{titleCase(o.status)}</Badge></td>
                   <td className="font-mono text-[12px] text-ink-muted">{pay?.razorpay_payment_id ?? o.receipt}</td>
+                  <td>{["paid", "refunded", "partially_refunded"].includes(o.status) ? <Link href={`/dashboard/payments/${o.id}`} className="text-[13px] font-semibold text-violet-300 hover:underline">Receipt</Link> : null}</td>
                 </tr>
               );
             })}

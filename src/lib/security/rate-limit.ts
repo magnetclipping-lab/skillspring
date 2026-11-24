@@ -14,6 +14,9 @@ export const LIMITS = {
   upload: { max: 40, windowSeconds: 60 * 60 },
   verifyCertificate: { max: 60, windowSeconds: 10 * 60 },
   quiz: { max: 30, windowSeconds: 10 * 60 },
+  submission: { max: 20, windowSeconds: 60 * 60 },
+  template: { max: 60, windowSeconds: 60 * 60 },
+  adminEvaluate: { max: 10, windowSeconds: 10 * 60 },
 } as const;
 
 export type LimitName = keyof typeof LIMITS;

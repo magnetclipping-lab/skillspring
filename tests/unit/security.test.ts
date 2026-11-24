@@ -1,7 +1,8 @@
 import { createHmac } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
 import { createRazorpayClient, verifyCheckoutSignature, verifyWebhookSignature } from "@/lib/payments/razorpay";
-import { sniffMime, validateUpload } from "@/lib/security/uploads";
+import { precheckUpload, sniffMime, validateUpload } from "@/lib/security/uploads";
+import { pathInFolder, uploadFolder } from "@/lib/uploads/folders";
 import { csvCell, toCsv } from "@/lib/csv";
 import { safeRedirectPath, formatINR, slugify } from "@/lib/utils";
 
@@ -70,6 +71,31 @@ describe("upload validation", () => {
     expect(validateUpload("resume", { size: 6 * 1024 * 1024, type: "application/pdf", name: "cv.pdf" }, pdf).ok).toBe(false);
     expect(validateUpload("resume", { size: 1000, type: "image/png", name: "cv.png" }, png).ok).toBe(false);
     expect(validateUpload("avatar", { size: 1000, type: "image/png", name: "me.png" }, png)).toEqual({ ok: true, mime: "image/png", ext: "png" });
+  });
+  it("accepts assignment workbooks, CSVs and preview videos by content, not by name", () => {
+    const zip = new Uint8Array([0x50, 0x4b, 0x03, 0x04, 0, 0, 0, 0]);
+    const csv = new TextEncoder().encode("name,score\nAsha,8\n");
+    const mp4 = new Uint8Array([0, 0, 0, 0x20, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d]);
+    expect(validateUpload("assignment", { size: 2000, type: "", name: "work.xlsx" }, zip)).toMatchObject({ ok: true, ext: "xlsx" });
+    expect(validateUpload("assignment", { size: 2000, type: "text/csv", name: "data.csv" }, csv)).toMatchObject({ ok: true, mime: "text/csv" });
+    expect(validateUpload("assignment", { size: 2000, type: "text/csv", name: "data.csv" }, exe).ok).toBe(false);
+    expect(validateUpload("assignment", { size: 21 * 1024 * 1024, type: "", name: "big.xlsx" }, zip).ok).toBe(false);
+    expect(validateUpload("preview", { size: 5_000_000, type: "video/mp4", name: "p.mp4" }, mp4)).toMatchObject({ ok: true, mime: "video/mp4" });
+    expect(validateUpload("preview", { size: 5_000_000, type: "video/mp4", name: "p.mp4" }, png).ok).toBe(false);
+    expect(precheckUpload("assignment", { size: 1000, name: "evil.exe" }).ok).toBe(false);
+  });
+});
+
+describe("upload folders", () => {
+  it("scopes learners to their own folder and rejects foreign paths", () => {
+    const u = "11111111-1111-4111-8111-111111111111";
+    const c = "22222222-2222-4222-8222-222222222222";
+    const f = uploadFolder("assignment", u, c);
+    expect(f).toEqual({ ok: true, folder: `${u}/${c}` });
+    expect(pathInFolder(`${u}/${c}/abc.xlsx`, `${u}/${c}`)).toBe(true);
+    expect(pathInFolder(`${u}/${c}/../x/abc.xlsx`, `${u}/${c}`)).toBe(false);
+    expect(pathInFolder(`other/${c}/abc.xlsx`, `${u}/${c}`)).toBe(false);
+    expect(uploadFolder("preview", u, "not-a-uuid").ok).toBe(false);
   });
 });
 

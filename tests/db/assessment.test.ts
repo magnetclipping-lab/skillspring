@@ -192,3 +192,44 @@ describe("Proofwork catalogue seed", () => {
     }
   });
 });
+
+describe("catalogue helpers and admin controls", () => {
+  it("shows assignment titles publicly but never instructions, rubrics or keys", async () => {
+    const { anon } = await import("./helpers");
+    await as(db, anon, async () => {
+      const { rows } = await db.query(`select * from public.get_course_assignment_summaries($1)`, [courseId]);
+      expect(rows.length).toBeGreaterThanOrEqual(2);
+      expect(Object.keys(rows[0]).sort()).toEqual(["estimated_minutes", "id", "kind", "summary", "title"]);
+    });
+  });
+  it("withholds quiz explanations until the learner passes", async () => {
+    await db.query(`update quiz_questions set explanation = 'because' where quiz_id = $1`, [quizId]);
+    await as(db, student(aliceId), async () => {
+      const fail = await one<{ r: { passed: boolean; results: Record<string, unknown>[]; max_points: number } }>(`select public.submit_quiz_attempt($1, '{}'::jsonb) as r`, [quizId]);
+      expect(fail.r.passed).toBe(false);
+      expect(fail.r.max_points).toBeGreaterThan(0);
+      expect(fail.r.results.every((x) => !("explanation" in x))).toBe(true);
+      const answers = { [q.single]: 1, [q.multi]: [0, 2], [q.tf]: 0, [q.match]: [1, 0], [q.fill]: ["xlookup"] };
+      const pass = await one<{ r: { passed: boolean; results: { explanation: string }[] } }>(`select public.submit_quiz_attempt($1, $2::jsonb) as r`, [quizId, JSON.stringify(answers)]);
+      expect(pass.r.passed).toBe(true);
+      expect(pass.r.results[0].explanation).toBe("because");
+    });
+  });
+  it("lets only admins or the course owner run an evaluation early", async () => {
+    const sub = await one<{ id: string }>(`select id from assignment_submissions where user_id = $1 limit 1`, [aliceId]);
+    await as(db, student(bobId), async () => {
+      await expect(db.query(`select public.admin_evaluate_now($1)`, [sub.id])).rejects.toThrow();
+    });
+    await as(db, student(adminId), async () => {
+      await db.query(`select public.admin_evaluate_now($1)`, [sub.id]);
+    });
+  });
+  it("stops non-admins from featuring or reordering courses", async () => {
+    const { rows } = await db.query(`select private.is_privileged() as p`);
+    expect(rows[0].p).toBe(true);
+    await as(db, student(aliceId), async () => {
+      const r = await db.query(`update courses set is_featured = true where id = $1`, [courseId]).catch((e) => e);
+      expect(r instanceof Error || r.rowCount === 0).toBe(true);
+    });
+  });
+});

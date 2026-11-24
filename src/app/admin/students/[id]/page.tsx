@@ -15,13 +15,13 @@ export default async function AdminStudentDetail({ params, searchParams }: { par
   await requireAdmin();
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
   const supabase = await createClient();
-  const [{ data: p }, { data: roles }, { data: enrolments }, { data: orders }, { data: certs }, { data: apps }, { data: progress }, { data: courses }] = await Promise.all([
+  const [{ data: p }, { data: roles }, { data: enrolments }, { data: orders }, { data: certs }, { data: subs }, { data: progress }, { data: courses }] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", id).maybeSingle(),
     supabase.from("user_roles").select("role").eq("user_id", id),
     supabase.from("enrolments").select("id, status, source, enrolled_at, completed_at, course:courses(id, title)").eq("user_id", id),
     supabase.from("orders").select("id, amount_paise, status, created_at, course:courses(title)").eq("user_id", id).order("created_at", { ascending: false }),
     supabase.from("certificates").select("certificate_code, course_title, status, issued_at").eq("user_id", id),
-    supabase.from("internship_applications").select("id, status, created_at, internship:internships(title)").eq("user_id", id),
+    supabase.from("assignment_submissions").select("id, eval_status, status, score, max_score, version, submitted_at, assignment:assignments(title)").eq("user_id", id).order("submitted_at", { ascending: false }).limit(50),
     supabase.from("lesson_progress").select("course_id, completed_at").eq("user_id", id),
     supabase.from("courses").select("id, title").neq("status", "archived").order("title"),
   ]);
@@ -36,7 +36,7 @@ export default async function AdminStudentDetail({ params, searchParams }: { par
   type En = { id: string; status: string; source: string; enrolled_at: string; completed_at: string | null; course: { id: string; title: string } };
   return (
     <div className="space-y-6">
-      <Link href="/admin/students" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />Students</Link>
+      <Link href="/admin/students" className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-300 hover:underline"><ArrowLeft className="size-4" />Students</Link>
       {error ? <Alert tone="danger">{error}</Alert> : null}
       <div className="flex flex-wrap items-center gap-3"><h1 className="text-2xl font-bold">{p.full_name || p.email}</h1>{r.map((x) => <Badge key={x} tone={x === "admin" ? "danger" : x === "instructor" ? "violet" : "neutral"}>{x}</Badge>)}{p.is_suspended ? <Badge tone="danger">Suspended</Badge> : null}</div>
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -56,11 +56,15 @@ export default async function AdminStudentDetail({ params, searchParams }: { par
           <Card><CardHeader title="Purchases" />
             {(orders ?? []).length ? <ul className="divide-y divide-line text-sm">{(orders as unknown as { id: string; amount_paise: number; status: string; created_at: string; course: { title: string } | null }[]).map((o) => <li key={o.id} className="flex justify-between px-5 py-3"><span>{o.course?.title} · {formatDate(o.created_at)}</span><span>{formatINR(o.amount_paise, true)} <Badge>{titleCase(o.status)}</Badge></span></li>)}</ul> : <p className="px-5 py-4 text-sm text-ink-muted">No purchases.</p>}
           </Card>
-          <Card><CardHeader title="Certificates & applications" />
-            <ul className="divide-y divide-line text-sm">
+          <Card><CardHeader title="Assignment submissions" action={<Link href="/admin/submissions?f=" className="text-sm font-semibold text-violet-300 hover:underline">Review queue</Link>} />
+            {(subs ?? []).length ? <ul className="divide-y divide-line text-sm">
+              {((subs ?? []) as unknown as { id: string; eval_status: string; status: string; score: number | null; max_score: number | null; version: number; submitted_at: string; assignment: { title: string } | null }[]).map((s) => <li key={s.id} className="flex justify-between gap-3 px-5 py-3"><span>{s.assignment?.title} <span className="text-[12px] text-ink-muted">v{s.version} · {formatDate(s.submitted_at)}</span></span><span className="flex items-center gap-2">{s.score != null ? <span className="font-mono">{Math.round(Number(s.score))}/{s.max_score}</span> : null}<Badge>{titleCase(s.eval_status)}</Badge></span></li>)}
+            </ul> : <p className="px-5 py-4 text-sm text-ink-muted">No submissions.</p>}
+          </Card>
+          <Card><CardHeader title="Completion records" />
+            {(certs ?? []).length ? <ul className="divide-y divide-line text-sm">
               {(certs ?? []).map((c) => <li key={c.certificate_code} className="flex justify-between px-5 py-3"><span>{c.course_title} <span className="font-mono text-[12px] text-ink-muted">{c.certificate_code}</span></span><Badge tone={c.status === "valid" ? "success" : "danger"}>{c.status}</Badge></li>)}
-              {((apps ?? []) as unknown as { id: string; status: string; internship: { title: string } | null }[]).map((a) => <li key={a.id} className="flex justify-between px-5 py-3"><span>{a.internship?.title}</span><Badge>{titleCase(a.status)}</Badge></li>)}
-            </ul>
+            </ul> : <p className="px-5 py-4 text-sm text-ink-muted">None yet.</p>}
           </Card>
         </div>
         <div className="space-y-6">

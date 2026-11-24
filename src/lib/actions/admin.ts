@@ -5,13 +5,14 @@ import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/dal";
 import { createClient } from "@/lib/supabase/server";
 import { audit } from "@/lib/audit";
-import { employerSchema, formDataToObject, internshipSchema, payoutSchema, refundSchema, applicationStatusSchema } from "@/lib/validation";
+import { formDataToObject, payoutSchema, refundSchema } from "@/lib/validation";
 import { initiateRefund, PaymentError } from "@/lib/payments/service";
 import { RazorpayError } from "@/lib/payments/razorpay";
 import { sendTemplateEmail } from "@/lib/email/send";
 import { publicEnv } from "@/lib/env";
 import { titleCase } from "@/lib/utils";
 import type { ActionState } from "@/components/ui/form";
+import { rateLimit } from "@/lib/security/rate-limit";
 
 /**
  * Administrator actions. Each one re-checks the admin role server-side and runs
@@ -39,7 +40,8 @@ export async function adminPublishCourseAction(fd: FormData) {
   const supabase = await createClient();
   const { error } = await supabase.rpc("admin_publish_course", { p_course_id: id, p_publish: publish });
   revalidatePath(`/admin/courses/${id}`);
-  revalidatePath("/programs");
+  revalidatePath("/courses");
+  revalidatePath("/");
   revalidatePath("/");
   redirect(`/admin/courses/${id}?${error ? `error=${encodeURIComponent(error.message)}` : `done=${publish ? "published" : "unpublished"}`}`);
 }
@@ -172,81 +174,6 @@ export async function adminReviewInstructorAction(_: ActionState, fd: FormData):
   return { ok: true, message: "Instructor updated." };
 }
 
-// ---------------- Internships & employers ----------------
-export async function adminSaveInternshipAction(_: ActionState, fd: FormData): Promise<ActionState> {
-  const admin = await requireAdmin();
-  const parsed = internshipSchema.safeParse(formDataToObject(fd));
-  if (!parsed.success) return { ok: false, errors: parsed.error.flatten().fieldErrors };
-  const supabase = await createClient();
-  if (parsed.data.kind === "employer") {
-    const { data: emp } = await supabase.from("employers").select("status").eq("id", parsed.data.employer_id!).maybeSingle();
-    if (emp?.status !== "verified") return { ok: false, message: "Employer internships require a verified employer." };
-  }
-  const id = String(fd.get("id") ?? "");
-  const row = { ...parsed.data, employer_id: parsed.data.kind === "employer" ? parsed.data.employer_id : parsed.data.employer_id, is_demo: fd.get("is_demo") === "on" };
-  const res = id
-    ? await supabase.from("internships").update(row).eq("id", id).select("id").single()
-    : await supabase.from("internships").insert({ ...row, created_by: admin.id }).select("id").single();
-  if (res.error || !res.data) return { ok: false, message: res.error?.code === "23505" ? "That slug is already in use." : res.error?.message ?? "Could not save." };
-  await audit(admin.id, id ? "internship.updated" : "internship.created", "internship", res.data.id, { kind: row.kind, status: row.status });
-  revalidatePath("/internships");
-  if (!id) redirect(`/admin/internships/${res.data.id}`);
-  revalidatePath(`/admin/internships/${id}`);
-  return { ok: true, message: "Internship saved." };
-}
-
-export async function adminUpdateApplicationAction(_: ActionState, fd: FormData): Promise<ActionState> {
-  await requireAdmin();
-  const parsed = applicationStatusSchema.safeParse(formDataToObject(fd));
-  if (!parsed.success) return { ok: false, message: "Invalid status." };
-  const supabase = await createClient();
-  const { error } = await supabase.rpc("update_application_status", { p_application_id: parsed.data.application_id, p_status: parsed.data.status, p_note: parsed.data.note });
-  if (error) return msg(error, "Could not update.");
-  const { data: app } = await supabase.from("internship_applications").select("user:profiles(full_name, email), internship:internships(title)").eq("id", parsed.data.application_id).single();
-  const a = app as unknown as { user: { full_name: string; email: string } | null; internship: { title: string } | null } | null;
-  if (a?.user?.email) {
-    await sendTemplateEmail({ to: a.user.email, template: "application_status", data: { name: a.user.full_name, title: a.internship?.title, status: titleCase(parsed.data.status), note: parsed.data.note ?? undefined, url: `${publicEnv.siteUrl}/dashboard/applications` } });
-  }
-  revalidatePath("/admin/applications");
-  return { ok: true, message: "Status updated and applicant notified." };
-}
-
-export async function adminSaveEmployerAction(_: ActionState, fd: FormData): Promise<ActionState> {
-  const admin = await requireAdmin();
-  const parsed = employerSchema.safeParse(formDataToObject(fd));
-  if (!parsed.success) return { ok: false, errors: parsed.error.flatten().fieldErrors };
-  const supabase = await createClient();
-  const { data, error } = await supabase.from("employers").insert(parsed.data).select("id").single();
-  if (error || !data) return { ok: false, message: error?.code === "23505" ? "That slug is already in use." : "Could not create employer." };
-  await audit(admin.id, "employer.created", "employer", data.id, { name: parsed.data.name });
-  revalidatePath("/admin/employers");
-  return { ok: true, message: "Employer added (pending verification)." };
-}
-
-export async function adminSetEmployerStatusAction(fd: FormData) {
-  const admin = await requireAdmin();
-  const id = uuid.parse(fd.get("id"));
-  const status = z.enum(["pending", "verified", "rejected", "suspended"]).parse(fd.get("status"));
-  const supabase = await createClient();
-  await supabase.from("employers").update({ status, verified_by: status === "verified" ? admin.id : null, verified_at: status === "verified" ? new Date().toISOString() : null }).eq("id", id);
-  await audit(admin.id, `employer.${status}`, "employer", id);
-  revalidatePath("/admin/employers");
-}
-
-export async function adminAddEmployerMemberAction(_: ActionState, fd: FormData): Promise<ActionState> {
-  const admin = await requireAdmin();
-  const employerId = uuid.parse(fd.get("employer_id"));
-  const email = String(fd.get("email") ?? "").trim().toLowerCase();
-  const supabase = await createClient();
-  const { data: profile } = await supabase.from("profiles").select("id").ilike("email", email).maybeSingle();
-  if (!profile) return { ok: false, message: "No Proofwork account with that email. Ask them to register first." };
-  const { error } = await supabase.from("employer_members").insert({ employer_id: employerId, user_id: profile.id });
-  if (error) return { ok: false, message: error.code === "23505" ? "Already a member." : "Could not add member." };
-  await audit(admin.id, "employer.member_added", "employer", employerId, { user_id: profile.id });
-  revalidatePath("/admin/employers");
-  return { ok: true, message: "Member added. They can now review applications for this employer." };
-}
-
 // ---------------- Finance ----------------
 export async function adminRefundAction(_: ActionState, fd: FormData): Promise<ActionState> {
   const admin = await requireAdmin();
@@ -290,7 +217,7 @@ export async function adminRevokeCertificateAction(_: ActionState, fd: FormData)
   const supabase = await createClient();
   const { error } = await supabase.rpc("admin_revoke_certificate", { p_certificate_id: uuid.parse(fd.get("id")), p_reason: String(fd.get("reason") ?? "") });
   if (error) return msg(error, "Could not revoke.");
-  revalidatePath("/admin/certificates");
+  revalidatePath("/admin/students");
   return { ok: true, message: "Certificate revoked." };
 }
 
@@ -299,4 +226,17 @@ export async function adminMarkMessageHandledAction(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("contact_messages").update({ handled: fd.get("handled") === "true" }).eq("id", uuid.parse(fd.get("id")));
   revalidatePath("/admin/messages");
+}
+
+/** Processes evaluation jobs that are due now (the scheduler does this automatically). */
+export async function runEvaluationWorkerAction() {
+  const admin = await requireAdmin();
+  if (!(await rateLimit("adminEvaluate", admin.id)).ok) return;
+  const { processEvaluationJobs } = await import("@/lib/assessment/worker");
+  const outcomes = await processEvaluationJobs({ limit: 5, budgetMs: 50_000 }).catch((e) => {
+    console.error("[runEvaluationWorker]", e);
+    return [];
+  });
+  await audit(admin.id, "evaluation.worker_run", "evaluation_jobs", "manual", { processed: outcomes.length });
+  revalidatePath("/admin/submissions");
 }

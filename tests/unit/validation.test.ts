@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applicationSchema, contactSchema, courseSchema, internshipSchema, lessonSchema, profileSchema, questionSchema, registerSchema } from "@/lib/validation";
+import { assignmentSchema, contactSchema, courseSchema, lessonSchema, parseQuestion, parseRubric, profileSchema, quizAnswerSchema, registerSchema, submissionSchema } from "@/lib/validation";
 import { renderTemplate } from "@/lib/email/templates";
 import { filterAndSort } from "@/lib/data/catalogue";
 
@@ -34,20 +34,38 @@ describe("validation schemas", () => {
     expect(lessonSchema.safeParse({ ...base, video_provider: "mux", video_asset_id: "a1B2c3D4e5" }).success).toBe(true);
   });
 
-  it("requires a verified employer reference for employer internships", () => {
-    const base = { title: "Analyst intern", slug: "analyst-intern", description: "A sufficiently long description", work_mode: "remote", status: "open", employer_id: "" };
-    expect(internshipSchema.safeParse({ ...base, kind: "employer" }).success).toBe(false);
-    expect(internshipSchema.safeParse({ ...base, kind: "simulation" }).success).toBe(true);
+  it("parses every quiz question type into the stored shape", () => {
+    const single = parseQuestion({ qtype: "single", prompt: "Which?", options: "A\nB\nC", answer: "2" });
+    expect(single).toMatchObject({ ok: true, data: { options: ["A", "B", "C"], correct_index: 1 } });
+    expect(parseQuestion({ qtype: "single", prompt: "Which?", options: "A", answer: "1" }).ok).toBe(false);
+    expect(parseQuestion({ qtype: "single", prompt: "Which?", options: "A\nB", answer: "5" }).ok).toBe(false);
+    expect(parseQuestion({ qtype: "true_false", prompt: "Sky is blue", answer: "false" })).toMatchObject({ ok: true, data: { options: ["True", "False"], correct_index: 1 } });
+    expect(parseQuestion({ qtype: "multi", prompt: "Pick", options: "A\nB\nC", answer: "3, 1" })).toMatchObject({ ok: true, data: { correct: [0, 2] } });
+    const match = parseQuestion({ qtype: "match", prompt: "Match", options: "CPC => Cost ÷ Clicks\nCTR => Clicks ÷ Impressions\nCPA => Cost ÷ Conversions" }, () => [2, 0, 1]);
+    expect(match).toMatchObject({ ok: true, data: { options: { left: ["CPC", "CTR", "CPA"], right: ["Cost ÷ Conversions", "Cost ÷ Clicks", "Clicks ÷ Impressions"] }, correct: [1, 2, 0] } });
+    expect(parseQuestion({ qtype: "fill_blank", prompt: "Assets = Liabilities + ___", answer: "Equity | Shareholders' equity" })).toMatchObject({ ok: true, data: { correct: [["Equity", "Shareholders' equity"]] } });
+    expect(parseQuestion({ qtype: "fill_blank", prompt: "No blank here", answer: "x" }).ok).toBe(false);
+    expect(parseQuestion({ qtype: "scenario", prompt: "What next?", options: "A\nB", answer: "1" }).ok).toBe(false); // needs a scenario
   });
 
-  it("validates quiz questions", () => {
-    expect(questionSchema.safeParse({ prompt: "Which?", options: "A\nB\nC", correct_index: 2 }).success).toBe(true);
-    expect(questionSchema.safeParse({ prompt: "Which?", options: "A", correct_index: 0 }).success).toBe(false);
-    expect(questionSchema.safeParse({ prompt: "Which?", options: "A\nB", correct_index: 5 }).success).toBe(false);
+  it("validates assignment authoring, rubrics and learner answers", () => {
+    const base = { title: "Workbook", kind: "file", instructions: "Do the tasks", max_score: "100", pass_pct: "50", accepted_types: "xlsx,csv", allow_file: "on", ai_evaluation: "on", lesson_id: "" };
+    expect(assignmentSchema.safeParse({ ...base, rubric: "Accuracy | 60 | Right numbers\nFormulas | 40 | Live" }).success).toBe(true);
+    expect(assignmentSchema.safeParse({ ...base, rubric: "" }).success).toBe(false); // AI evaluation needs a rubric
+    expect(assignmentSchema.safeParse({ ...base, rubric: "Accuracy | lots" }).success).toBe(false);
+    expect(assignmentSchema.safeParse({ ...base, rubric: "A | 10 | x", accepted_types: "exe" }).success).toBe(false);
+    expect(parseRubric("A | 10 | good | very good")).toEqual([{ criterion: "A", points: 10, description: "good | very good" }]);
+    expect(quizAnswerSchema.safeParse(2).success).toBe(true);
+    expect(quizAnswerSchema.safeParse([0, 2]).success).toBe(true);
+    expect(quizAnswerSchema.safeParse(["Equity"]).success).toBe(true);
+    expect(quizAnswerSchema.safeParse({ $gt: 1 }).success).toBe(false);
+    const sub = submissionSchema.safeParse({ assignment_id: "00000000-0000-4000-8000-000000000000", links: "https://a.example/x\nhttps://b.example" });
+    expect(sub.success && sub.data.links).toEqual(["https://a.example/x", "https://b.example"]);
+    expect(submissionSchema.safeParse({ assignment_id: "00000000-0000-4000-8000-000000000000", links: "javascript:alert(1)" }).success).toBe(false);
+    expect(submissionSchema.safeParse({ assignment_id: "00000000-0000-4000-8000-000000000000", links: "http://insecure.example" }).success).toBe(false);
   });
 
   it("validates application and profile inputs", () => {
-    expect(applicationSchema.safeParse({ internship_id: "00000000-0000-4000-8000-000000000000", cover_letter: "too short" }).success).toBe(false);
     expect(profileSchema.safeParse({ full_name: "Asha", phone: "abc" }).success).toBe(false);
     expect(profileSchema.parse({ full_name: "Asha", skills: "Excel, SQL ,  " }).skills).toEqual(["Excel", "SQL"]);
     expect(contactSchema.safeParse({ topic: "general", name: "A", email: "a@b.in", message: "Hello there friend", website: "spam" }).success).toBe(false);
@@ -71,18 +89,17 @@ describe("email templates", () => {
 });
 
 describe("catalogue filtering", () => {
-  const mk = (slug: string, price: number, level: string, category: string, enrolments = 0, days = 0) =>
-    ({ slug, title: slug, subtitle: "", description: "", effective_price: price, price_paise: price, level, category: { slug: category, name: category }, enrolment_count: enrolments, review_count: 0, published_at: new Date(Date.now() - days * 86400000).toISOString(), created_at: "" }) as never;
-  const list = [mk("a", 49900, "beginner", "finance", 5, 3), mk("b", 149900, "advanced", "tech", 1, 1), mk("c", 0, "beginner", "tech", 0, 0)];
-  it("filters by price, level, category and search", () => {
-    expect(filterAndSort(list, { price: "under-500" }).map((c: { slug: string }) => c.slug)).toEqual(["a", "c"]);
+  const mk = (slug: string, order: number, level: string, category: string, enrolments = 0, days = 0) =>
+    ({ slug, title: slug, subtitle: "", description: "", effective_price: 750000, price_paise: 750000, level, sort_order: order, category: { slug: category, name: category }, enrolment_count: enrolments, review_count: 0, published_at: new Date(Date.now() - days * 86400000).toISOString(), created_at: "" }) as never;
+  const list = [mk("a", 2, "beginner", "ai", 5, 3), mk("b", 3, "advanced", "marketing", 9, 1), mk("c", 1, "beginner", "marketing", 0, 0)];
+  it("filters by level, category and search", () => {
     expect(filterAndSort(list, { level: "advanced" }).map((c: { slug: string }) => c.slug)).toEqual(["b"]);
-    expect(filterAndSort(list, { category: "tech", price: "free" }).map((c: { slug: string }) => c.slug)).toEqual(["c"]);
+    expect(filterAndSort(list, { category: "marketing" }).map((c: { slug: string }) => c.slug)).toEqual(["c", "b"]);
     expect(filterAndSort(list, { q: "B" }).map((c: { slug: string }) => c.slug)).toEqual(["b"]);
   });
-  it("sorts by popularity, price and newest", () => {
-    expect(filterAndSort(list, {}).map((c: { slug: string }) => c.slug)).toEqual(["a", "b", "c"]);
-    expect(filterAndSort(list, { sort: "price-asc" }).map((c: { slug: string }) => c.slug)).toEqual(["c", "a", "b"]);
+  it("sorts by curated order, popularity and newest", () => {
+    expect(filterAndSort(list, {}).map((c: { slug: string }) => c.slug)).toEqual(["c", "a", "b"]);
+    expect(filterAndSort(list, { sort: "popular" }).map((c: { slug: string }) => c.slug)).toEqual(["b", "a", "c"]);
     expect(filterAndSort(list, { sort: "newest" }).map((c: { slug: string }) => c.slug)).toEqual(["c", "b", "a"]);
   });
 });

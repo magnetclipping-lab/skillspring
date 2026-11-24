@@ -19,6 +19,7 @@ export function integrationStatus() {
     razorpayWebhook: !placeholder(e.RAZORPAY_WEBHOOK_SECRET),
     razorpayLiveMode: (e.RAZORPAY_KEY_ID ?? "").startsWith("rzp_live_"),
     email: !placeholder(e.RESEND_API_KEY) && !placeholder(e.EMAIL_FROM),
+    anthropic: !placeholder(e.ANTHROPIC_API_KEY),
     mux: !placeholder(e.MUX_SIGNING_KEY_ID) && !placeholder(e.MUX_SIGNING_PRIVATE_KEY),
     muxUploads: !placeholder(e.MUX_TOKEN_ID) && !placeholder(e.MUX_TOKEN_SECRET),
     cloudflareStream: !placeholder(e.CLOUDFLARE_STREAM_CUSTOMER_CODE) && !placeholder(e.CLOUDFLARE_STREAM_KEY_ID) && !placeholder(e.CLOUDFLARE_STREAM_PRIVATE_KEY),

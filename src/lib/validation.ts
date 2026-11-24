@@ -91,6 +91,12 @@ export const courseSchema = z
     learning_outcomes: list(20),
     requirements: list(15),
     thumbnail_url: z.union([z.literal(""), z.string().trim().max(500).refine((v) => v.startsWith("/") || v.startsWith("https://"), "Use a relative path or https URL")]).optional().transform((v) => (v ? v : null)),
+    preview_video_url: z.union([z.literal(""), z.string().trim().max(800).regex(/^https:\/\//, "Use an https URL")]).optional().transform((v) => (v ? v : null)),
+    preview_poster_url: z.union([z.literal(""), z.string().trim().max(800).regex(/^https:\/\//, "Use an https URL")]).optional().transform((v) => (v ? v : null)),
+    preview_duration_seconds: z.union([z.literal(""), z.coerce.number().int().min(1).max(600)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
+    projects_count: z.coerce.number().int().min(0).max(50).optional().default(0),
+    is_featured: checkbox,
+    sort_order: z.coerce.number().int().min(0).max(10000).optional().default(0),
     completion_requires_all_lessons: checkbox,
     completion_requires_assignments: checkbox,
     completion_min_quiz_pct: z.union([z.literal(""), z.coerce.number().int().min(0).max(100)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
@@ -135,66 +141,134 @@ export const quizSchema = z.object({
   is_mandatory: checkbox,
 });
 
-export const questionSchema = z
-  .object({
-    prompt: trimmed(1000).min(3),
-    options: list(8, 300),
-    correct_index: z.coerce.number().int().min(0).max(7),
-    explanation: optionalText(1000),
-  })
-  .refine((v) => v.options.length >= 2, { message: "Add at least two options (one per line)", path: ["options"] })
-  .refine((v) => v.correct_index < v.options.length, { message: "Correct option number is out of range", path: ["correct_index"] });
+/**
+ * Quiz question authoring. Answers are entered in plain text and converted to the stored shape:
+ *  single / scenario : options (one per line) + correct option number
+ *  true_false        : correct = "true" | "false"
+ *  multi             : options + correct option numbers, comma-separated (e.g. "1, 3")
+ *  match             : pairs, one per line, "left => right" (right side is shuffled for learners)
+ *  fill_blank        : prompt with ___ per blank; answers one line per blank, alternatives separated by |
+ */
+export const QUESTION_TYPES = ["single", "multi", "true_false", "match", "fill_blank", "scenario"] as const;
+export type QuestionInput = {
+  qtype: (typeof QUESTION_TYPES)[number]; prompt: string; context: string | null; explanation: string | null; points: number;
+  options: string[] | { left: string[]; right: string[] } | null; correct_index: number | null; correct: unknown;
+};
+const lines = (v: unknown) => String(v ?? "").split("\n").map((x) => x.trim()).filter(Boolean);
 
-export const assignmentSchema = z.object({
-  title: trimmed(160).min(1),
-  instructions: trimmed(10000).min(5),
-  lesson_id: z.string().uuid().or(z.literal("")).transform((v) => (v ? v : null)),
-  is_mandatory: checkbox,
-  allow_file: checkbox,
+export function parseQuestion(raw: Record<string, unknown>, shuffle: (n: number) => number[] = (n) => [...Array(n).keys()].sort(() => Math.random() - 0.5)):
+  { ok: true; data: QuestionInput } | { ok: false; errors: Record<string, string[]> } {
+  const qtype = String(raw.qtype ?? "single") as QuestionInput["qtype"];
+  const errors: Record<string, string[]> = {};
+  const fail = (k: string, m: string) => ((errors[k] ??= []).push(m), null);
+  if (!QUESTION_TYPES.includes(qtype)) fail("qtype", "Choose a question type");
+  const prompt = String(raw.prompt ?? "").trim().slice(0, 1000);
+  if (prompt.length < 3) fail("prompt", "Write the question");
+  const context = String(raw.context ?? "").trim().slice(0, 2000) || null;
+  const explanation = String(raw.explanation ?? "").trim().slice(0, 1000) || null;
+  const points = Math.min(20, Math.max(1, Number(raw.points ?? 1) || 1));
+  let options: QuestionInput["options"] = null;
+  let correct_index: number | null = null;
+  let correct: unknown = null;
+  const opts = lines(raw.options).slice(0, 10).map((o) => o.slice(0, 300));
+  const answer = String(raw.answer ?? "").trim();
+  if (qtype === "single" || qtype === "scenario") {
+    if (opts.length < 2 || opts.length > 8) fail("options", "Add 2–8 options, one per line");
+    const n = Number(answer);
+    if (!Number.isInteger(n) || n < 1 || n > opts.length) fail("answer", "Enter the number of the correct option");
+    options = opts; correct_index = n - 1;
+    if (qtype === "scenario" && !context) fail("context", "Describe the scenario");
+  } else if (qtype === "true_false") {
+    if (!["true", "false"].includes(answer.toLowerCase())) fail("answer", "Enter true or false");
+    options = ["True", "False"]; correct_index = answer.toLowerCase() === "true" ? 0 : 1;
+  } else if (qtype === "multi") {
+    if (opts.length < 2) fail("options", "Add at least 2 options, one per line");
+    const nums = answer.split(/[,\s]+/).filter(Boolean).map(Number);
+    if (!nums.length || nums.some((x) => !Number.isInteger(x) || x < 1 || x > opts.length)) fail("answer", "List the correct option numbers, e.g. 1, 3");
+    options = opts; correct = [...new Set(nums.map((x) => x - 1))].sort((a, b) => a - b);
+  } else if (qtype === "match") {
+    const pairs = opts.map((l) => l.split("=>").map((x) => x.trim()));
+    if (pairs.length < 2 || pairs.some((p) => p.length !== 2 || !p[0] || !p[1])) fail("options", "Write 2 or more pairs, one per line: left => right");
+    const left = pairs.map((p) => p[0]);
+    const rightOrdered = pairs.map((p) => p[1]);
+    const order = shuffle(rightOrdered.length);
+    const right = order.map((i) => rightOrdered[i]);
+    options = { left, right }; correct = left.map((_, i) => order.indexOf(i));
+  } else if (qtype === "fill_blank") {
+    const blanks = (prompt.match(/_{3,}/g) ?? []).length;
+    const accepted = lines(raw.answer).map((l) => l.split("|").map((x) => x.trim()).filter(Boolean));
+    if (!blanks) fail("prompt", "Mark each blank with ___");
+    if (accepted.length !== blanks || accepted.some((a) => !a.length)) fail("answer", `Give one line of accepted answers per blank (${blanks} blank${blanks === 1 ? "" : "s"})`);
+    correct = accepted;
+  }
+  if (Object.keys(errors).length) return { ok: false, errors };
+  return { ok: true, data: { qtype, prompt, context, explanation, points, options, correct_index, correct } };
+}
+
+const ASSIGNMENT_KINDS = ["file", "document", "practical", "scenario"] as const;
+const ACCEPTED = ["xlsx", "csv", "docx", "pdf", "pptx", "png", "jpg", "zip", "txt"] as const;
+
+/** Rubric lines: "Criterion | points | what good looks like". */
+export function parseRubric(v: unknown) {
+  return lines(v).slice(0, 12).map((l) => {
+    const [criterion, points, ...desc] = l.split("|").map((x) => x.trim());
+    return { criterion: (criterion ?? "").slice(0, 120), points: Number(points), description: desc.join(" | ").slice(0, 500) };
+  });
+}
+
+export const assignmentSchema = z
+  .object({
+    title: trimmed(160).min(1),
+    kind: z.enum(ASSIGNMENT_KINDS),
+    summary: optionalText(600),
+    scenario: optionalText(4000),
+    instructions: trimmed(10000).min(5),
+    deliverables: optionalText(1000),
+    submission_requirements: optionalText(1000),
+    rubric: z.string().optional().transform(parseRubric),
+    max_score: z.coerce.number().int().min(1).max(1000),
+    pass_pct: z.coerce.number().int().min(0).max(100),
+    accepted_types: z.string().optional().transform((v) => (v ?? "").split(",").map((x) => x.trim()).filter((x): x is (typeof ACCEPTED)[number] => (ACCEPTED as readonly string[]).includes(x))),
+    estimated_minutes: z.union([z.literal(""), z.coerce.number().int().min(1).max(10000)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
+    lesson_id: z.string().uuid().or(z.literal("")).transform((v) => (v ? v : null)),
+    is_mandatory: checkbox,
+    allow_file: checkbox,
+    allow_text: checkbox,
+    allow_links: checkbox,
+    ai_evaluation: checkbox,
+    answer_key: optionalText(20000),
+    evaluator_notes: optionalText(4000),
+  })
+  .refine((v) => v.rubric.every((r) => r.criterion && Number.isInteger(r.points) && r.points > 0), { message: "Each rubric line needs: criterion | points | description", path: ["rubric"] })
+  .refine((v) => !v.ai_evaluation || v.rubric.length > 0, { message: "Add a rubric (required for AI evaluation)", path: ["rubric"] })
+  .refine((v) => v.allow_file || v.allow_text || v.allow_links, { message: "Allow at least one way to submit", path: ["allow_file"] })
+  .refine((v) => !v.allow_file || v.accepted_types.length > 0, { message: "Choose at least one accepted file type", path: ["accepted_types"] });
+
+export const reviewOverrideSchema = z.object({
+  submission_id: z.string().uuid(),
+  score: z.coerce.number().min(0).max(1000),
+  feedback: trimmed(4000).min(5, "Add feedback for the learner"),
 });
 
 export const submissionSchema = z.object({
   assignment_id: z.string().uuid(),
   text_response: optionalText(20000),
   file_path: z.string().max(500).optional().transform((v) => (v ? v : null)),
+  file_name: z.string().max(200).optional().transform((v) => (v ? v.replace(/[\\/\u0000-\u001f]/g, "_") : null)),
+  links: z
+    .string()
+    .max(2500)
+    .optional()
+    .transform((v) => (v ? v.split(/\s+/).map((x) => x.trim()).filter(Boolean) : []))
+    .pipe(z.array(z.string().url().regex(/^https:\/\//, "Links must start with https://").max(500)).max(5, "Add at most 5 links")),
 });
 
-export const internshipSchema = z
-  .object({
-    title: trimmed(160).min(3),
-    slug: z.string().trim().toLowerCase().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(80),
-    kind: z.enum(["employer", "simulation", "project"]),
-    employer_id: z.string().uuid().or(z.literal("")).transform((v) => (v ? v : null)),
-    description: trimmed(10000).min(20),
-    responsibilities: list(20),
-    skills: csvList(20),
-    eligibility: optionalText(1000),
-    location: optionalText(120),
-    work_mode: z.enum(["remote", "hybrid", "onsite"]),
-    duration_weeks: z.union([z.literal(""), z.coerce.number().int().min(1).max(104)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
-    is_paid: checkbox,
-    stipend_min_inr: z.union([z.literal(""), z.coerce.number().int().min(0)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
-    stipend_max_inr: z.union([z.literal(""), z.coerce.number().int().min(0)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
-    stipend_notes: optionalText(300),
-    deadline: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/)]).optional().transform((v) => (v ? v : null)),
-    positions: z.union([z.literal(""), z.coerce.number().int().min(1).max(10000)]).optional().transform((v) => (v === "" || v === undefined ? null : v)),
-    status: z.enum(["draft", "open", "closed", "archived"]),
-  })
-  .refine((v) => v.kind !== "employer" || v.employer_id, { message: "Employer internships must be linked to a verified employer", path: ["employer_id"] });
-
-export const applicationSchema = z.object({
-  internship_id: z.string().uuid(),
-  cover_letter: trimmed(5000).min(30, "Write at least 30 characters about why you're a good fit"),
-  phone: z.union([z.literal(""), z.string().trim().regex(/^\+?[0-9 \-]{7,20}$/, "Enter a valid phone number")]).optional().transform((v) => (v ? v : null)),
-  portfolio_url: z.union([z.literal(""), z.string().trim().url().regex(/^https?:\/\//)]).optional().transform((v) => (v ? v : null)),
-  resume_path: z.string().max(500).optional().transform((v) => (v ? v : null)),
-});
-
-export const applicationStatusSchema = z.object({
-  application_id: z.string().uuid(),
-  status: z.enum(["submitted", "under_review", "shortlisted", "interview_scheduled", "selected", "rejected"]),
-  note: optionalText(1000),
-});
+/** Quiz answers: single/true-false/scenario → index; multi/match → indices; fill-in-the-blank → strings. */
+export const quizAnswerSchema = z.union([
+  z.number().int().min(0).max(9),
+  z.array(z.number().int().min(0).max(9)).max(10),
+  z.array(z.string().max(200)).max(10),
+]);
 
 export const reviewSchema = z.object({
   course_id: z.string().uuid(),

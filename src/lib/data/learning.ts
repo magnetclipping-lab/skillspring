@@ -18,13 +18,13 @@ export async function getLearningContext(slug: string, user: SessionUser) {
 
   const { data: enrolment } = await supabase.from("enrolments").select("id, status, completed_at, last_lesson_id").eq("course_id", c.id).eq("user_id", user.id).maybeSingle();
   const isStaff = user.roles.includes("admin") || (user.instructor?.status === "approved" && c.instructor_id === user.instructor.id);
-  if (enrolment?.status !== "active" && !isStaff) redirect(`/programs/${slug}`);
+  if (enrolment?.status !== "active" && !isStaff) redirect(`/courses/${slug}`);
 
   const [{ data: modules }, { data: lessons }, { data: progress }, { data: certificate }] = await Promise.all([
     supabase.from("course_modules").select("id, title, position, created_at").eq("course_id", c.id).order("position").order("created_at"),
     supabase.from("lessons").select("*").eq("course_id", c.id).order("position").order("created_at"),
     supabase.from("lesson_progress").select("lesson_id, completed_at").eq("course_id", c.id).eq("user_id", user.id),
-    supabase.from("certificates").select("certificate_code, status").eq("course_id", c.id).eq("user_id", user.id).maybeSingle(),
+    supabase.from("certificates").select("certificate_code, status, issued_at").eq("course_id", c.id).eq("user_id", user.id).maybeSingle(),
   ]);
   const done = new Set((progress ?? []).filter((p) => p.completed_at).map((p) => p.lesson_id));
   const mods: LearningModule[] = (modules ?? []).map((m) => ({
@@ -39,5 +39,5 @@ export async function getLearningContext(slug: string, user: SessionUser) {
     const { data } = await supabase.rpc("get_completion_status", { p_course_id: c.id });
     completion = data as CompletionStatus;
   }
-  return { course: c, enrolment, isStaff, modules: mods, flat, percent, completion, certificate: certificate as { certificate_code: string; status: string } | null };
+  return { course: c, enrolment, isStaff, modules: mods, flat, percent, completion, certificate: certificate as { certificate_code: string; status: string; issued_at: string | null } | null };
 }

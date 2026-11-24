@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { deleteLessonAction, deleteQuestionAction, deleteResourceAction } from "@/lib/actions/course-content";
 import { Alert, Badge, Card, CardHeader } from "@/components/ui/primitives";
 import { SubmitButton } from "@/components/ui/form";
-import { AssignmentForm, LessonForm, QuestionForm, QuizForm, ResourceForm } from "./forms";
+import { AssignmentForm, LessonForm, QuestionForm, QuizForm, ResourceForm, type EditableAssignment } from "./forms";
 import type { Lesson } from "@/lib/types";
 
 export async function LessonEditorView({ base, courseId, lessonId, editable }: { base: "/admin" | "/instructor"; courseId: string; lessonId: string; editable: boolean }) {
@@ -21,6 +21,7 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
   if (!lesson) notFound();
   const l = lesson as Lesson;
   const { data: questions } = quiz ? await supabase.from("quiz_questions").select("*").eq("quiz_id", quiz.id).order("position") : { data: [] };
+  const { data: answerKey } = assignment ? await supabase.from("assignment_answer_keys").select("answer_key, evaluator_notes").eq("assignment_id", assignment.id).maybeSingle() : { data: null };
   const hidden = (extra: Record<string, string>) => (
     <>
       <input type="hidden" name="_base" value={base} />
@@ -32,9 +33,9 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
 
   return (
     <div className="space-y-6">
-      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />Back to course</Link>
+      <Link href={`${base}/courses/${courseId}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-300 hover:underline"><ArrowLeft className="size-4" />Back to course</Link>
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold">{l.title}</h1>
+        <h1 className="font-display text-2xl font-semibold tracking-tight">{l.title}</h1>
         {editable ? <form action={deleteLessonAction}>{hidden({ id: l.id })}<SubmitButton variant="danger" pendingText="Deleting…"><Trash2 className="size-4" />Delete lesson</SubmitButton></form> : null}
       </div>
       {!editable ? <Alert tone="info">This course is locked for editing.</Alert> : null}
@@ -68,10 +69,10 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
                   <ol className="space-y-2">
                     {(questions ?? []).map((q, i) => (
                       <li key={q.id} className="rounded-xl border border-line p-3 text-sm">
-                        <div className="flex items-start gap-2"><span className="font-semibold">{i + 1}.</span><span className="flex-1">{q.prompt}</span>
+                        <div className="flex items-start gap-2"><span className="font-semibold">{i + 1}.</span><span className="flex-1">{q.context ? <span className="mb-1 block text-[12.5px] text-ink-muted">{q.context}</span> : null}{q.prompt}<span className="ml-2 text-[11.5px] text-ink-muted">{q.qtype} · {q.points} pt</span></span>
                           {editable ? <form action={deleteQuestionAction}>{hidden({ id: q.id })}<button className="text-ink-muted hover:text-red-400" aria-label="Delete question"><Trash2 className="size-4" /></button></form> : null}
                         </div>
-                        <ul className="mt-2 space-y-1 pl-5">{(q.options as string[]).map((o, oi) => <li key={oi} className={oi === q.correct_index ? "font-semibold text-emerald-300" : "text-ink-soft"}>{oi === q.correct_index ? "✓ " : "• "}{o}</li>)}</ul>
+                        <QuestionAnswers q={q} />
                       </li>
                     ))}
                   </ol>
@@ -83,12 +84,28 @@ export async function LessonEditorView({ base, courseId, lessonId, editable }: {
         ) : null}
 
         {l.type === "assignment" || assignment ? (
-          <Card>
+          <Card className="lg:col-span-2">
             <CardHeader title="Assignment" />
-            <div className="p-5">{editable ? <AssignmentForm base={base} courseId={courseId} lessonId={lessonId} assignment={assignment} /> : assignment ? <p className="whitespace-pre-line text-sm">{assignment.instructions}</p> : <p className="text-sm text-ink-muted">No assignment.</p>}</div>
+            <div className="p-5">{editable ? <AssignmentForm base={base} courseId={courseId} lessonId={lessonId} assignment={assignment as EditableAssignment | null} answerKey={answerKey} /> : assignment ? <p className="whitespace-pre-line text-sm">{assignment.instructions}</p> : <p className="text-sm text-ink-muted">No assignment.</p>}</div>
           </Card>
         ) : null}
       </div>
     </div>
   );
+}
+
+type QRow = { qtype: string; options: unknown; correct_index: number | null; correct: unknown };
+
+function QuestionAnswers({ q }: { q: QRow }) {
+  if (q.qtype === "match") {
+    const o = q.options as { left: string[]; right: string[] };
+    const c = (q.correct as number[]) ?? [];
+    return <ul className="mt-2 space-y-1 pl-5 text-ink-soft">{o.left.map((l, i) => <li key={i}>{l} <span className="text-ink-muted">→</span> <span className="font-semibold text-emerald-300">{o.right[c[i]]}</span></li>)}</ul>;
+  }
+  if (q.qtype === "fill_blank") {
+    return <ul className="mt-2 space-y-1 pl-5 text-ink-soft">{((q.correct as string[][]) ?? []).map((a, i) => <li key={i}>Blank {i + 1}: <span className="font-semibold text-emerald-300">{a.join(" | ")}</span></li>)}</ul>;
+  }
+  const opts = (q.options as string[]) ?? [];
+  const right = q.qtype === "multi" ? new Set((q.correct as number[]) ?? []) : new Set([q.correct_index]);
+  return <ul className="mt-2 space-y-1 pl-5">{opts.map((o, oi) => <li key={oi} className={right.has(oi) ? "font-semibold text-emerald-300" : "text-ink-soft"}>{right.has(oi) ? "✓ " : "• "}{o}</li>)}</ul>;
 }

@@ -1,12 +1,12 @@
 "use client";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Award } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert } from "@/components/ui/primitives";
-import { claimCertificateAction } from "@/lib/actions/learning";
+import { claimCompletionAction } from "@/lib/actions/learning";
 
-export function ClaimCertificate({ courseId, eligible }: { courseId: string; eligible: boolean }) {
+export function ClaimCompletion({ courseId, eligible }: { courseId: string; eligible: boolean }) {
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -17,12 +17,12 @@ export function ClaimCertificate({ courseId, eligible }: { courseId: string; eli
         className="w-full"
         disabled={!eligible || pending}
         onClick={() => start(async () => {
-          const r = await claimCertificateAction(courseId);
-          if (r.ok && r.code) router.push(`/dashboard/certificates/${r.code}`);
-          else setError(r.message ?? "Could not issue certificate.");
+          const r = await claimCompletionAction(courseId);
+          if (r.ok) router.refresh();
+          else setError(r.message ?? "Could not record completion.");
         })}
       >
-        <Award className="size-4" />{pending ? "Issuing…" : eligible ? "Claim certificate" : "Complete requirements to unlock"}
+        <CheckCircle2 className="size-4" />{pending ? "Recording…" : eligible ? "Record course completion" : "Complete the requirements first"}
       </Button>
     </div>
   );

@@ -31,15 +31,15 @@ export function CourseEditorView({ base, data, editable, notice, adminPanel }: {
   const { course, categories, modules, lessons } = data;
   return (
     <div className="space-y-6">
-      <Link href={`${base}/courses`} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-300 hover:underline"><ArrowLeft className="size-4" />All courses</Link>
+      <Link href={`${base}/courses`} className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-300 hover:underline"><ArrowLeft className="size-4" />All courses</Link>
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
         <div>
           <div className="flex flex-wrap gap-2"><Badge tone={statusTone[course.status]}>{titleCase(course.status)}</Badge><Badge tone={course.rights_status === "rejected" ? "danger" : course.rights_status === "pending" ? "warning" : "success"}>Rights: {titleCase(course.rights_status)}</Badge>{course.is_demo ? <Badge tone="warning">Demo</Badge> : null}</div>
-          <h1 className="mt-2 text-2xl font-bold">{course.title}</h1>
+          <h1 className="mt-2 font-display text-2xl font-semibold tracking-tight">{course.title}</h1>
         </div>
         <div className="flex flex-wrap gap-2">
-          {course.status === "published" ? <Link href={`/programs/${course.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-500/10"><Eye className="size-4" />View live</Link> : null}
-          <Link href={`${base}/courses/${course.id}/submissions`} className="inline-flex h-10 items-center gap-2 rounded-xl px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-brand-500/10"><ClipboardList className="size-4" />Submissions</Link>
+          {course.status === "published" ? <Link href={`/courses/${course.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-white/[0.04]"><Eye className="size-4" />View live</Link> : null}
+          <Link href={`${base}/courses/${course.id}/submissions`} className="inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-semibold text-ink-soft ring-1 ring-line hover:bg-white/[0.04]"><ClipboardList className="size-4" />Submissions</Link>
           {base === "/instructor" && editable ? (
             <form action={submitForReviewAction}><input type="hidden" name="_base" value={base} /><input type="hidden" name="course_id" value={course.id} /><SubmitButton pendingText="Submitting…"><Send className="size-4" />Submit for review</SubmitButton></form>
           ) : null}
@@ -59,7 +59,7 @@ export function CourseEditorView({ base, data, editable, notice, adminPanel }: {
               const ls = lessons.filter((l) => l.module_id === m.id);
               return (
                 <div key={m.id} className="rounded-xl border border-line">
-                  <div className="flex items-center gap-2 border-b border-line bg-white/[0.03]/60 p-3">
+                  <div className="flex items-center gap-2 border-b border-line bg-white/[0.02] p-3">
                     <div className="flex-1">{editable ? <ModuleForm base={base} courseId={course.id} module={m} /> : <p className="font-semibold">{m.title}</p>}</div>
                     {editable ? <form action={deleteModuleAction}><input type="hidden" name="_base" value={base} /><input type="hidden" name="course_id" value={course.id} /><input type="hidden" name="id" value={m.id} /><button className="grid size-9 place-items-center rounded-lg text-ink-muted hover:bg-red-500/10 hover:text-red-400" aria-label={`Delete module ${m.title}`}><Trash2 className="size-4" /></button></form> : null}
                   </div>
@@ -68,7 +68,7 @@ export function CourseEditorView({ base, data, editable, notice, adminPanel }: {
                       const Icon = lessonIcon[l.type];
                       return (
                         <li key={l.id}>
-                          <Link href={`${base}/courses/${course.id}/lessons/${l.id}`} className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-brand-500/[0.06]">
+                          <Link href={`${base}/courses/${course.id}/lessons/${l.id}`} className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-white/[0.03]">
                             <Icon className="size-4 text-ink-muted" /><span className="flex-1">{l.title}</span>
                             {l.is_preview ? <Badge tone="brand">Preview</Badge> : null}
                             {l.type === "video" && !l.video_asset_id ? <Badge tone="warning">No video</Badge> : null}

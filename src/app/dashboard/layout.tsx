@@ -11,16 +11,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const unread = await getUnreadCount(user.id);
   const nav: NavItem[] = [
     { href: "/dashboard", label: "Overview", icon: "dashboard", exact: true },
-    { href: "/dashboard/learning", label: "My learning", icon: "learning" },
-    { href: "/dashboard/certificates", label: "Certificates", icon: "certificates" },
-    { href: "/dashboard/applications", label: "Applications", icon: "applications" },
-    { href: "/dashboard/saved", label: "Saved internships", icon: "saved" },
-    { href: "/dashboard/payments", label: "Payments", icon: "payments" },
+    { href: "/dashboard/learning", label: "My courses", icon: "learning" },
+    { href: "/dashboard/assignments", label: "Assignments", icon: "applications" },
+    { href: "/dashboard/results", label: "Results", icon: "analytics" },
+    { href: "/dashboard/submissions", label: "Submission history", icon: "pending" },
+    { href: "/dashboard/resources", label: "Resources", icon: "resources" },
+    { href: "/dashboard/payments", label: "Payments & receipts", icon: "payments" },
     { href: "/dashboard/notifications", label: "Notifications", icon: "notifications", badge: unread || undefined },
     { href: "/dashboard/settings", label: "Account settings", icon: "settings" },
   ];
   return (
-    <AppShell user={user} nav={nav} title="Student dashboard" unread={unread}>
+    <AppShell user={user} nav={nav} title="Learning" unread={unread}>
       {children}
     </AppShell>
   );

@@ -45,7 +45,7 @@ export function RegisterForm({ next }: { next?: string }) {
     <form action={action} className="space-y-4" noValidate>
       <input type="hidden" name="next" value={next ?? ""} />
       <FormMessage state={state} />
-      <Field label="Full name" name="fullName" error={state?.errors?.fullName} help="As you'd like it to appear on certificates.">
+      <Field label="Full name" name="fullName" error={state?.errors?.fullName} help="As you'd like it to appear on your receipts and completion records.">
         <Input id="fullName" name="fullName" autoComplete="name" required aria-invalid={Boolean(state?.errors?.fullName)} />
       </Field>
       <Field label="Email" name="email" error={state?.errors?.email}>

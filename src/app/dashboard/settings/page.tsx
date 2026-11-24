@@ -9,7 +9,7 @@ export default async function SettingsPage() {
   const user = await requireUser("/dashboard/settings");
   return (
     <>
-      <PageHeader title="Account settings" description="Your name appears on certificates exactly as entered here." />
+      <PageHeader title="Account settings" description="Your name appears on receipts and completion records exactly as entered here." />
       <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <Card><CardHeader title="Profile" /><div className="p-5"><ProfileForm profile={user.profile} /></div></Card>
         <div className="space-y-6">

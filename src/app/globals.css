@@ -16,18 +16,18 @@
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Indigo glow scale (used for links, focus, depth) */
-  --color-brand-50: #f3f4fe;
-  --color-brand-100: #e6e8fc;
-  --color-brand-200: #c9cef8;
-  --color-brand-300: #aab2ff;
-  --color-brand-400: #8a94ff;
-  --color-brand-500: #6c76f5;
-  --color-brand-600: #5560e0;
-  --color-brand-700: #3f48b8;
-  --color-brand-800: #262c74;
-  --color-brand-900: #151937;
-  --color-brand-950: #0b0d1f;
+  /* Brand scale (electric violet) — used across app screens */
+  --color-brand-50: #f1eeff;
+  --color-brand-100: #e2dcff;
+  --color-brand-200: #c8bdff;
+  --color-brand-300: #ab9bff;
+  --color-brand-400: #8d76ff;
+  --color-brand-500: #7457ff;
+  --color-brand-600: #5f43ee;
+  --color-brand-700: #4a32c4;
+  --color-brand-800: #2c1f78;
+  --color-brand-900: #17143a;
+  --color-brand-950: #0d0b22;
 
   --color-accent-400: #b59cff;
   --color-accent-500: #9171ff;

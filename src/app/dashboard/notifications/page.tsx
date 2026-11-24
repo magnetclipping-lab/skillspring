@@ -28,7 +28,7 @@ export default async function NotificationsPage() {
             </li>
           ))}
         </ul></Card>
-      ) : <EmptyState icon={<Bell className="size-5" />} title="No notifications" description="Updates about enrolments, certificates and applications will show up here." />}
+      ) : <EmptyState icon={<Bell className="size-5" />} title="No notifications" description="Updates about enrolments, assignment results and payments will show up here." />}
     </>
   );
 }
