@@ -1,42 +1,47 @@
 import Link from "next/link";
-import {
-  ArrowRight, ArrowUpRight, Award, BadgeCheck, Check, ClipboardCheck, Download, FileQuestion,
-  FolderKanban, Megaphone, PlayCircle, Sparkles, Trophy, Users,
-} from "lucide-react";
-import { HeroSwitcher } from "@/components/programs/hero-switcher";
-import { InternshipCard } from "@/components/site/cards";
+import { ArrowRight, Check, FileSpreadsheet, FileText, ListChecks, Hammer, Compass, Clock3, Bot, UserCheck, Bell } from "lucide-react";
 import { FaqList, generalFaqs } from "@/components/site/faq-list";
-import { CertificateView } from "@/components/certificate";
-import { getInternships, getPrograms } from "@/lib/data/catalogue";
-import { ProgramTile } from "@/components/programs/program-tile";
-import { formatINR } from "@/lib/utils";
+import { CourseCard, CourseFeature } from "@/components/courses/course-card";
+import { accentDot, accentText } from "@/components/courses/accent";
+import { getCategories, getFeaturedCourses, getPublicInstructors, getPublishedCourses, getTestimonials } from "@/lib/data/catalogue";
+import { cn } from "@/lib/utils";
 
-const includes = [
-  { icon: PlayCircle, title: "Video lessons", text: "Short, focused lessons you can watch at your own pace, on phone or laptop." },
-  { icon: Download, title: "Practice files", text: "Workbooks, templates and notes to download for every module." },
-  { icon: FileQuestion, title: "Quizzes", text: "Check your understanding at the end of each module." },
-  { icon: FolderKanban, title: "Real projects", text: "Graded assignments and a capstone you can show in interviews." },
-  { icon: ClipboardCheck, title: "Project experiences", text: "Apply to Proofwork-run simulations to build your profile." },
+const FORMATS = [
+  { icon: ListChecks, name: "Interactive quizzes", text: "Multiple choice, multi-select, true/false, matching, fill-in-the-blank and scenario questions. Marked instantly with explanations." },
+  { icon: FileSpreadsheet, name: "Workbook assignments", text: "Download an Excel workbook with real data, solve the tasks with live formulas and upload it. Formulas and values are both checked." },
+  { icon: FileText, name: "Written assignments", text: "Answer case questions in a Word brief. Graded against a rubric and an answer key of the points a strong answer covers." },
+  { icon: Hammer, name: "Practical projects", text: "Do the work for real — a campaign, an automation, a dashboard — and submit evidence: files, links and screenshots." },
+  { icon: Compass, name: "Scenario challenges", text: "A realistic problem lands on your desk. Diagnose it, decide what to do and explain the trade-offs." },
 ];
 
-const steps = [
-  { title: "Choose a program", text: "Pick the skill you want and enrol with UPI, card or net banking." },
-  { title: "Learn by doing", text: "Watch lessons, practise with the files and pass the quizzes." },
-  { title: "Build your projects", text: "Submit assignments and finish a capstone that proves your skill." },
-  { title: "Get certified", text: "Earn a verifiable certificate and add it to your CV and LinkedIn." },
+const STEPS = [
+  { t: "Learn the method", d: "Short, focused lessons per module, with the reasoning behind each technique." },
+  { t: "Practise on real material", d: "Workbooks with real data, briefs from realistic businesses, tools you'll use at work." },
+  { t: "Submit your work", d: "Upload files, add links or write your answer. Every version is kept." },
+  { t: "Get evaluated", d: "Marked against a published rubric with criterion-by-criterion feedback." },
+  { t: "Improve and resubmit", d: "Act on the feedback, resubmit, and track your progress over time." },
 ];
 
-const facts = ["4 focused programs", "From ₹1,999, one-time", "Verifiable certificates", "100% online, self-paced"];
+const WHY = [
+  { t: "Work, not just watching", d: "Every course has four graded assignments and a quiz. You finish with things you made, not a playlist you watched." },
+  { t: "Feedback you can act on", d: "Each submission is scored per rubric criterion with specific comments. A person can review any result." },
+  { t: "One clear price", d: "₹7,500 per course. No subscription, no upsells inside the course, refund within 7 days under 25% progress." },
+  { t: "Skills used at work today", d: "AI assistants and agents, performance marketing, Excel and Power BI, financial modelling, sales and launch fundamentals." },
+];
 
-function SectionHead({ eyebrow, title, accent, text, id, action }: { eyebrow: string; title: string; accent?: string; text?: string; id: string; action?: React.ReactNode }) {
+const OUTCOMES = [
+  "A body of graded work: workbooks, written analyses and practical projects you can show",
+  "Criterion-by-criterion feedback and a history of every submission and resubmission",
+  "Fluency with the tools in your course — Claude, ChatGPT, Gemini, Google & Meta Ads, Excel, Power BI and more",
+  "An internal Proofwork completion record when you finish (not an accredited qualification)",
+];
+
+function SectionHead({ id, kicker, title, text, action }: { id: string; kicker: string; title: React.ReactNode; text?: string; action?: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div className="max-w-2xl">
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 id={id} className="display mt-4 text-[42px] sm:text-[58px]">
-          <span className="text-sheen">{title}</span>
-          {accent ? <> <span className="serif-accent text-gold">{accent}</span></> : null}
-        </h2>
+        <p className="eyebrow">{kicker}</p>
+        <h2 id={id} className="display mt-4 text-[38px] text-ink sm:text-[52px]">{title}</h2>
         {text ? <p className="mt-4 text-[17px] leading-7 text-ink-soft">{text}</p> : null}
       </div>
       {action}
@@ -44,216 +49,246 @@ function SectionHead({ eyebrow, title, accent, text, id, action }: { eyebrow: st
   );
 }
 
-export default async function HomePage() {
-  const [programs, internships] = await Promise.all([getPrograms(), getInternships()]);
-  const priceLabel = (p: (typeof programs)[number]) => (p.course ? formatINR(p.course.effective_price) : "");
-
+/** Illustrative product view: how an evaluated assignment looks in the dashboard. */
+function EvaluationSnapshot() {
+  const rows = [
+    { c: "Accuracy of results", s: 34, m: 40 },
+    { c: "Live, correct formulas", s: 21, m: 25 },
+    { c: "Structure and presentation", s: 12, m: 15 },
+    { c: "Insight and recommendation", s: 13, m: 20 },
+  ];
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden />
-        <div className="grid-fade pointer-events-none absolute inset-0" aria-hidden />
-        <div className="container-page relative pb-20 pt-16 text-center sm:pt-24">
-          <Link href="/campus-ambassador" className="group mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-1.5 pr-4 text-[13px] font-medium text-ink-soft transition hover:border-white/20">
-            <span className="rounded-full bg-marigold-400 px-2.5 py-0.5 text-[11.5px] font-bold text-canvas">New</span>
-            Campus Ambassador program is open
-            <ArrowRight className="size-3.5 transition group-hover:translate-x-0.5" />
-          </Link>
-          <h1 className="display mx-auto mt-8 max-w-5xl text-[52px] sm:text-[84px] xl:text-[104px]">
-            <span className="text-sheen">Learn skills.</span>
-            <br />
-            <span className="text-sheen">Build </span>
-            <span className="serif-accent text-gold">proof.</span>
-          </h1>
-          <p className="mx-auto mt-7 max-w-2xl text-[17px] leading-8 text-ink-soft sm:text-[19px]">
-            Practical programs in the stock market, web development, digital marketing and Excel for college students and fresh graduates across India. Build real projects and earn a certificate employers can verify.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link href="/programs" className="btn-primary">Explore programs <ArrowRight className="size-4" /></Link>
-            <Link href="/register" className="btn-ghost">Create free account</Link>
-          </div>
-          <ul className="mt-9 flex flex-wrap justify-center gap-x-7 gap-y-2 text-[14px] text-ink-muted">
-            {["Verifiable certificates", "Hands-on projects", "Secure Razorpay checkout"].map((t) => (
-              <li key={t} className="flex items-center gap-2"><Check className="size-4 text-marigold-400" strokeWidth={2.5} />{t}</li>
-            ))}
-          </ul>
-
-          {/* Product frame */}
-          <div className="relative mx-auto mt-16 max-w-5xl text-left">
-            <div className="absolute -inset-x-10 -top-10 bottom-10 rounded-[48px] bg-[radial-gradient(closest-side,rgb(108_118_245/0.18),transparent)] blur-2xl" aria-hidden />
-            <div className="relative rounded-[32px] border border-white/10 bg-white/[0.02] p-2 shadow-lift">
-              <div className="rounded-[26px] border border-white/[0.06] bg-surface p-4 sm:p-6">
-                <HeroSwitcher
-                  programs={programs.map((p) => ({ slug: p.slug, shortName: p.shortName, pitch: p.pitch, hue: p.hue, showcase: p.showcase, price: priceLabel(p), duration: p.duration }))}
-                />
-              </div>
-            </div>
-          </div>
+    <figure className="relative rounded-xl border border-line bg-surface">
+      <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
+        <p className="text-[13px] font-medium text-ink-soft">Workbook assignment · Campaign performance analysis</p>
+        <span className="rounded bg-cyan-tint px-2 py-0.5 text-[11.5px] font-semibold text-cyan-300">Evaluated</span>
+      </div>
+      <div className="grid gap-6 p-5 sm:grid-cols-[auto_1fr]">
+        <div>
+          <p className="font-display text-[56px] font-semibold leading-none">80<span className="text-2xl text-ink-muted">/100</span></p>
+          <p className="mt-2 text-[12.5px] text-ink-muted">Pass mark 50 · Version 2</p>
         </div>
-      </section>
-
-      {/* Facts strip */}
-      <section aria-label="At a glance" className="border-y border-white/[0.06] bg-surface/50">
-        <ul className="container-page grid grid-cols-2 divide-white/[0.06] md:grid-cols-4 md:divide-x">
-          {facts.map((f) => (
-            <li key={f} className="px-4 py-6 text-center text-[14.5px] font-medium text-ink-soft">{f}</li>
+        <ul className="space-y-3">
+          {rows.map((r) => (
+            <li key={r.c}>
+              <div className="flex justify-between text-[12.5px]"><span className="text-ink-soft">{r.c}</span><span className="font-mono text-ink-muted">{r.s}/{r.m}</span></div>
+              <div className="mt-1.5 h-1.5 rounded-full bg-white/[0.06]"><div className="h-full rounded-full bg-violet-500" style={{ width: `${(r.s / r.m) * 100}%` }} /></div>
+            </li>
           ))}
         </ul>
-      </section>
+      </div>
+      <div className="border-t border-line px-5 py-4 text-[13.5px] leading-6 text-ink-soft">
+        <span className="font-semibold text-ink">Feedback · </span>CPA by channel is correct and formulas are live. Your budget shift ignores the email list&apos;s capacity — say how many extra conversions it can realistically take.
+      </div>
+      <ol className="flex flex-wrap gap-x-5 gap-y-2 border-t border-line px-5 py-3.5 text-[12px] text-ink-muted">
+        {["Submitted 10:02", "Pending evaluation", "Evaluated 11:04", "Notified"].map((s, i) => (
+          <li key={s} className="flex items-center gap-1.5"><span className={cn("size-1.5 rounded-full", i < 3 ? "bg-cyan-400" : "bg-violet-400")} />{s}</li>
+        ))}
+      </ol>
+      <figcaption className="sr-only">Example of an evaluated assignment in the Proofwork dashboard.</figcaption>
+    </figure>
+  );
+}
 
-      {/* Programs */}
-      <section className="py-24 sm:py-32" aria-labelledby="programs-heading">
-        <div className="container-page">
-          <SectionHead
-            id="programs-heading"
-            eyebrow="Programs"
-            title="Choose your"
-            accent="path."
-            text="Four focused programs. One price each, no subscriptions."
-            action={<Link href="/programs" className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-ink-soft transition hover:text-ink">Compare programs <ArrowUpRight className="size-4" /></Link>}
-          />
-          <div className="mt-14 grid gap-5 lg:grid-cols-2">
-            {programs.map((p) => <ProgramTile key={p.slug} p={p} />)}
+export default async function HomePage() {
+  const [featured, all, categories, instructors, testimonials] = await Promise.all([
+    getFeaturedCourses(4), getPublishedCourses(), getCategories(), getPublicInstructors(), getTestimonials(),
+  ]);
+  const [lead, ...rest] = featured;
+
+  return (
+    <main id="main">
+      {/* Hero */}
+      <section className="hero-glow relative overflow-hidden border-b border-line" aria-labelledby="hero">
+        <div className="grid-fade pointer-events-none absolute inset-0" aria-hidden />
+        <div className="container-page relative grid gap-14 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pb-28 lg:pt-24">
+          <div className="animate-fade-up">
+            <p className="eyebrow">{all.length} courses · ₹7,500 each</p>
+            <h1 id="hero" className="display mt-6 text-[52px] text-ink sm:text-[76px] lg:text-[84px]">
+              Build skills that <span className="serif-accent text-violet-300">move you</span> forward.
+            </h1>
+            <p className="mt-6 max-w-xl text-[18px] leading-8 text-ink-soft">
+              Practical courses in AI, digital marketing, professional tools and business. Learn a method, apply it to real material, and get every assignment evaluated against a clear rubric.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/courses" className="btn-primary">Browse courses <ArrowRight className="size-4" /></Link>
+              <Link href="#assignments" className="btn-ghost">How assignments work</Link>
+            </div>
+            <dl className="mt-12 grid max-w-xl grid-cols-3 border-t border-line pt-6">
+              {[["4", "assignment formats per course"], ["~60 min", "typical evaluation time"], ["Lifetime", "access to what you buy"]].map(([k, v]) => (
+                <div key={v}><dt className="sr-only">{v}</dt><dd className="font-display text-2xl font-semibold">{k}</dd><p className="mt-1 text-[12.5px] leading-5 text-ink-muted">{v}</p></div>
+              ))}
+            </dl>
+          </div>
+          <div className="animate-fade-up [animation-delay:120ms]">
+            <EvaluationSnapshot />
+            <p className="mt-3 text-[12px] text-ink-muted">Illustration of an evaluated submission in the learner dashboard.</p>
           </div>
         </div>
       </section>
 
-      {/* Bento: what's included */}
-      <section className="pb-24 sm:pb-32" aria-labelledby="included-heading">
-        <div className="container-page">
-          <SectionHead id="included-heading" eyebrow="What you get" title="Everything you need to" accent="actually learn it." />
-          <div className="mt-14 grid gap-4 lg:grid-cols-3 lg:grid-rows-[auto_auto]">
-            <figure className="card relative overflow-hidden p-6 sm:p-8 lg:col-span-2 lg:row-span-2">
-              <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-marigold-400/10 blur-3xl" aria-hidden />
-              <div className="relative flex items-center gap-3">
-                <span className="grid size-10 place-items-center rounded-xl border border-marigold-400/30 bg-marigold-400/10"><BadgeCheck className="size-5 text-marigold-400" /></span>
-                <div>
-                  <p className="font-display text-[20px] font-semibold">Verifiable certificate</p>
-                  <p className="text-[14.5px] text-ink-muted">A unique ID that recruiters can check online.</p>
-                </div>
-              </div>
-              <div className="relative mt-8 rotate-[-1deg] transition duration-500 hover:rotate-0">
-                <CertificateView cert={{ certificate_code: "SS-2026-SAMPLE0001", student_name: "Your name here", course_title: "Excel for Finance & Business", issued_at: "2026-11-23", status: "valid" }} />
-              </div>
-              <figcaption className="relative mt-6 flex items-center gap-2 text-[13.5px] text-ink-muted"><Award className="size-4 text-marigold-400" />Sample certificate. Every real one can be verified on Proofwork.</figcaption>
-            </figure>
-            {includes.slice(0, 2).map(({ icon: Icon, title, text }) => (
-              <div key={title} className="card card-hover p-7">
-                <Icon className="size-6 text-marigold-400" strokeWidth={1.6} />
-                <p className="mt-6 font-display text-[20px] font-semibold">{title}</p>
-                <p className="mt-2 text-[15px] leading-6 text-ink-muted">{text}</p>
-              </div>
-            ))}
+      {/* Featured */}
+      {lead ? (
+        <section className="container-page py-24" aria-labelledby="featured">
+          <SectionHead id="featured" kicker="Featured courses" title="Start with one of these" text="Each course has a 30-second preview, a full curriculum and the exact assignments you'll complete." action={<Link href="/courses" className="btn-ghost h-11">All courses <ArrowRight className="size-4" /></Link>} />
+          <div className="mt-12 space-y-6">
+            <CourseFeature c={lead} />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{rest.map((c) => <CourseCard key={c.id} c={c} />)}</div>
           </div>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {includes.slice(2).map(({ icon: Icon, title, text }) => (
-              <div key={title} className="card card-hover p-7">
-                <Icon className="size-6 text-marigold-400" strokeWidth={1.6} />
-                <p className="mt-6 font-display text-[20px] font-semibold">{title}</p>
-                <p className="mt-2 text-[15px] leading-6 text-ink-muted">{text}</p>
-              </div>
-            ))}
+        </section>
+      ) : null}
+
+      {/* Categories */}
+      <section className="border-y border-line bg-surface/40" aria-labelledby="categories">
+        <div className="container-page py-24">
+          <SectionHead id="categories" kicker="Categories" title="Four areas. One standard of work." />
+          <div className="mt-12 grid border-t border-line md:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat, i) => {
+              const list = all.filter((c) => c.category?.slug === cat.slug);
+              return (
+                <div key={cat.slug} className={cn("flex flex-col border-b border-line py-8 md:px-6", i % 2 === 1 && "md:border-l", i > 0 && "lg:border-l", i === 0 && "md:pl-0")}>
+                  <p className="font-mono text-[12px] text-ink-muted">{String(i + 1).padStart(2, "0")} · {list.length} courses</p>
+                  <h3 className="mt-3 flex items-center gap-2 font-display text-xl font-semibold"><span className={cn("size-2 rounded-full", accentDot(cat.accent))} />{cat.name}</h3>
+                  {cat.tagline ? <p className="mt-2 text-[14px] leading-6 text-ink-muted">{cat.tagline}</p> : null}
+                  <ul className="mt-5 space-y-2">
+                    {list.slice(0, 4).map((c) => (
+                      <li key={c.slug}><Link href={`/courses/${c.slug}`} className="text-[14px] text-ink-soft transition hover:text-ink">{c.title.split(" — ")[0]}</Link></li>
+                    ))}
+                  </ul>
+                  <Link href={`/courses?category=${cat.slug}`} className={cn("mt-6 text-[13.5px] font-semibold", accentText(cat.accent))}>View all {list.length} →</Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="relative overflow-hidden border-y border-white/[0.06] bg-surface/60 py-24 sm:py-32" aria-labelledby="how-heading">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgb(240_181_68/0.5),transparent)]" aria-hidden />
-        <div className="container-page">
-          <SectionHead id="how-heading" eyebrow="How it works" title="Four steps to" accent="proof." />
-          <ol className="mt-16 grid gap-10 md:grid-cols-4 md:gap-6">
-            {steps.map((s, i) => (
-              <li key={s.title}>
-                <div className="flex items-center gap-4">
-                  <span className="serif-accent text-gold text-[56px] leading-none">0{i + 1}</span>
-                  {i < steps.length - 1 ? <span className="hairline hidden flex-1 md:block" /> : null}
+      {/* Why */}
+      <section className="container-page py-24" aria-labelledby="why">
+        <SectionHead id="why" kicker="Why Proofwork" title={<>Learning that ends in <span className="serif-accent text-violet-300">finished work</span></>} />
+        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
+          {WHY.map((w) => (
+            <div key={w.t} className="bg-canvas p-8">
+              <h3 className="font-display text-xl font-semibold">{w.t}</h3>
+              <p className="mt-3 text-[15px] leading-7 text-ink-soft">{w.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Method */}
+      <section id="method" className="scroll-mt-20 border-y border-line bg-surface/40" aria-labelledby="method-h">
+        <div className="container-page py-24">
+          <SectionHead id="method-h" kicker="Methodology" title="Learn, practise, prove, improve" text="Every module follows the same loop, so you always know what's expected and how it's judged." />
+          <ol className="mt-14 grid gap-10 md:grid-cols-5 md:gap-6">
+            {STEPS.map((s, i) => (
+              <li key={s.t} className="relative">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[13px] text-violet-300">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="h-px flex-1 bg-line" aria-hidden />
                 </div>
-                <p className="mt-6 font-display text-[21px] font-semibold">{s.title}</p>
-                <p className="mt-2 max-w-[17rem] text-[15px] leading-6 text-ink-muted">{s.text}</p>
+                <h3 className="mt-4 font-display text-[17px] font-semibold">{s.t}</h3>
+                <p className="mt-2 text-[14px] leading-6 text-ink-muted">{s.d}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* Campus ambassador */}
-      <section className="py-24 sm:py-32" aria-labelledby="ambassador-heading">
-        <div className="container-page">
-          <div className="noise relative grid overflow-hidden rounded-[36px] border border-marigold-400/20 bg-[linear-gradient(135deg,#17130a_0%,#0e1015_55%)] lg:grid-cols-[1.15fr_1fr]">
-            <div className="pointer-events-none absolute -left-32 -top-32 size-[28rem] rounded-full bg-marigold-400/15 blur-3xl" aria-hidden />
-            <div className="relative p-8 sm:p-14">
-              <p className="inline-flex items-center gap-2 rounded-full border border-marigold-400/30 bg-marigold-400/10 px-3.5 py-1.5 text-[13px] font-semibold text-marigold-300"><Sparkles className="size-4" />Free to join</p>
-              <h2 id="ambassador-heading" className="display mt-7 text-[42px] sm:text-[58px]">
-                <span className="text-sheen">Lead Proofwork at</span> <span className="serif-accent text-gold">your college.</span>
-              </h2>
-              <p className="mt-5 max-w-lg text-[17px] leading-7 text-ink-soft">Become a Campus Ambassador. Run sessions, grow a community of learners and build leadership experience that stands out on your CV.</p>
-              <Link href="/campus-ambassador" className="btn-gold mt-9">Apply to be an ambassador <ArrowRight className="size-4" /></Link>
-            </div>
-            <ul className="relative grid content-center gap-3 p-6 sm:grid-cols-2 sm:p-10 lg:grid-cols-1">
+      {/* Assignments */}
+      <section id="assignments" className="container-page scroll-mt-20 py-24" aria-labelledby="assignments-h">
+        <SectionHead id="assignments-h" kicker="Assignment system" title="Five formats, one clear rubric" text="Different skills need different proof. Each course mixes these formats, and every one is marked against criteria you can read before you start." />
+        <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+          <ul className="divide-y divide-line border-y border-line">
+            {FORMATS.map((f) => (
+              <li key={f.name} className="grid grid-cols-[36px_1fr] gap-4 py-6">
+                <f.icon className="mt-0.5 size-5 text-cyan-400" aria-hidden />
+                <div>
+                  <h3 className="font-display text-[17px] font-semibold">{f.name}</h3>
+                  <p className="mt-1.5 text-[14.5px] leading-6 text-ink-muted">{f.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="rounded-xl border border-line bg-surface p-7">
+            <p className="kicker">After you submit</p>
+            <ol className="mt-6 space-y-6">
               {[
-                { icon: Award, t: "Certificate of recognition", d: "For every active ambassador." },
-                { icon: Trophy, t: "Rewards for top performers", d: "Program access, letters of recommendation and more." },
-                { icon: Users, t: "Leadership experience", d: "Plan events and lead a student community." },
-                { icon: Megaphone, t: "Marketing skills", d: "Learn outreach and social media by doing it." },
-              ].map(({ icon: Icon, t, d }) => (
-                <li key={t} className="flex gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.03] px-5 py-4 backdrop-blur">
-                  <Icon className="mt-0.5 size-5 shrink-0 text-marigold-400" />
-                  <div><p className="font-semibold">{t}</p><p className="text-[14.5px] text-ink-muted">{d}</p></div>
+                { icon: Check, t: "Stored and versioned", d: "Your file, links or text are saved. Resubmitting creates a new version; history is kept." },
+                { icon: Clock3, t: "Pending evaluation", d: "Evaluation is queued for about an hour later, so you can still fix a mistake." },
+                { icon: Bot, t: "Evaluated against the rubric", d: "Workbooks are read for formulas and values; documents for their content. Scored per criterion against the answer key." },
+                { icon: UserCheck, t: "Human review when needed", d: "Low-confidence or unusual results are flagged for a person, who can adjust any mark." },
+                { icon: Bell, t: "Results in your dashboard", d: "Marks, feedback and a notification as soon as it's done." },
+              ].map((s) => (
+                <li key={s.t} className="grid grid-cols-[28px_1fr] gap-3">
+                  <s.icon className="mt-0.5 size-4 text-violet-300" aria-hidden />
+                  <div><p className="text-[15px] font-semibold">{s.t}</p><p className="mt-1 text-[13.5px] leading-6 text-ink-muted">{s.d}</p></div>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* Internships */}
-      <section className="pb-24 sm:pb-32" aria-labelledby="internships-heading">
-        <div className="container-page">
-          <SectionHead
-            id="internships-heading"
-            eyebrow="Experience"
-            title="Build experience"
-            accent="while you learn."
-            text="Project experiences run by Proofwork, plus internships from verified employers. Every listing tells you exactly which one it is."
-            action={<Link href="/internships" className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-ink-soft transition hover:text-ink">See all opportunities <ArrowUpRight className="size-4" /></Link>}
-          />
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {internships.slice(0, 3).map((i) => <InternshipCard key={i.id} internship={i} />)}
-          </div>
+      {/* Outcomes */}
+      <section className="border-y border-line bg-surface/40" aria-labelledby="outcomes">
+        <div className="container-page grid gap-12 py-24 lg:grid-cols-[1fr_1.2fr]">
+          <SectionHead id="outcomes" kicker="Outcomes" title="What you leave with" text="We don't promise jobs or placements. We promise practice, honest feedback and work you can show." />
+          <ul className="divide-y divide-line border-y border-line">
+            {OUTCOMES.map((o) => (
+              <li key={o} className="flex gap-4 py-5 text-[16px] leading-7 text-ink-soft"><Check className="mt-1.5 size-4 shrink-0 text-cyan-400" aria-hidden />{o}</li>
+            ))}
+          </ul>
         </div>
       </section>
+
+      {/* Instructors — shown only when real instructor profiles are published */}
+      {instructors.length ? (
+        <section className="container-page py-24" aria-labelledby="instructors">
+          <SectionHead id="instructors" kicker="Instructors" title="Who teaches" />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {instructors.map((p) => (
+              <div key={p.id} className="rounded-xl border border-line bg-surface p-6">
+                <p className="font-display text-lg font-semibold">{p.display_name}</p>
+                {p.headline ? <p className="mt-1 text-[14px] text-violet-300">{p.headline}</p> : null}
+                {p.bio ? <p className="mt-3 line-clamp-4 text-[14px] leading-6 text-ink-muted">{p.bio}</p> : null}
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Testimonials — real, published learner reviews only */}
+      {testimonials.length ? (
+        <section className="container-page py-24" aria-labelledby="testimonials">
+          <SectionHead id="testimonials" kicker="From learners" title="In their words" text="Published reviews from learners enrolled in the course." />
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <figure key={t.id} className="flex flex-col rounded-xl border border-line bg-surface p-6">
+                <blockquote className="flex-1 text-[15px] leading-7 text-ink-soft">“{t.comment}”</blockquote>
+                <figcaption className="mt-5 text-[13px] text-ink-muted">Verified learner{t.course ? <> · <Link className="hover:text-ink" href={`/courses/${t.course.slug}`}>{t.course.title.split(" — ")[0]}</Link></> : null}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* FAQ */}
-      <section className="pb-24 sm:pb-32" aria-labelledby="faq-heading">
-        <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.6fr]">
-          <div>
-            <p className="eyebrow">FAQ</p>
-            <h2 id="faq-heading" className="display mt-4 text-[42px] sm:text-[58px]"><span className="text-sheen">Questions,</span> <span className="serif-accent text-gold">answered.</span></h2>
-            <p className="mt-5 text-[16px] text-ink-soft">Something else on your mind? <Link href="/contact" className="font-semibold text-marigold-400 hover:underline">Send us a message</Link>.</p>
-          </div>
-          <FaqList items={generalFaqs} />
-        </div>
+      <section className="container-page grid gap-12 py-24 lg:grid-cols-[1fr_1.6fr]" aria-labelledby="faq">
+        <SectionHead id="faq" kicker="FAQ" title="Questions, answered" action={null} />
+        <FaqList items={generalFaqs} />
       </section>
 
-      {/* Final CTA */}
-      <section className="pb-24 sm:pb-32">
-        <div className="container-page">
-          <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-surface px-8 py-20 text-center sm:px-14">
-            <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden />
-            <div className="grid-fade pointer-events-none absolute inset-0 opacity-60" aria-hidden />
-            <div className="relative">
-              <h2 className="display mx-auto max-w-3xl text-[42px] sm:text-[64px]"><span className="text-sheen">Start with one skill</span> <span className="serif-accent text-gold">this month.</span></h2>
-              <p className="mx-auto mt-5 max-w-xl text-[17px] text-ink-soft">Pick a program, learn at your pace and finish with a project you&apos;re proud of.</p>
-              <div className="mt-10 flex flex-wrap justify-center gap-3">
-                <Link href="/programs" className="btn-gold">Explore programs <ArrowRight className="size-4" /></Link>
-                <Link href="/register" className="btn-ghost">Create free account</Link>
-              </div>
-            </div>
+      {/* CTA */}
+      <section className="border-t border-line" aria-labelledby="cta">
+        <div className="container-page flex flex-col items-start justify-between gap-8 py-20 md:flex-row md:items-center">
+          <div>
+            <h2 id="cta" className="display text-[40px] sm:text-[56px]">Pick a skill. <span className="serif-accent text-violet-300">Do the work.</span></h2>
+            <p className="mt-3 text-[16px] text-ink-soft">{all.length} courses across {categories.length} categories · ₹7,500 per course · Refund within 7 days under 25% progress.</p>
           </div>
+          <Link href="/courses" className="btn-primary">Browse all courses <ArrowRight className="size-4" /></Link>
         </div>
       </section>
-    </>
+    </main>
   );
 }

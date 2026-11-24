@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 const variants = {
-  primary: "bg-ink text-canvas hover:bg-white active:bg-ink-soft disabled:bg-ink-muted disabled:text-canvas/70",
+  primary: "bg-violet-500 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.18)] hover:bg-violet-600 disabled:bg-white/10 disabled:text-ink-muted disabled:shadow-none",
   secondary: "bg-white/[0.03] text-ink ring-1 ring-inset ring-white/10 hover:bg-white/[0.06] hover:ring-white/20 disabled:text-ink-muted",
   ghost: "text-ink-soft hover:bg-white/[0.06] hover:text-ink",
   danger: "bg-red-600 text-white hover:bg-red-700 disabled:bg-red-300",
@@ -13,8 +13,8 @@ const variants = {
 
 const sizes = {
   sm: "h-8 px-3 text-[13px] gap-1.5 rounded-lg",
-  md: "h-10 px-4 text-sm gap-2 rounded-xl",
-  lg: "h-12 px-6 text-[15px] gap-2 rounded-xl",
+  md: "h-10 px-4 text-sm gap-2 rounded-lg",
+  lg: "h-12 px-6 text-[15px] gap-2 rounded-lg",
   icon: "h-9 w-9 rounded-lg",
 } as const;
 

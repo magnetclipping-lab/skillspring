@@ -16,7 +16,7 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="grid size-10 place-items-center rounded-xl text-ink hover:bg-brand-500/10"
+        className="grid size-10 place-items-center rounded-md text-ink hover:bg-white/[0.06]"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -29,7 +29,7 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
             {items.map((n) => (
               <Link key={n.href} href={n.href} className={n.indent ? "rounded-lg py-2.5 pl-7 pr-3 text-[14.5px] text-ink-soft hover:bg-canvas" : "flex items-center gap-2 rounded-lg px-3 py-3 text-[15px] font-medium text-ink hover:bg-canvas"}>
                 {n.label}
-                {n.badge ? <span className="rounded-full bg-marigold-100 px-2 py-0.5 text-[11px] font-semibold text-marigold-600">{n.badge}</span> : null}
+                {n.badge ? <span className="rounded bg-violet-tint px-2 py-0.5 text-[11px] font-semibold text-violet-300">{n.badge}</span> : null}
               </Link>
             ))}
           </nav>
@@ -39,7 +39,7 @@ export function MobileNav({ items, signedIn }: { items: { href: string; label: s
                 Log in
               </Link>
               <Link href="/register" className={buttonClass("primary", "md")}>
-                Get started
+                Create account
               </Link>
             </div>
           ) : null}

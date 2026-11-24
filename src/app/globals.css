@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Proofwork design system — dark-first, premium.
+   Proofwork design system — dark-first, premium, restrained.
    Typography: Bricolage Grotesque (display) + Geist (text) + Instrument Serif (italic accents).
-   Colour: near-black canvas (never pure black), layered graphite surfaces,
-   one warm gold signature accent, soft indigo glow for depth, one hue per program.
+   Colour: deep navy canvas, navy/charcoal surfaces, electric violet (#7457FF) as the
+   signature accent and soft cyan (#55D6E8) for progress and data. Gradients are used
+   sparingly; corners are tight (8–14px), surfaces are defined by hairlines, not shadows.
+   Legacy token names (marigold-*, highlight-*) are kept as aliases so older screens
+   pick up the new palette.
    --------------------------------------------------------------------------- */
 
 @theme {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Bricolage Grotesque Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* Indigo glow scale (used for links, focus, depth) */
   --color-brand-50: #f3f4fe;
@@ -29,14 +33,33 @@
   --color-accent-500: #9171ff;
   --color-accent-600: #7c55f5;
 
-  --color-highlight-400: #f6cf7a;
-  --color-highlight-500: #f0b544;
+  /* Signature accent: electric violet */
+  --color-violet-200: #d3caff;
+  --color-violet-300: #ab9bff;
+  --color-violet-400: #8d76ff;
+  --color-violet-500: #7457ff;
+  --color-violet-600: #5f43ee;
+  --color-violet-tint: #17143a;
+  /* Progress / data accent: soft cyan */
+  --color-cyan-300: #8be5f0;
+  --color-cyan-400: #55d6e8;
+  --color-cyan-500: #2fbfd4;
+  --color-cyan-tint: #0c2630;
 
-  /* Signature accent: gold */
-  --color-marigold-100: #251d0d;
-  --color-marigold-300: #f6cf7a;
-  --color-marigold-400: #f0b544;
-  --color-marigold-600: #f2c66d;
+  /* Legacy aliases */
+  --color-highlight-400: #8be5f0;
+  --color-highlight-500: #55d6e8;
+  --color-marigold-100: #17143a;
+  --color-marigold-300: #ab9bff;
+  --color-marigold-400: #8d76ff;
+  --color-marigold-600: #ab9bff;
+
+  /* Category hues */
+  --color-cat-violet: #8d76ff;
+  --color-cat-cyan: #55d6e8;
+  --color-cat-blue: #6f9bff;
+  --color-cat-emerald: #3dd68c;
+  --color-cat-amber: #f5b94a;
 
   /* Program hues (tuned for dark backgrounds) */
   --color-stock: #2fd394;
@@ -49,21 +72,23 @@
   --color-excel-tint: #0c2131;
 
   /* Neutrals */
-  --color-canvas: #07080b;
-  --color-surface: #0e1015;
-  --color-raised: #14171e;
-  --color-line: #1f232c;
+  --color-canvas: #080b12;
+  --color-navy: #101827;
+  --color-charcoal: #111827;
+  --color-surface: #0d121c;
+  --color-raised: #131a28;
+  --color-line: #1e2638;
   --color-ink: #f4f5f8;
   --color-ink-soft: #b4b9c7;
   --color-ink-muted: #7d8395;
 
-  --radius-xl: 0.875rem;
-  --radius-2xl: 1.125rem;
-  --radius-3xl: 1.5rem;
+  --radius-xl: 0.625rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 0.875rem;
 
   --shadow-soft: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 8px 24px -8px rgb(0 0 0 / 0.5);
   --shadow-lift: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 30px 60px -24px rgb(0 0 0 / 0.75);
-  --shadow-glow: 0 0 0 1px rgb(240 181 68 / 0.35), 0 12px 40px -12px rgb(240 181 68 / 0.45);
+  --shadow-glow: 0 0 0 1px rgb(116 87 255 / 0.45), 0 12px 40px -12px rgb(116 87 255 / 0.55);
 
   --animate-fade-up: fade-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   @keyframes fade-up {
@@ -84,8 +109,8 @@
     font-feature-settings: "cv11", "ss01";
   }
   h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; font-stretch: 92%; }
-  ::selection { background: rgb(240 181 68 / 0.35); color: #fff; }
-  :focus-visible { outline: 2px solid var(--color-marigold-400); outline-offset: 2px; }
+  ::selection { background: rgb(116 87 255 / 0.45); color: #fff; }
+  :focus-visible { outline: 2px solid var(--color-violet-400); outline-offset: 2px; }
   input, select, textarea { color-scheme: dark; }
   input::placeholder, textarea::placeholder { color: var(--color-ink-muted); }
   @media (prefers-reduced-motion: reduce) {
@@ -95,7 +120,7 @@
 
 @layer components {
   .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
-  .eyebrow { @apply inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-marigold-400; }
+  .eyebrow { @apply inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-cyan-400; }
   .display { font-family: var(--font-display); font-stretch: 90%; letter-spacing: -0.04em; line-height: 0.95; font-weight: 700; }
   .serif-accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; font-stretch: normal; padding: 0.04em 0.12em 0.16em 0.02em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
@@ -104,19 +129,18 @@
     background: linear-gradient(180deg, #ffffff 20%, rgb(255 255 255 / 0.55) 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .text-gold {
-    background: linear-gradient(100deg, #ffe2a3 0%, #f0b544 45%, #d8913a 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
+  .text-accent { color: var(--color-violet-400); }
+  .text-gold { color: var(--color-violet-300); } /* legacy alias */
 
   /* Surfaces */
   .card {
-    @apply rounded-3xl border border-white/[0.07] bg-surface;
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+    @apply rounded-xl border border-line bg-surface;
   }
-  .card-hover { @apply transition duration-300 hover:-translate-y-0.5 hover:border-white/[0.14]; }
+  .card-hover { @apply transition duration-200 hover:border-white/[0.16] hover:bg-raised; }
+  .panel { @apply border-t border-line pt-6; }
+  .kicker { @apply font-mono text-[12px] uppercase tracking-[0.18em] text-ink-muted; }
   .glass {
-    background: rgb(14 16 21 / 0.62);
+    background: rgb(8 11 18 / 0.72);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
@@ -125,15 +149,13 @@
   /* Backgrounds */
   .hero-gradient {
     background:
-      radial-gradient(50rem 28rem at 80% -10%, rgb(108 118 245 / 0.22), transparent 62%),
-      radial-gradient(40rem 26rem at 0% 0%, rgb(240 181 68 / 0.10), transparent 60%),
+      radial-gradient(50rem 28rem at 80% -10%, rgb(116 87 255 / 0.16), transparent 62%),
       var(--color-canvas);
   }
   .hero-glow {
     background:
-      radial-gradient(60rem 34rem at 50% -12%, rgb(108 118 245 / 0.26), transparent 65%),
-      radial-gradient(34rem 20rem at 85% 18%, rgb(240 181 68 / 0.10), transparent 70%),
-      radial-gradient(30rem 22rem at 8% 30%, rgb(145 113 255 / 0.10), transparent 70%);
+      radial-gradient(56rem 30rem at 70% -14%, rgb(116 87 255 / 0.20), transparent 64%),
+      radial-gradient(28rem 18rem at 95% 30%, rgb(85 214 232 / 0.07), transparent 70%);
   }
   .grid-fade {
     background-image: linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
@@ -148,16 +170,17 @@
 
   /* Buttons used directly in marketing pages */
   .btn-primary {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-semibold text-canvas transition hover:bg-white;
-    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1), 0 10px 30px -10px rgb(255 255 255 / 0.35);
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-violet-500 px-6 text-[15px] font-semibold text-white transition hover:bg-violet-600;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18);
   }
-  .btn-gold {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold text-canvas transition hover:brightness-110;
-    background: linear-gradient(180deg, #f6cf7a, #f0b544);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 12px 32px -12px rgb(240 181 68 / 0.7);
+  .btn-gold { /* legacy alias of .btn-primary */
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-violet-500 px-6 text-[15px] font-semibold text-white transition hover:bg-violet-600;
   }
   .btn-ghost {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-6 text-[15px] font-semibold text-ink transition hover:border-white/25 hover:bg-white/[0.06];
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-white/12 bg-transparent px-6 text-[15px] font-semibold text-ink transition hover:border-white/30 hover:bg-white/[0.04];
+  }
+  .btn-light {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-[15px] font-semibold text-canvas transition hover:bg-white;
   }
 
   .prose-lesson { @apply max-w-none text-[15px] leading-7 text-ink-soft; }
@@ -166,7 +189,7 @@
   .prose-lesson p { @apply my-3; }
   .prose-lesson ul { @apply my-3 list-disc pl-6; }
   .prose-lesson ol { @apply my-3 list-decimal pl-6; }
-  .prose-lesson blockquote { @apply my-4 rounded-xl border-l-4 border-marigold-400 bg-white/[0.04] px-4 py-3 text-ink; }
+  .prose-lesson blockquote { @apply my-4 rounded-md border-l-2 border-violet-500 bg-white/[0.03] px-4 py-3 text-ink; }
   .prose-lesson code { @apply rounded bg-white/[0.08] px-1.5 py-0.5 text-[13px] text-marigold-300; }
   .prose-lesson a { @apply font-medium text-marigold-400 underline underline-offset-2; }
   .prose-legal { @apply text-[15px] leading-7 text-ink-soft; }

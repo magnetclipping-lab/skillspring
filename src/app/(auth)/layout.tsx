@@ -24,15 +24,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="hero-gradient relative hidden overflow-hidden lg:block">
         <div className="grid-fade absolute inset-0" aria-hidden />
         <div className="relative flex h-full flex-col justify-center px-16 text-white">
-          <h2 className="max-w-md font-display text-4xl font-bold leading-tight text-white">Learn skills. Build experience. Shape your future.</h2>
+          <h2 className="max-w-md font-display text-4xl font-bold leading-tight text-white">Build skills that move you forward.</h2>
           <ul className="mt-10 max-w-md space-y-4">
             {[
-              { icon: BookOpenCheck, t: "Structured courses with assignments and quizzes" },
-              { icon: Award, t: "Certificates issued only after verified completion" },
-              { icon: BadgeCheck, t: "Clearly labelled internships and project experiences" },
+              { icon: BookOpenCheck, t: "24 practical courses, ₹7,500 each" },
+              { icon: Award, t: "Every assignment marked against a clear rubric" },
+              { icon: BadgeCheck, t: "Feedback and submission history in one dashboard" },
             ].map(({ icon: Icon, t }) => (
-              <li key={t} className="flex items-center gap-3 rounded-2xl bg-white/[0.07] px-4 py-3.5 text-[15px] text-brand-50 ring-1 ring-white/10">
-                <Icon className="size-5 text-brand-300" /> {t}
+              <li key={t} className="flex items-center gap-3 rounded-lg border border-white/10 px-4 py-3.5 text-[15px] text-ink-soft">
+                <Icon className="size-5 text-violet-300" /> {t}
               </li>
             ))}
           </ul>

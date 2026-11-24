@@ -14,7 +14,7 @@ export function ContactForm({ defaultTopic = "general" }: { defaultTopic?: strin
       <div className="hidden" aria-hidden><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
       <Field label="Topic" name="topic"><Select id="topic" name="topic" defaultValue={defaultTopic}>
         <option value="general">General enquiry</option><option value="support">Course or account support</option><option value="refund">Refund request</option>
-        <option value="partner">Partnership</option><option value="employer">List internships (employers)</option><option value="instructor">Teaching</option>
+        <option value="partner">Partnership</option><option value="instructor">Teaching</option>
       </Select></Field>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" name="name" error={e.name} required><Input id="name" name="name" autoComplete="name" /></Field>

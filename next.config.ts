@@ -15,7 +15,7 @@ const csp = [
   "font-src 'self' data:",
   `connect-src 'self' ${supabaseOrigin} ${supabaseWs} https://api.razorpay.com https://lumberjack.razorpay.com https://*.mux.com`,
   "frame-src https://api.razorpay.com https://checkout.razorpay.com https://player.mux.com https://*.cloudflarestream.com",
-  "media-src 'self' blob: https://*.mux.com https://*.cloudflarestream.com",
+  `media-src 'self' blob: ${supabaseOrigin} https://*.mux.com https://*.cloudflarestream.com`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -51,13 +51,32 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "image.mux.com" },
     ],
   },
+  // Assignment templates live outside public/ and are served only to enrolled learners.
+  outputFileTracingIncludes: {
+    "/api/templates/*": ["./private/templates/**/*"],
+    "/api/cron/evaluate": ["./private/templates/**/*"],
+  },
   experimental: {
     serverActions: { bodySizeLimit: "2mb" },
   },
   async redirects() {
     return [
-      { source: "/courses", destination: "/programs", permanent: true },
-      { source: "/courses/:slug", destination: "/programs/:slug", permanent: true },
+      // Retired sections: the old four programs, internships and certificate verification.
+      { source: "/programs", destination: "/courses", permanent: true },
+      { source: "/programs/stock-market-program", destination: "/courses", permanent: true },
+      { source: "/programs/web-development-program", destination: "/courses", permanent: true },
+      { source: "/programs/digital-marketing-program", destination: "/courses?category=digital-marketing-growth", permanent: true },
+      { source: "/programs/excel-program", destination: "/courses/advanced-excel-for-professionals", permanent: true },
+      { source: "/programs/:slug", destination: "/courses/:slug", permanent: true },
+      { source: "/internships", destination: "/courses", permanent: true },
+      { source: "/internships/:slug*", destination: "/courses", permanent: true },
+      { source: "/partners", destination: "/contact", permanent: true },
+      { source: "/verify", destination: "/", permanent: false },
+      { source: "/verify/:code*", destination: "/", permanent: false },
+      { source: "/dashboard/applications", destination: "/dashboard", permanent: false },
+      { source: "/dashboard/saved", destination: "/dashboard", permanent: false },
+      { source: "/dashboard/certificates", destination: "/dashboard/learning", permanent: false },
+      { source: "/dashboard/certificates/:code*", destination: "/dashboard/learning", permanent: false },
     ];
   },
   async headers() {

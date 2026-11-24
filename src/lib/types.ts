@@ -42,7 +42,10 @@ export type InstructorProfile = {
   created_at: string;
 };
 
-export type Category = { id: string; slug: string; name: string; description: string | null; icon: string | null; sort_order: number };
+export type Category = {
+  id: string; slug: string; name: string; description: string | null; icon: string | null; sort_order: number;
+  is_public?: boolean; tagline?: string | null; accent?: string | null;
+};
 
 export type CourseFaq = { question: string; answer: string };
 
@@ -76,10 +79,16 @@ export type Course = {
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  preview_video_url?: string | null;
+  preview_poster_url?: string | null;
+  preview_duration_seconds?: number | null;
+  projects_count?: number;
+  is_featured?: boolean;
+  sort_order?: number;
 };
 
 export type CourseWithRelations = Course & {
-  category: Pick<Category, "slug" | "name"> | null;
+  category: Pick<Category, "slug" | "name" | "accent"> | null;
   instructor: Pick<InstructorProfile, "id" | "display_name" | "headline" | "bio" | "avatar_url" | "expertise"> | null;
 };
 
@@ -151,3 +160,8 @@ export type CompletionStatus = {
   assignments: { ok: boolean; done: number; required: number };
   quizzes: { ok: boolean; passed: number; required: number; min_pct: number | null };
 };
+
+export type AssignmentKind = "file" | "document" | "practical" | "scenario";
+export type QuestionType = "single" | "multi" | "true_false" | "match" | "fill_blank" | "scenario";
+export type EvalStatus = "pending" | "evaluating" | "evaluated" | "needs_review" | "failed" | "reviewed";
+export type RubricCriterion = { criterion: string; points: number; description?: string };

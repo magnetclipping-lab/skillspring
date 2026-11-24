@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "@fontsource-variable/bricolage-grotesque/standard.css";
 import "@fontsource/instrument-serif/400-italic.css";
 import "./globals.css";
@@ -7,20 +8,20 @@ import { publicEnv } from "@/lib/env";
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.siteUrl),
-  title: { default: "Proofwork — Learn Skills. Build Experience. Shape Your Future.", template: "%s · Proofwork" },
-  description: "Affordable, practical and career-focused courses, projects and internship opportunities for students across India.",
+  title: { default: "Proofwork — Build Skills That Move You Forward", template: "%s · Proofwork" },
+  description: "Practical courses in AI, digital marketing, Excel and business analysis, with real assignments evaluated against clear rubrics. ₹7,500 per course.",
   applicationName: "Proofwork",
   openGraph: {
     type: "website",
     siteName: "Proofwork",
     locale: "en_IN",
-    title: "Proofwork — Learn Skills. Build Experience. Shape Your Future.",
-    description: "Affordable, practical and career-focused learning designed to prepare students for the real world.",
+    title: "Proofwork — Build Skills That Move You Forward",
+    description: "Practical courses in AI, digital marketing, professional tools and business, with real assignments and rubric-based feedback.",
   },
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#07080b", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#080b12", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

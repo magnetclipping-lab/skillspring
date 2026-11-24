@@ -1,38 +1,41 @@
 import Link from "next/link";
 import { getSessionUser } from "@/lib/auth/dal";
 import { isSupabaseConfigured } from "@/lib/env";
-import { PROGRAMS } from "@/lib/programs";
+import { getCategories, getPublishedCourses } from "@/lib/data/catalogue";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
-import { ProgramsMenu } from "./programs-menu";
+import { CoursesMenu, type MenuCategory } from "./courses-menu";
 import { UserMenu } from "./user-menu";
 
 export const NAV = [
-  { href: "/internships", label: "Internships" },
-  { href: "/campus-ambassador", label: "Campus Ambassador", badge: "Free" },
+  { href: "/#method", label: "How it works" },
+  { href: "/#assignments", label: "Assignments" },
   { href: "/about", label: "About" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export async function SiteHeader() {
-  const user = await getSessionUser();
+  const [user, categories, courses] = await Promise.all([getSessionUser(), getCategories(), getPublishedCourses()]);
   const configured = isSupabaseConfigured();
-  const menu = PROGRAMS.map((p) => ({ slug: p.slug, name: p.shortName, pitch: p.pitch, hue: p.hue, duration: p.duration }));
+  const menu: MenuCategory[] = categories.map((c) => ({
+    slug: c.slug, name: c.name, tagline: c.tagline ?? null, accent: c.accent ?? null,
+    courses: courses.filter((x) => x.category?.slug === c.slug).map((x) => ({ slug: x.slug, title: x.title.split(" — ")[0] })),
+  }));
   return (
-    <header className="glass sticky top-0 z-40 border-b border-white/[0.06]">
+    <header className="glass sticky top-0 z-40 border-b border-line">
       {!configured ? (
-        <div className="border-b border-marigold-400/15 bg-marigold-400/[0.07] px-4 py-1.5 text-center text-[12.5px] font-medium text-marigold-300">
-          Preview mode: Supabase isn&apos;t configured, so sign-in and purchases are off. Showing sample data.
+        <div className="border-b border-cyan-400/15 bg-cyan-400/[0.06] px-4 py-1.5 text-center text-[12.5px] font-medium text-cyan-300">
+          Preview mode: Supabase isn&apos;t configured, so sign-in and purchases are off.
         </div>
       ) : null}
-      <div className="container-page flex h-[68px] items-center justify-between gap-4">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
         <div className="flex items-center gap-8">
           <Logo />
-          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
-            <ProgramsMenu programs={menu} />
+          <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
+            <CoursesMenu categories={menu} />
             {NAV.map((n) => (
-              <Link key={n.href} href={n.href} className="flex items-center gap-2 rounded-full px-3.5 py-2 text-[14.5px] font-medium text-ink-soft transition-colors hover:bg-white/[0.06] hover:text-ink">
+              <Link key={n.href} href={n.href} className="rounded-md px-3 py-2 text-[14.5px] font-medium text-ink-soft transition-colors hover:text-ink">
                 {n.label}
-                {n.badge ? <span className="rounded-full border border-marigold-400/30 bg-marigold-400/10 px-2 py-0.5 text-[11px] font-semibold text-marigold-300">{n.badge}</span> : null}
               </Link>
             ))}
           </nav>
@@ -42,11 +45,18 @@ export async function SiteHeader() {
             <UserMenu name={user.profile.full_name || user.email} email={user.email} isAdmin={user.roles.includes("admin")} isInstructor={user.instructor?.status === "approved"} />
           ) : (
             <>
-              <Link href="/login" className="hidden rounded-full px-4 py-2 text-[14.5px] font-medium text-ink-soft hover:text-ink sm:inline-flex">Log in</Link>
-              <Link href="/register" className="btn-primary hidden h-10 px-5 text-[14px] sm:inline-flex">Get started</Link>
+              <Link href="/login" className="hidden rounded-md px-3 py-2 text-[14.5px] font-medium text-ink-soft hover:text-ink sm:inline-flex">Log in</Link>
+              <Link href="/courses" className="btn-primary hidden h-10 px-4 text-[14px] sm:inline-flex">Browse courses</Link>
             </>
           )}
-          <MobileNav items={[{ href: "/programs", label: "All programs" }, ...menu.map((m) => ({ href: `/programs/${m.slug}`, label: m.name, indent: true })), ...NAV]} signedIn={Boolean(user)} />
+          <MobileNav
+            items={[
+              { href: "/courses", label: "All courses" },
+              ...menu.map((m) => ({ href: `/courses?category=${m.slug}`, label: m.name, indent: true })),
+              ...NAV,
+            ]}
+            signedIn={Boolean(user)}
+          />
         </div>
       </div>
     </header>

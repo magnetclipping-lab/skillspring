@@ -23,7 +23,7 @@ export function ReviewForm({ courseId, slug, existing }: { courseId: string; slu
   const [state, action] = useActionState<ActionState, FormData>(saveReviewAction, null);
   const [rating, setRating] = useState(existing?.rating ?? 0);
   return (
-    <form action={action} className="space-y-3 rounded-2xl border border-line bg-surface p-5">
+    <form action={action} className="space-y-3 rounded-xl border border-line bg-surface p-5">
       <p className="font-semibold">{existing ? "Update your review" : "Review this course"}</p>
       <FormMessage state={state} />
       <input type="hidden" name="course_id" value={courseId} />
@@ -32,7 +32,7 @@ export function ReviewForm({ courseId, slug, existing }: { courseId: string; slu
       <div className="flex gap-1" role="radiogroup" aria-label="Rating">
         {[1, 2, 3, 4, 5].map((n) => (
           <button key={n} type="button" role="radio" aria-checked={rating === n} aria-label={`${n} star${n > 1 ? "s" : ""}`} onClick={() => setRating(n)}>
-            <Star className={n <= rating ? "size-6 fill-highlight-400 text-highlight-400" : "size-6 text-slate-300"} />
+            <Star className={n <= rating ? "size-6 fill-highlight-400 text-highlight-400" : "size-6 text-ink-muted"} />
           </button>
         ))}
       </div>
