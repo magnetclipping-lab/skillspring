@@ -8,7 +8,7 @@ import { getCourseAssignmentSummaries, getCourseBySlug, getCourseOutline, getCou
 import { isSupabaseConfigured, publicEnv } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 import { FaqList } from "@/components/site/faq-list";
-import { CourseRow } from "@/components/courses/course-card";
+import { CourseMini } from "@/components/courses/course-card";
 import { PreviewButton } from "@/components/courses/preview-player";
 import { accentDot, accentText } from "@/components/courses/accent";
 import { cn, formatDate, formatINR } from "@/lib/utils";
@@ -99,7 +99,7 @@ export default async function CoursePage({ params }: Props) {
   );
 
   return (
-    <main id="main">
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <section className="hero-gradient border-b border-line">
@@ -264,10 +264,10 @@ export default async function CoursePage({ params }: Props) {
         {related.length ? (
           <aside aria-labelledby="related" className="lg:pt-10">
             <h2 id="related" className="kicker flex items-center gap-2"><span className={cn("size-1.5 rounded-full", accentDot(course.category?.accent))} />More in {course.category?.name}</h2>
-            <div className="mt-2">{related.map((c) => <CourseRow key={c.id} c={c} />)}</div>
+            <div className="mt-2">{related.map((c) => <CourseMini key={c.id} c={c} />)}</div>
           </aside>
         ) : null}
       </div>
-    </main>
+    </div>
   );
 }

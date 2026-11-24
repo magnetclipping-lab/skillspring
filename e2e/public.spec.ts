@@ -3,44 +3,60 @@ import { expect, test } from "@playwright/test";
 /** Public-site checks that work with or without backend credentials. */
 
 test.describe("public website", () => {
-  test("homepage has the hero, both CTAs and no fake statistics", async ({ page }) => {
+  test("homepage has the hero, featured courses and no fake statistics or claims", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Learn skills.");
-    await expect(page.getByRole("link", { name: /Explore programs/ }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /campus ambassador/i }).first()).toBeVisible();
-    await expect(page.getByRole("tab", { name: "Excel" })).toBeVisible();
-    await page.getByRole("tab", { name: "Excel" }).click();
-    await expect(page.getByRole("tab", { name: "Excel" })).toHaveAttribute("aria-selected", "true");
-    const text = await page.locator("main").innerText();
-    expect(text).not.toMatch(/\d[\d,]*\+?\s*(students|learners|placements)/i);
-  });
-
-  test("programs page lists the four programs with prices", async ({ page }) => {
-    await page.goto("/programs");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Programs");
-    for (const name of ["Stock Market", "Web Design", "Digital Marketing", "Excel"]) {
-      await expect(page.getByRole("link", { name: new RegExp(name) }).first()).toBeVisible();
-    }
-    await expect(page.getByText("₹3,999").first()).toBeVisible();
-    await expect(page.getByText("₹1,999").first()).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Compare programs" })).toBeVisible();
-  });
-
-  test("old course URLs redirect to programs", async ({ page }) => {
-    await page.goto("/courses");
-    await expect(page).toHaveURL(/\/programs$/);
-    await page.goto("/courses/excel-program");
-    await expect(page).toHaveURL(/\/programs\/excel-program$/);
-  });
-
-  test("program page shows details, FAQs and cannot be bought before launch", async ({ page }) => {
-    await page.goto("/programs/excel-program");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Excel");
-    await expect(page.getByRole("button", { name: "Enrolment opens soon" })).toBeDisabled();
-    for (const h of ["About this program", "Curriculum", "Projects you'll build", "Your certificate", "Frequently asked questions"]) {
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Build skills that");
+    await expect(page.getByRole("link", { name: /Browse courses/ }).first()).toBeVisible();
+    for (const h of ["Start with one of these", "Four areas. One standard of work.", "Five formats, one clear rubric", "What you leave with", "Questions, answered"]) {
       await expect(page.getByRole("heading", { name: h })).toBeVisible();
     }
+    const text = await page.locator("main").innerText();
+    expect(text).not.toMatch(/\d[\d,]*\+?\s*(students|learners|placements|hired)/i);
+    expect(text).not.toMatch(/accredited certificate|verifiable certificate|guaranteed (job|placement)|placement partner/i);
+    expect(text).not.toMatch(/internship/i);
+  });
+
+  test("courses page lists 24 courses at ₹7,500 across four categories", async ({ page }) => {
+    await page.goto("/courses?view=list");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Courses");
+    for (const name of ["Artificial Intelligence & Automation", "Digital Marketing & Growth", "Professional & Productivity Skills", "Entrepreneurship & Business"]) {
+      await expect(page.getByRole("heading", { name })).toBeVisible();
+    }
+    await expect(page.getByText("Showing 24 courses")).toBeVisible();
+    expect(await page.getByText("₹7,500").count()).toBeGreaterThanOrEqual(24);
+    await expect(page.getByText(/Financial Markets/)).toHaveCount(0);
+  });
+
+  test("category tabs filter the catalogue", async ({ page }) => {
+    await page.goto("/courses");
+    await page.getByRole("navigation", { name: "Categories" }).getByRole("link", { name: /Entrepreneurship/ }).click();
+    await expect(page).toHaveURL(/category=entrepreneurship-business/);
+    await expect(page.getByText("Showing 4 courses")).toBeVisible();
+  });
+
+  test("retired URLs redirect", async ({ page }) => {
+    await page.goto("/programs");
+    await expect(page).toHaveURL(/\/courses$/);
+    await page.goto("/programs/excel-program");
+    await expect(page).toHaveURL(/\/courses\/advanced-excel-for-professionals$/);
+    await page.goto("/internships");
+    await expect(page).toHaveURL(/\/courses$/);
+    await page.goto("/verify");
+    await expect(page).toHaveURL(/\/$/);
+  });
+
+  test("course page shows curriculum, assignments, FAQs, structured data and an honest preview", async ({ page }) => {
+    await page.goto("/courses/mastering-claude-ai");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Mastering Claude AI");
+    for (const h of ["About this course", "What you'll be able to do", "Curriculum", "Assignments you'll complete", "Questions"]) {
+      await expect(page.getByRole("heading", { name: h, exact: true })).toBeVisible();
+    }
+    await expect(page.getByText("₹7,500").first()).toBeVisible();
+    await expect(page.getByText("Workbook", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("Scenario challenge", { exact: true }).first()).toBeVisible();
     await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
+    await page.getByRole("button", { name: /Watch the 30-second preview/ }).first().click();
+    await expect(page.getByText("Preview video coming soon")).toBeVisible();
   });
 
   test("campus ambassador page validates the free application", async ({ page }) => {
@@ -52,22 +68,8 @@ test.describe("public website", () => {
     await expect(page.getByText("Enter a valid phone number")).toBeVisible();
   });
 
-  test("internships are clearly labelled as educational, not jobs", async ({ page }) => {
-    await page.goto("/internships");
-    await expect(page.getByText("Educational simulation").first()).toBeVisible();
-    await page.getByRole("link", { name: /Excel MIS Dashboard/ }).click();
-    await expect(page.getByText("This is an educational experience, not a job")).toBeVisible();
-  });
-
-  test("certificate verification rejects unknown IDs", async ({ page }) => {
-    await page.goto("/verify");
-    await page.getByPlaceholder("SS-YYYY-XXXXXXXXXX").fill("SS-2026-NOTREAL000");
-    await page.getByRole("button", { name: "Verify" }).click();
-    await expect(page.getByRole("heading", { name: "No certificate found" })).toBeVisible();
-  });
-
   test("legal and info pages render", async ({ page }) => {
-    for (const [path, heading] of [["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"], ["/refund-policy", "Refund policy"], ["/disclaimer", "Disclaimer"], ["/about", "Practical skills for every student"], ["/faq", "Frequently asked questions"], ["/contact", "We're here to help"], ["/become-instructor", "Share what you know"], ["/partners", "Partner with Proofwork"]]) {
+    for (const [path, heading] of [["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"], ["/refund-policy", "Refund policy"], ["/disclaimer", "Disclaimer"], ["/about", "Skills you practise, not just watch"], ["/faq", "Frequently asked questions"], ["/contact", "We're here to help"], ["/become-instructor", "Share what you know"]]) {
       await page.goto(path);
       await expect(page.getByRole("heading", { level: 1 })).toContainText(heading);
     }
@@ -77,7 +79,7 @@ test.describe("public website", () => {
     const robots = await (await request.get("/robots.txt")).text();
     expect(robots).toContain("Disallow: /admin");
     const sitemap = await (await request.get("/sitemap.xml")).text();
-    expect(sitemap).toContain("/programs/excel-program");
+    expect(sitemap).toContain("/courses/advanced-excel-for-professionals");
     expect(sitemap).toContain("/campus-ambassador");
   });
 
@@ -92,7 +94,7 @@ test.describe("public website", () => {
   });
 
   test("layout does not overflow horizontally", async ({ page }) => {
-    for (const path of ["/", "/programs", "/programs/web-development-program", "/campus-ambassador", "/internships", "/login"]) {
+    for (const path of ["/", "/courses", "/courses?view=list", "/courses/financial-modelling-business-analysis", "/campus-ambassador", "/login"]) {
       await page.goto(path);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, path).toBeLessThanOrEqual(1);
@@ -101,7 +103,7 @@ test.describe("public website", () => {
 });
 
 test.describe("Journey 6 (signed out): protected areas deny access", () => {
-  for (const path of ["/admin", "/admin/finance", "/instructor", "/dashboard", "/dashboard/payments", "/checkout/excel-program"]) {
+  for (const path of ["/admin", "/admin/submissions", "/instructor", "/dashboard", "/dashboard/assignments", "/dashboard/results", "/checkout/mastering-claude-ai", "/learn/mastering-claude-ai/x"]) {
     test(`${path} redirects to login`, async ({ page }) => {
       await page.goto(path);
       await expect(page).toHaveURL(/\/login/);
@@ -113,5 +115,8 @@ test.describe("Journey 6 (signed out): protected areas deny access", () => {
     expect((await request.post("/api/payments/create-order", { data: { courseSlug: "x" } })).status()).toBe(403); // no Origin → CSRF guard
     expect((await request.post("/api/payments/create-order", { data: { courseSlug: "x" }, headers: { origin: new URL(test.info().project.use.baseURL ?? "http://localhost:3100").origin } })).status()).toBe(401);
     expect((await request.post("/api/webhooks/razorpay", { data: "{}" })).status()).toBeGreaterThanOrEqual(401);
+    expect((await request.get("/api/cron/evaluate")).status()).toBeGreaterThanOrEqual(401);
+    expect((await request.get("/api/cron/evaluate", { headers: { authorization: "Bearer wrong" } })).status()).toBeGreaterThanOrEqual(401);
+    expect((await request.get("/api/templates/00000000-0000-4000-8000-000000000000")).status()).toBe(401);
   });
 });

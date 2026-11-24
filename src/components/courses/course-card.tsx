@@ -20,12 +20,12 @@ function Meta({ c, className }: { c: CourseCardData; className?: string }) {
   );
 }
 
-function Actions({ c, compact }: { c: CourseCardData; compact?: boolean }) {
+function Actions({ c, compact, preview = true }: { c: CourseCardData; compact?: boolean; preview?: boolean }) {
   return (
     <div className={cn("flex flex-wrap items-center gap-2", compact ? "" : "pt-1")}>
       <Link href={`/checkout/${c.slug}`} className="inline-flex h-9 items-center rounded-md bg-violet-500 px-3.5 text-[13px] font-semibold text-white transition hover:bg-violet-600">Enrol now</Link>
       <Link href={`/courses/${c.slug}#curriculum`} className="inline-flex h-9 items-center rounded-md border border-line px-3.5 text-[13px] font-semibold text-ink-soft transition hover:border-white/25 hover:text-ink">View curriculum</Link>
-      <PreviewButton title={shortTitle(c.title)} src={c.preview_video_url} poster={c.preview_poster_url ?? c.thumbnail_url} className="h-9" />
+      {preview ? <PreviewButton title={shortTitle(c.title)} src={c.preview_video_url} poster={c.preview_poster_url ?? c.thumbnail_url} className="h-9" /> : null}
     </div>
   );
 }
@@ -54,10 +54,11 @@ export function CourseCard({ c, headingLevel = "h3" }: { c: CourseCardData; head
         </H>
         <p className="line-clamp-2 text-[14px] leading-6 text-ink-muted">{c.subtitle}</p>
         <Meta c={c} />
-        <div className="mt-auto flex items-end justify-between gap-3 border-t border-line pt-4">
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-4">
           <p className="font-display text-xl font-semibold">{formatINR(c.effective_price)}</p>
+          <PreviewButton title={shortTitle(c.title)} src={c.preview_video_url} poster={c.preview_poster_url ?? c.thumbnail_url} />
         </div>
-        <Actions c={c} />
+        <Actions c={c} preview={false} />
       </div>
     </article>
   );
@@ -100,6 +101,22 @@ export function CourseRow({ c, index }: { c: CourseCardData; index?: number }) {
       <div className="flex flex-wrap items-center gap-3 md:justify-end">
         <span className="font-display text-lg font-semibold">{formatINR(c.effective_price)}</span>
         <Actions c={c} compact />
+      </div>
+    </article>
+  );
+}
+
+/** Compact item for narrow columns (related courses). */
+export function CourseMini({ c }: { c: CourseCardData }) {
+  return (
+    <article className="group border-b border-line py-4">
+      <h3 className="font-display text-[15.5px] font-semibold leading-snug">
+        <Link href={`/courses/${c.slug}`} className="hover:text-violet-200">{shortTitle(c.title)}</Link>
+      </h3>
+      <p className="mt-1 line-clamp-2 text-[13px] leading-5 text-ink-muted">{c.subtitle}</p>
+      <div className="mt-2 flex items-center justify-between text-[12.5px] text-ink-muted">
+        <span>{LEVEL[c.level]} · {hours(c.duration_minutes)}</span>
+        <span className="font-semibold text-ink">{formatINR(c.effective_price)}</span>
       </div>
     </article>
   );

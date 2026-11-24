@@ -278,7 +278,7 @@ def social_posts(slug, n=60, name="Posts"):
         reach = int(rng.uniform(800, 9000) * (1.6 if f == "Reel" else 1) * (1.3 if p == "Education" else 1))
         eng = int(reach * rng.uniform(.02, .08) * (1.4 if f == "Carousel" else 1))
         rows.append([(date(2026, 8, 1) + timedelta(days=i)).isoformat(), p, f, rng.choice(["Question", "Bold claim", "Number", "Story"]), reach, eng])
-    rate = lambda key: {k: r2(100 * sum(r[5] for r in rows if r[key] == k) / sum(r[4] for r in rows if r[key] == k)) for k in set(r[key] for r in rows)}
+    rate = lambda key: {k: r2(100 * sum(r[5] for r in rows if r[key] == k) / sum(r[4] for r in rows if r[key] == k)) for k in sorted(set(r[key] for r in rows))}
     pr, fr = rate(1), rate(2)
     return {
         "sheets": {name: (["Date", "Pillar", "Format", "Hook type", "Reach", "Engagements"], rows)},

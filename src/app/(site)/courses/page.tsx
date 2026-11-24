@@ -31,16 +31,16 @@ export default async function CoursesPage({ searchParams }: Props) {
   const groups = active || sp.q || sp.level ? null : categories.map((c) => ({ cat: c, list: courses.filter((x) => x.category?.slug === c.slug) }));
 
   return (
-    <main id="main">
-      <section className="border-b border-line">
-        <div className="container-page pb-10 pt-14">
+    <div>
+      <section>
+        <div className="container-page pt-14">
           <p className="eyebrow">{active ? active.name : "All courses"}</p>
           <h1 className="display mt-4 text-[46px] sm:text-[64px]">{active ? active.name : "Courses"}</h1>
           <p className="mt-4 max-w-2xl text-[17px] leading-7 text-ink-soft">
             {active?.tagline ?? "Practical courses with graded assignments and rubric-based feedback. Every course is ₹7,500, one-time."}
           </p>
-          <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <nav aria-label="Categories" className="-mx-1 flex gap-1 overflow-x-auto pb-1">
+          <div className="mt-10 flex flex-col gap-4 border-b border-line pb-0">
+            <nav aria-label="Categories" className="-mx-1 flex gap-1 overflow-x-auto pb-3">
               <Link href={qs({ category: undefined })} aria-current={!active ? "page" : undefined} className={cn("shrink-0 rounded-md px-3.5 py-2 text-[14px] font-medium", !active ? "bg-raised text-ink" : "text-ink-soft hover:text-ink")}>All</Link>
               {categories.map((c) => (
                 <Link key={c.slug} href={qs({ category: c.slug })} aria-current={active?.slug === c.slug ? "page" : undefined} className={cn("flex shrink-0 items-center gap-2 rounded-md px-3.5 py-2 text-[14px] font-medium", active?.slug === c.slug ? "bg-raised text-ink" : "text-ink-soft hover:text-ink")}>
@@ -48,7 +48,7 @@ export default async function CoursesPage({ searchParams }: Props) {
                 </Link>
               ))}
             </nav>
-            <form className="flex flex-wrap items-center gap-2" action="/courses">
+            <form className="flex flex-wrap items-center gap-2 pb-4" action="/courses">
               {sp.category ? <input type="hidden" name="category" value={sp.category} /> : null}
               <label className="relative">
                 <span className="sr-only">Search courses</span>
@@ -62,7 +62,7 @@ export default async function CoursesPage({ searchParams }: Props) {
                 </select>
               </label>
               <button className="h-10 rounded-md border border-line px-3.5 text-sm font-medium text-ink-soft hover:text-ink">Apply</button>
-              <div className="ml-1 flex rounded-md border border-line p-0.5 text-[13px]" role="group" aria-label="Layout">
+              <div className="flex rounded-md border border-line p-0.5 text-[13px] sm:ml-auto" role="group" aria-label="Layout">
                 <Link href={qs({ view: undefined })} aria-pressed={view === "grid"} className={cn("rounded px-2.5 py-1.5", view === "grid" ? "bg-raised text-ink" : "text-ink-muted")}>Grid</Link>
                 <Link href={qs({ view: "list" })} aria-pressed={view === "list"} className={cn("rounded px-2.5 py-1.5", view === "list" ? "bg-raised text-ink" : "text-ink-muted")}>List</Link>
               </div>
@@ -106,6 +106,6 @@ export default async function CoursesPage({ searchParams }: Props) {
         )}
         <p className="mt-16 text-[13px] text-ink-muted">Showing {courses.length} course{courses.length === 1 ? "" : "s"}. Prices in INR.</p>
       </div>
-    </main>
+    </div>
   );
 }

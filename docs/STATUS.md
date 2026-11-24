@@ -1,27 +1,36 @@
-# Build status — what works, what needs credentials, what's incomplete
+# Build status — Proofwork platform
+
+Branch: `redesign-proofwork`. Production (`main`) still runs the old SkillSpring/Proofwork site until this branch is merged.
 
 ## Verified in the build environment
-- `next build`, TypeScript and ESLint all pass with no errors.
-- **65 Vitest tests pass:**
-  - 32 database tests against real PostgreSQL 16 with a Supabase auth shim. They cover all six journeys at the database level (purchase → enrolment, completion → certificate → verification, internship apply/status, admin create → approve → publish, instructor submit → approve, privilege escalation), plus refunds, IDOR, quiz-answer secrecy, suspension, storage policies and rate limiting.
-  - 33 unit and API tests.
-- **32 Playwright tests pass** on desktop and mobile in preview mode: public site, filters, demo lock, internship labelling, SEO, security headers, responsiveness, and signed-out denial of admin, instructor, dashboard and checkout.
+- `npm run build` succeeds; TypeScript and ESLint clean.
+- Unit tests (39): validation, typed quiz parsing, upload sniffing (XLSX/CSV/MP4), upload folder scoping, AI evaluation output validation, Anthropic call handling (mocked), XLSX formula/value extraction, DOCX extraction, template path safety.
+- Database tests (52) against Postgres 16 with all migrations: RLS, payments, quiz grading for all six question types, answer-key secrecy, 60-minute evaluation queue, duplicate-safe job claiming, superseded versions, human override with history, catalogue seed (24 courses × ₹7,500, four assignment kinds, rubrics and keys), explanation withholding.
+- Public end-to-end tests (38, desktop + mobile) in preview mode.
 
-## Fully implemented (works once Supabase is connected)
-Public site · auth (register, verify email, login, logout, forgot/reset password) · roles · student dashboard · LMS (modules, lessons, video, text, PDFs/resources, quizzes, assignments, progress, resume learning) · configurable completion rules · certificates (issue, print/PDF, public verification, admin revoke) · internship portal (search, filters, save, apply with resume, withdraw, status tracking) · instructor portal (authoring, submit for review, submissions grading, earnings, payouts) · admin console (overview from live data, course review/publish/rights/demo, students, suspend, roles, grant/revoke access, instructors, internships, employers and employer accounts, applications with CSV export, finance with refunds/payouts/CSV, certificates, messages, audit log) · in-app notifications · email outbox.
+## Catalogue
+- Content lives in `scripts/catalogue/*.py`; `npm run catalogue:build` regenerates the seed migration
+  (`supabase/migrations/20261125000010_proofwork_catalogue.sql`), `src/lib/catalogue/catalogue.json` (preview mode),
+  thumbnails and the private assignment templates in `private/templates/` (24 workbooks + 24 Word briefs).
+- Lesson pages are outlines marked "being finalised" — real lesson videos/notes still need to be produced and added in Admin.
+- Preview videos: none uploaded yet. Course cards show an honest "Preview video coming soon" until an admin uploads one (Admin → Courses → course → 30-second preview).
+- Instructors are hidden on the site until approved instructor profiles exist.
 
-## Implemented but needs your credentials
-| Integration | Variables | Without them |
-|---|---|---|
-| Supabase | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | Preview mode (public demo pages only) |
-| Razorpay | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET` | Checkout disabled with a clear notice; nothing is simulated |
-| Resend | `RESEND_API_KEY`, `EMAIL_FROM` | Emails logged as `skipped`, not sent |
-| Mux / Cloudflare Stream | `MUX_SIGNING_*` (+ `MUX_TOKEN_*` for uploads) or `CLOUDFLARE_STREAM_*` | Video lessons show "playback not configured" |
+## Assignment evaluation
+1. Learner submits → stored, versioned → `Pending evaluation` (runs ~60 minutes later; the learner can still change it).
+2. A durable job row in `evaluation_jobs` is created by a database trigger (no browser timers).
+3. `/api/cron/evaluate` claims due jobs (`FOR UPDATE SKIP LOCKED`), extracts the file (XLSX formulas + values, DOCX text, PPTX text, PDF/images native), calls Claude with the rubric and private answer key, validates the result and records it. Low-confidence or inconsistent results go to human review. Failures retry up to 3 times, then go to human review.
+4. Learner gets a notification; marks and per-criterion feedback appear in Dashboard → Results.
+5. Admin → Review queue: confirm/override any mark (history kept), re-run AI, evaluate now, or process due jobs.
 
-The admin overview page shows the live status of each integration.
+## Needs your action / credentials
+| Item | Where |
+|---|---|
+| `ANTHROPIC_API_KEY` (and optional `ANTHROPIC_MODEL`, default `claude-sonnet-5-5`) | Vercel env. Without it, submissions go to human review — no marks are invented. |
+| Scheduler | Run `supabase/scheduler/evaluation_scheduler.sql` in Supabase (enables pg_cron + pg_net, calls the worker every 5 min). Set `site_url` in `private.app_settings` to the production domain. Alternative: `CRON_SECRET` + an external cron calling `GET /api/cron/evaluate` with `Authorization: Bearer <secret>`. |
+| Live DB migrations not yet applied | `20261125000009_completion_rules.sql`, `20261125000010_proofwork_catalogue.sql`, `20261125000011_catalogue_helpers.sql` — apply when merging, because 000010 archives the old four programs that the current production code still shows. |
+| Razorpay live keys + webhook secret | already supported; set before taking real payments. |
 
-## Not yet verified or still incomplete
-- **Never run against a live Supabase / Razorpay / Resend / Mux.** The build sandbox had no network access to them. The six-journey browser suite (`e2e/journeys.spec.ts`) is written but has not been executed. Run `npm run test:e2e:full` once test credentials are set.
-- Logged-in screens (dashboard, admin, instructor, lesson player) were type-checked and built but **not visually reviewed in a browser**, because they need a working Supabase session.
-- **Content:** all 15 courses are demo listings with placeholder lessons. Testimonials are labelled placeholders. No employers exist. Legal pages are templates that need lawyer review and your entity details.
-- **Not built (reasonable next steps):** GST invoices/receipts PDF, coupon codes, course bundles, a self-serve employer dashboard (employer members currently need an admin-created link and use the database functions; there is no dedicated UI), analytics/monitoring (e.g. Sentry), data-export/deletion self-service (handled via support), a background email-retry worker.
+## Not yet verified
+- Full journeys (`E2E_FULL=1 npx playwright test e2e/journeys.spec.ts`) need a non-production Supabase project and Razorpay test keys.
+- A live Claude evaluation end to end (needs the API key).

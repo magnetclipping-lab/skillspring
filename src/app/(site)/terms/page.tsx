@@ -8,7 +8,7 @@ export default function TermsPage() {
     <LegalPage title="Terms and conditions" updated="22 November 2026">
       <p>These terms govern your use of Proofwork, operated by [legal entity name, registered address, CIN/GSTIN]. By creating an account you agree to them.</p>
       <h2>Accounts</h2>
-      <ul><li>You must provide accurate information and keep your password secure.</li><li>Work you submit must be your own. Using AI tools is allowed where an assignment permits it, but you must not submit someone else's work as yours.</li><li>We may suspend accounts that breach these terms, share paid content, or misuse the platform.</li></ul>
+      <ul><li>You must provide accurate information and keep your password secure.</li><li>Work you submit must be your own. Using AI tools is allowed where an assignment permits it, but you must not submit someone else&apos;s work as yours.</li><li>We may suspend accounts that breach these terms, share paid content, or misuse the platform.</li></ul>
       <h2>Courses and licence</h2>
       <p>Purchasing a course grants you a personal, non-transferable, non-commercial licence to access its content. You may not copy, record, resell or redistribute course material.</p>
       <h2>Assignments, evaluation and completion records</h2>

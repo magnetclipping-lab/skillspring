@@ -48,7 +48,7 @@ export function PreviewButton({ title, src, poster, className, variant = "chip" 
             <X className="size-4" />
           </button>
         </div>
-        {open && src ? (
+        {!open ? null : src ? (
           <video className="aspect-video w-full bg-black" src={src} poster={poster ?? undefined} controls autoPlay playsInline preload="metadata">
             <track kind="captions" />
           </video>

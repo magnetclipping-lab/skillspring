@@ -272,7 +272,8 @@ def thumbnail(course, cat, idx):
         motif = f'<path d="{path}" fill="none" stroke="{a}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' + "".join(
             f'<circle cx="{x}" cy="{y}" r="{9 if i < 4 else 16}" fill="{a if i == 4 else "#0B0D12"}" stroke="{a}" stroke-width="4"/>' for i, (x, y) in enumerate(pts))
     elif m == 1:  # grid of cells, some lit
-        motif = "".join(f'<rect x="{760 + c * 70}" y="{170 + r * 70}" width="54" height="54" rx="6" fill="{a if rng.random() < .28 else "#ffffff"}" fill-opacity="{0.9 if rng.random() < .28 else 0.05}"/>'
+        lit = [[rng.random() < .3 for _ in range(5)] for _ in range(5)]
+        motif = "".join(f'<rect x="{760 + c * 70}" y="{170 + r * 70}" width="54" height="54" rx="6" fill="{a if lit[r][c] else "#ffffff"}" fill-opacity="{0.85 if lit[r][c] else 0.05}"/>'
                         for r in range(5) for c in range(5))
     elif m == 2:  # concentric arcs
         motif = "".join(f'<path d="M{1000 - r} 520 A{r} {r} 0 0 1 {1000 + r} 520" fill="none" stroke="{a}" stroke-opacity="{0.85 - i * 0.17}" stroke-width="4"/>' for i, r in enumerate([70, 130, 190, 250, 310]))

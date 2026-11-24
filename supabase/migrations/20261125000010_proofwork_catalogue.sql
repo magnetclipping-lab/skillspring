@@ -2360,15 +2360,15 @@ insert into public.assignment_answer_keys (assignment_id, answer_key, evaluator_
   "Best pillar by engagement rate": "Community",
   "Best format by engagement rate": "Carousel",
   "By pillar": {
-   "Customer stories": 4.18,
-   "Product": 4.58,
    "Behind the scenes": 5.44,
+   "Community": 5.86,
+   "Customer stories": 4.18,
    "Education": 5.42,
-   "Community": 5.86
+   "Product": 4.58
   },
   "By format": {
-   "Reel": 4.84,
    "Carousel": 6.1,
+   "Reel": 4.84,
    "Static": 5.19,
    "Story": 4.45
   }
@@ -4735,15 +4735,15 @@ insert into public.assignment_answer_keys (assignment_id, answer_key, evaluator_
   "Best pillar by engagement rate": "Behind the scenes",
   "Best format by engagement rate": "Static",
   "By pillar": {
-   "Customer stories": 5.38,
-   "Product": 4.16,
    "Behind the scenes": 6.2,
+   "Community": 3.2,
+   "Customer stories": 5.38,
    "Education": 4.09,
-   "Community": 3.2
+   "Product": 4.16
   },
   "By format": {
-   "Reel": 5.05,
    "Carousel": 4.92,
+   "Reel": 5.05,
    "Static": 5.44,
    "Story": 4.1
   }

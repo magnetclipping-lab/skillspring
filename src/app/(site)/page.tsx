@@ -7,7 +7,7 @@ import { getCategories, getFeaturedCourses, getPublicInstructors, getPublishedCo
 import { cn } from "@/lib/utils";
 
 const FORMATS = [
-  { icon: ListChecks, name: "Interactive quizzes", text: "Multiple choice, multi-select, true/false, matching, fill-in-the-blank and scenario questions. Marked instantly with explanations." },
+  { icon: ListChecks, name: "Interactive quizzes", text: "Multiple choice, multi-select, true/false, matching, fill-in-the-blank and scenario questions. Marked instantly; explanations unlock when you pass." },
   { icon: FileSpreadsheet, name: "Workbook assignments", text: "Download an Excel workbook with real data, solve the tasks with live formulas and upload it. Formulas and values are both checked." },
   { icon: FileText, name: "Written assignments", text: "Answer case questions in a Word brief. Graded against a rubric and an answer key of the points a strong answer covers." },
   { icon: Hammer, name: "Practical projects", text: "Do the work for real — a campaign, an automation, a dashboard — and submit evidence: files, links and screenshots." },
@@ -38,7 +38,7 @@ const OUTCOMES = [
 
 function SectionHead({ id, kicker, title, text, action }: { id: string; kicker: string; title: React.ReactNode; text?: string; action?: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div className={cn("flex flex-col gap-6 md:flex-row md:justify-between", action ? "md:items-end" : "self-start lg:sticky lg:top-24")}>
       <div className="max-w-2xl">
         <p className="eyebrow">{kicker}</p>
         <h2 id={id} className="display mt-4 text-[38px] text-ink sm:text-[52px]">{title}</h2>
@@ -97,7 +97,7 @@ export default async function HomePage() {
   const [lead, ...rest] = featured;
 
   return (
-    <main id="main">
+    <div>
       {/* Hero */}
       <section className="hero-glow relative overflow-hidden border-b border-line" aria-labelledby="hero">
         <div className="grid-fade pointer-events-none absolute inset-0" aria-hidden />
@@ -289,6 +289,6 @@ export default async function HomePage() {
           <Link href="/courses" className="btn-primary">Browse all courses <ArrowRight className="size-4" /></Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

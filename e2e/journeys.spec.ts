@@ -81,7 +81,7 @@ test("registration form creates an account (email verification flow)", async ({ 
 
 test("Journey 1: student logs in → buys a course in Razorpay test mode → enrolled → opens lessons", async ({ page }) => {
   await login(page, users.student.email);
-  await page.goto(`/programs/${courseSlug}`);
+  await page.goto(`/courses/${courseSlug}`);
   await page.getByRole("link", { name: "Enrol now" }).click();
   await expect(page).toHaveURL(new RegExp(`/checkout/${courseSlug}`));
   await expect(page.getByRole("button", { name: /Pay ₹499/ })).toBeVisible();
@@ -113,10 +113,10 @@ test("Journey 1: student logs in → buys a course in Razorpay test mode → enr
   await expect(page.getByText("Paid")).toBeVisible();
 });
 
-test("Journey 2: student completes the course → certificate issued → verification succeeds", async ({ page }) => {
+test("Journey 2: student completes the course → internal completion record", async ({ page }) => {
   await login(page, users.student.email);
   await page.goto(`/dashboard/learning/${courseSlug}`);
-  await expect(page.getByRole("button", { name: /Complete requirements to unlock/ })).toBeDisabled();
+  await expect(page.getByRole("button", { name: /Complete the requirements first/ })).toBeDisabled();
   for (const title of ["Lesson A", "Lesson B"]) {
     await page.goto(`/dashboard/learning/${courseSlug}`);
     await page.getByRole("link", { name: title }).click();
@@ -124,25 +124,39 @@ test("Journey 2: student completes the course → certificate issued → verific
     await expect(page.getByRole("button", { name: "Completed" })).toBeVisible();
   }
   await page.goto(`/dashboard/learning/${courseSlug}`);
-  await page.getByRole("button", { name: "Claim certificate" }).click();
-  await expect(page).toHaveURL(/\/dashboard\/certificates\/SS-/);
-  const code = page.url().split("/").pop()!;
-  await logout(page);
-  await page.goto(`/verify/${code}`);
-  await expect(page.getByText("Verified — this certificate is genuine")).toBeVisible();
-  await expect(page.getByText(users.student.name).first()).toBeVisible();
+  await page.getByRole("button", { name: "Record course completion" }).click();
+  await expect(page.getByText("Course completion recorded.")).toBeVisible();
+  await expect(page.getByText(/not an accredited qualification/)).toBeVisible();
 });
 
-test("Journey 3: student discovers an internship → applies → sees the status", async ({ page }) => {
+test("Journey 3: student submits an assignment → pending evaluation → admin reviews → result visible", async ({ page }) => {
+  const db = admin();
+  const { data: lesson } = await db.from("lessons").select("id, module_id").eq("course_id", ids.course).eq("title", "Lesson B").single();
+  const { data: asgLesson } = await db.from("lessons").insert({ module_id: lesson!.module_id, course_id: ids.course, title: "Scenario: pricing call", type: "assignment", position: 3 }).select("id").single();
+  await db.from("assignments").insert({ course_id: ids.course, lesson_id: asgLesson!.id, title: "Pricing call", kind: "scenario", scenario: "A client says you are 30% too expensive.", instructions: "Write your response.", allow_text: true, allow_file: false, rubric: [{ criterion: "Diagnosis", points: 50 }, { criterion: "Actions", points: 50 }] });
+
   await login(page, users.student.email);
-  await page.goto("/internships");
-  await page.getByRole("link", { name: /Digital Marketing Campaign Project/ }).click();
-  await page.getByLabel(/Why are you a good fit/).fill("I have completed coursework in digital marketing and want hands-on practice building a campaign plan.");
-  await page.getByRole("button", { name: "Submit application" }).click();
-  await expect(page.getByText("Application submitted!")).toBeVisible();
-  await page.goto("/dashboard/applications");
-  await expect(page.getByRole("link", { name: "Digital Marketing Campaign Project" })).toBeVisible();
-  await expect(page.getByText("Submitted").first()).toBeVisible();
+  await page.goto(`/learn/${courseSlug}/${asgLesson!.id}`);
+  await page.getByLabel("Your response").fill("I would first understand what they are comparing, then quantify the value of what we include, and only then consider trading a concession for a longer commitment.");
+  await page.getByRole("button", { name: "Submit assignment" }).click();
+  await expect(page.getByText(/queued for evaluation/)).toBeVisible();
+  await page.goto("/dashboard/assignments?f=waiting");
+  await expect(page.getByText("Pricing call")).toBeVisible();
+  await expect(page.getByText(/Pending evaluation|With a reviewer/).first()).toBeVisible();
+
+  await logout(page);
+  await login(page, users.admin.email);
+  await page.goto("/admin/submissions?f=");
+  const card = page.locator("div").filter({ hasText: "Pricing call" }).filter({ has: page.getByRole("button", { name: "Save human review" }) }).last();
+  await card.getByLabel("Final score").fill("72");
+  await card.getByPlaceholder("Feedback for the learner").fill("Good diagnosis; be specific about which concession you would trade.");
+  await card.getByRole("button", { name: "Save human review" }).click();
+  await expect(page.getByText("Review saved and the learner has been notified.")).toBeVisible();
+
+  await logout(page);
+  await login(page, users.student.email);
+  await page.goto("/dashboard/results");
+  await expect(page.getByText("72/100")).toBeVisible();
 });
 
 test("Journey 4: admin creates → approves → publishes → course appears in the catalogue", async ({ page }) => {
@@ -168,8 +182,8 @@ test("Journey 4: admin creates → approves → publishes → course appears in 
   await expect(page.getByText("Course approved.")).toBeVisible();
   await page.getByRole("button", { name: "Publish course" }).click();
   await expect(page.getByText("Course published.")).toBeVisible();
-  await page.goto("/programs");
-  await expect(page.getByRole("link", { name: new RegExp(`Admin E2E ${run}`) })).toBeVisible();
+  await page.goto(`/courses/${slug}`);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(`Admin E2E ${run}`);
 });
 
 test("Journey 5: instructor submits a course → admin reviews → approved", async ({ page }) => {
