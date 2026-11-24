@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Data Analytics for Business Professionals">
+  <defs><radialGradient id="g" cx="0.85" cy="0.15" r="0.9"><stop offset="0" stop-color="#5B8CFF" stop-opacity="0.32"/><stop offset="1" stop-color="#5B8CFF" stop-opacity="0"/></radialGradient>
+  <pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.04"/></pattern></defs>
+  <rect width="1200" height="675" fill="#0B0D12"/><rect width="1200" height="675" fill="url(#p)"/><rect width="1200" height="675" fill="url(#g)"/>
+  <path d="M760 500 L850 421 L940 380 L1030 306 L1120 235" fill="none" stroke="#5B8CFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="760" cy="500" r="9" fill="#0B0D12" stroke="#5B8CFF" stroke-width="4"/><circle cx="850" cy="421" r="9" fill="#0B0D12" stroke="#5B8CFF" stroke-width="4"/><circle cx="940" cy="380" r="9" fill="#0B0D12" stroke="#5B8CFF" stroke-width="4"/><circle cx="1030" cy="306" r="9" fill="#0B0D12" stroke="#5B8CFF" stroke-width="4"/><circle cx="1120" cy="235" r="16" fill="#5B8CFF" stroke="#5B8CFF" stroke-width="4"/>
+  <text x="72" y="130" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#BFD2FF" letter-spacing="3">PROFESSIONAL &amp; PRODUCTIVITY SKILLS</text>
+  <text x="72" y="300" font-family="Bricolage Grotesque, Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#F4F5F8" letter-spacing="-1">Data Analytics for</text>
+  <text x="72" y="370" font-family="Bricolage Grotesque, Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#F4F5F8" letter-spacing="-1">Business Professionals</text>
+  <text x="72" y="600" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="#F4F5F8" fill-opacity="0.7">Proofwork</text>
+</svg>

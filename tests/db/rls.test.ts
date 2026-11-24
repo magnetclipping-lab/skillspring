@@ -61,7 +61,7 @@ beforeAll(async () => {
     ($1, 'Q1', '["a","b"]', 1, 1), ($1, 'Q2', '["a","b"]', 0, 2)`, [quizId]);
   assignmentId = (await one<{ id: string }>(`insert into assignments (course_id, title, instructions) values ($1, 'A1', 'do it') returning id`, [courseId])).id;
 
-  internshipId = (await one<{ id: string }>(`select id from internships where slug = 'stock-market-research-simulation'`)).id;
+  internshipId = (await one<{ id: string }>(`insert into internships (slug, title, kind, description, status) values ('test-simulation', 'Test simulation', 'simulation', 'Fixture', 'open') returning id`)).id;
 });
 
 afterAll(async () => {
@@ -69,11 +69,11 @@ afterAll(async () => {
 });
 
 describe("seed & public catalogue", () => {
-  it("anon sees published demo courses but none are purchasable", async () => {
+  it("anon sees the 24 published catalogue courses, all purchasable at ₹7,500", async () => {
     await as(db, anon, async () => {
-      const { rows } = await db.query(`select slug, is_demo, public.course_is_purchasable(id) as buyable from courses where is_demo`);
-      expect(rows.length).toBe(4);
-      expect(rows.every((r) => r.buyable === false)).toBe(true);
+      const { rows } = await db.query(`select slug, price_paise, public.course_is_purchasable(id) as buyable from courses where thumbnail_url like '/thumbnails/%'`);
+      expect(rows.length).toBe(24);
+      expect(rows.every((r) => r.buyable === true && r.price_paise === 750000)).toBe(true);
     });
   });
 

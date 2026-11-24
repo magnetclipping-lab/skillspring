@@ -93,7 +93,7 @@ describe("submissions and the evaluation queue", () => {
       expect(r.rows).toHaveLength(0);
     });
     await as(db, student(adminId), async () => {
-      const r = await db.query(`select * from assignment_answer_keys`);
+      const r = await db.query(`select * from assignment_answer_keys where assignment_id = $1`, [assignmentId]);
       expect(r.rows).toHaveLength(1);
     });
   });
@@ -167,5 +167,28 @@ describe("submissions and the evaluation queue", () => {
     expect(s.eval_status).toBe("needs_review");
     const jobs = await db.query(`select 1 from evaluation_jobs where submission_id = $1`, [id]);
     expect(jobs.rows).toHaveLength(0);
+  });
+});
+
+describe("Proofwork catalogue seed", () => {
+  it("publishes 24 courses at ₹7,500 across 4 public categories, with a hidden roadmap category", async () => {
+    const c = await db.query(`select count(*)::int n, min(price_paise) lo, max(price_paise) hi from courses c join categories k on k.id = c.category_id where c.status = 'published' and k.is_public and c.slug not like 'test-%'`);
+    expect(c.rows[0]).toMatchObject({ n: 24, lo: 750000, hi: 750000 });
+    const k = await db.query(`select slug, is_public from categories where slug = 'financial-markets'`);
+    expect(k.rows[0].is_public).toBe(false);
+  });
+  it("gives every course a mixed quiz, four assignment kinds, rubrics and answer keys", async () => {
+    const r = await db.query(`
+      select c.slug,
+        (select count(distinct qtype) from quiz_questions qq join quizzes z on z.id = qq.quiz_id where z.course_id = c.id) qtypes,
+        (select array_agg(distinct a.kind order by a.kind) from assignments a where a.course_id = c.id) kinds,
+        (select count(*) from assignments a join assignment_answer_keys k on k.assignment_id = a.id where a.course_id = c.id and jsonb_array_length(a.rubric) = 4) keyed
+      from courses c where c.thumbnail_url like '/thumbnails/%' and c.price_paise = 750000`);
+    expect(r.rows).toHaveLength(24);
+    for (const row of r.rows) {
+      expect(Number(row.qtypes)).toBeGreaterThanOrEqual(4);
+      expect(row.kinds).toEqual(["document", "file", "practical", "scenario"]);
+      expect(Number(row.keyed)).toBe(4);
+    }
   });
 });

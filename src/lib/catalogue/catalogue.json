@@ -1,0 +1,4844 @@
+{
+ "categories": [
+  {
+   "slug": "ai-automation",
+   "name": "Artificial Intelligence & Automation",
+   "tagline": "Put AI to work on real tasks, safely and reliably.",
+   "description": "Hands-on courses on Claude, ChatGPT, Gemini, agents and automation for professionals and founders.",
+   "accent": "violet",
+   "icon": "sparkles",
+   "sort_order": 1
+  },
+  {
+   "slug": "digital-marketing-growth",
+   "name": "Digital Marketing & Growth",
+   "tagline": "Plan, run and measure campaigns that grow a business.",
+   "description": "Performance, content, social and growth marketing with hands-on campaigns and analytics.",
+   "accent": "cyan",
+   "icon": "megaphone",
+   "sort_order": 2
+  },
+  {
+   "slug": "professional-productivity",
+   "name": "Professional & Productivity Skills",
+   "tagline": "Excel, BI, modelling and presentations at a professional standard.",
+   "description": "The analytical and communication tools employers test for, taught through real workbooks and decks.",
+   "accent": "blue",
+   "icon": "table",
+   "sort_order": 3
+  },
+  {
+   "slug": "entrepreneurship-business",
+   "name": "Entrepreneurship & Business",
+   "tagline": "Start, sell and grow with practical business fundamentals.",
+   "description": "Launch, sales, online business and personal branding, built around real-world deliverables.",
+   "accent": "emerald",
+   "icon": "rocket",
+   "sort_order": 4
+  },
+  {
+   "slug": "financial-markets",
+   "name": "Financial Markets",
+   "tagline": "Coming later: markets, investing and research.",
+   "description": "Roadmap category. Not visible or purchasable until courses are added and published.",
+   "accent": "amber",
+   "icon": "trending-up",
+   "sort_order": 5,
+   "is_public": false
+  }
+ ],
+ "courses": [
+  {
+   "slug": "mastering-claude-ai",
+   "title": "Mastering Claude AI — From Beginner to Advanced",
+   "subtitle": "Go from first prompt to reliable, repeatable Claude workflows for research, writing and analysis.",
+   "description": "A structured path through Claude: how it reasons, how to brief it, how to work with long documents and data, and how to turn one-off chats into dependable workflows with Projects, artifacts and tools. Every module ends with a task you would actually do at work.",
+   "level": "beginner",
+   "outcomes": [
+    "Write clear, structured prompts that get consistent results first time",
+    "Analyse long reports, contracts and spreadsheets with Claude and verify its output",
+    "Use Projects, artifacts and file uploads to build reusable work setups",
+    "Design multi-step workflows for research, writing and decision support",
+    "Recognise hallucination risks and apply checks before you rely on an answer"
+   ],
+   "requirements": [
+    "A free or paid Claude account",
+    "No coding knowledge needed"
+   ],
+   "id": "4fa9978f-d974-5b9f-a301-6de2c94e5385",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 1,
+   "thumbnail_url": "/thumbnails/mastering-claude-ai.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Go from first prompt to reliable, repeatable Claude workflows for research, writing and analysis. Level: Beginner. Requirements: A free or paid Claude account; No coding knowledge needed."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "How Claude thinks and where it fits",
+     "lessons": [
+      {
+       "title": "What large language models are good and bad at",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Claude models, plans and limits explained",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Your first structured conversation",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Prompting with intent",
+     "lessons": [
+      {
+       "title": "The brief: role, context, task, format",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Examples, constraints and rubrics in prompts",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Iterating: critique, refine, re-run",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Working with documents and data",
+     "lessons": [
+      {
+       "title": "Summarising long PDFs without losing detail",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Extracting tables and figures accurately",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Checking claims against the source",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Projects, artifacts and reusable setups",
+     "lessons": [
+      {
+       "title": "Projects and custom instructions",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Artifacts for documents, code and dashboards",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Building a personal prompt library",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Advanced workflows and judgement",
+     "lessons": [
+      {
+       "title": "Multi-step research workflows",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Decision memos with pros, cons and risks",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Responsible use, privacy and verification",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Prompt design case study",
+     "kind": "document",
+     "summary": "Rewrite three weak prompts from a marketing team, explain what each change fixes and predict the effect on the output.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Claude-assisted data clean-up",
+     "kind": "file",
+     "summary": "Use Claude to clean and summarise a messy customer feedback sheet, then record the prompts you used and the checks you ran.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Build a reusable Claude Project",
+     "kind": "practical",
+     "summary": "Set up a Claude Project for a real recurring task (weekly report, research brief, client emails) with instructions and reference files, and show three runs.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The confident wrong answer",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "ai-productivity-workflow-automation",
+   "title": "AI Productivity & Workflow Automation",
+   "subtitle": "Reclaim hours every week by redesigning your routine work around AI assistants and no-code automation.",
+   "description": "Map where your time goes, decide which tasks AI should draft, check or fully automate, and build working automations with tools such as Zapier, Make and Google Workspace. You finish with a documented productivity system you actually use.",
+   "level": "beginner",
+   "outcomes": [
+    "Audit your week and identify tasks suited to AI assistance or automation",
+    "Use AI assistants for email, meetings, notes and document drafting",
+    "Build no-code automations that connect forms, sheets, email and AI",
+    "Design human checkpoints so automations stay accurate",
+    "Measure time saved and keep a maintainable workflow inventory"
+   ],
+   "requirements": [
+    "Google Workspace or Microsoft 365 account",
+    "Free Zapier or Make account (set up in module 3)"
+   ],
+   "id": "894734b7-3ad6-5755-a29a-b93d2ad8e6ab",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 2,
+   "is_featured": false,
+   "sort_order": 2,
+   "thumbnail_url": "/thumbnails/ai-productivity-workflow-automation.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Reclaim hours every week by redesigning your routine work around AI assistants and no-code automation. Level: Beginner. Requirements: Google Workspace or Microsoft 365 account; Free Zapier or Make account (set up in module 3)."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Finding the work worth automating",
+     "lessons": [
+      {
+       "title": "The time audit",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Draft, check or automate: a decision framework",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Choosing the right tool for each job",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI for everyday knowledge work",
+     "lessons": [
+      {
+       "title": "Email triage and reply drafting",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Meeting notes, actions and follow-ups",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Writing and editing documents faster",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "No-code automation fundamentals",
+     "lessons": [
+      {
+       "title": "Triggers, actions and data mapping",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Your first Zap / Make scenario",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Handling errors and edge cases",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI inside automations",
+     "lessons": [
+      {
+       "title": "Classifying and summarising with AI steps",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Routing requests and drafting responses",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Human-in-the-loop approvals",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Running your productivity system",
+     "lessons": [
+      {
+       "title": "Documenting workflows",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Measuring time saved",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Maintaining and improving automations",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Automation decision memo",
+     "kind": "document",
+     "summary": "Answer the questions in the brief about which of a support team's tasks should be drafted, checked or fully automated, and why.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Time audit workbook",
+     "kind": "file",
+     "summary": "Complete the provided time-audit workbook for one working week and score each task for automation potential using the formulas supplied.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Ship a working automation",
+     "kind": "practical",
+     "summary": "Build an automation that uses an AI step (for example: form → AI summary → sheet → email) and run it on at least five real or realistic inputs.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The automation that emailed the wrong client",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "ai-agents-autonomous-workflows",
+   "title": "AI Agents and Autonomous Workflows",
+   "subtitle": "Understand, design and safely deploy AI agents that plan, use tools and complete multi-step tasks.",
+   "description": "Learn what separates an agent from a chatbot, how tool use and planning work, and how to design agentic workflows with guardrails, evaluation and human oversight. You will design and test an agent for a real business process.",
+   "level": "advanced",
+   "outcomes": [
+    "Explain agent architecture: planning, tools, memory and feedback loops",
+    "Design tool definitions and instructions for reliable agent behaviour",
+    "Build an agentic workflow using a no-code or low-code platform",
+    "Create evaluation sets to test agent accuracy and failure modes",
+    "Apply guardrails, permissions and human approval for risky actions"
+   ],
+   "requirements": [
+    "Comfort with AI assistants (or our Claude course)",
+    "Basic spreadsheet skills; coding optional"
+   ],
+   "id": "9865a636-75de-59d7-ad35-4cbafcb65ad4",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 1440,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 3,
+   "thumbnail_url": "/thumbnails/ai-agents-autonomous-workflows.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Understand, design and safely deploy AI agents that plan, use tools and complete multi-step tasks. Level: Advanced. Requirements: Comfort with AI assistants (or our Claude course); Basic spreadsheet skills; coding optional."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "From chatbots to agents",
+     "lessons": [
+      {
+       "title": "What makes a system agentic",
+       "type": "text",
+       "minutes": 66,
+       "preview": true
+      },
+      {
+       "title": "Planning, acting and observing",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Where agents fail today",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Tools and instructions",
+     "lessons": [
+      {
+       "title": "Designing tool descriptions",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Structured outputs and validation",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "System prompts for agents",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Building an agentic workflow",
+     "lessons": [
+      {
+       "title": "Choosing a platform",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Multi-step research agent walkthrough",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Connecting business data safely",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Evaluation and reliability",
+     "lessons": [
+      {
+       "title": "Building a test set",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Measuring success and error rates",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Debugging agent traces",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Safe deployment",
+     "lessons": [
+      {
+       "title": "Permissions and least privilege",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Human approval for irreversible actions",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Monitoring, cost and governance",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Agent design review",
+     "kind": "document",
+     "summary": "Answer the design-review questions for a proposed customer-support agent: tools, permissions, escalation rules and risks.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Agent evaluation sheet",
+     "kind": "file",
+     "summary": "Use the provided evaluation workbook to score 20 agent runs against expected outcomes and calculate pass rate and failure categories.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Build and test an agent",
+     "kind": "practical",
+     "summary": "Build an agent that completes a multi-step task (research brief, lead qualification, invoice triage) and test it on at least ten cases.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The agent with too much access",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "generative-ai-for-professionals",
+   "title": "Generative AI for Professionals",
+   "subtitle": "A practical, tool-agnostic foundation for using generative AI well in any role.",
+   "description": "For managers, analysts, consultants and specialists who want to use text, image and data AI tools confidently. Covers how generative models work, high-value use cases by function, quality control, ethics and how to lead AI adoption in a team.",
+   "level": "beginner",
+   "outcomes": [
+    "Explain how generative AI works in plain language to colleagues",
+    "Apply AI to writing, analysis, research, presentations and images",
+    "Evaluate output quality and set review standards",
+    "Handle data privacy, bias and intellectual property responsibly",
+    "Build an AI adoption plan for your team"
+   ],
+   "requirements": [
+    "Any modern AI assistant account",
+    "No technical background required"
+   ],
+   "id": "012a60bb-6a4c-554d-aecc-c73198f4d9a1",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 2,
+   "is_featured": false,
+   "sort_order": 4,
+   "thumbnail_url": "/thumbnails/generative-ai-for-professionals.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "A practical, tool-agnostic foundation for using generative AI well in any role. Level: Beginner. Requirements: Any modern AI assistant account; No technical background required."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Generative AI in plain language",
+     "lessons": [
+      {
+       "title": "Models, training and tokens",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Text, image, audio and video tools",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Capabilities versus hype",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "High-value use cases by function",
+     "lessons": [
+      {
+       "title": "Marketing, sales and HR",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Finance, operations and analytics",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Consulting and research",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Quality control",
+     "lessons": [
+      {
+       "title": "Review checklists",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Fact-checking and citations",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Style guides for AI drafts",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Responsible use",
+     "lessons": [
+      {
+       "title": "Privacy and confidential data",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Bias and fairness",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Copyright and ownership",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Leading adoption",
+     "lessons": [
+      {
+       "title": "Picking pilot use cases",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Training and guidelines",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Measuring impact",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "AI policy questions",
+     "kind": "document",
+     "summary": "Answer the policy questions in the brief for a 50-person firm adopting AI assistants.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Use-case prioritisation matrix",
+     "kind": "file",
+     "summary": "Score 15 candidate AI use cases in the workbook for value, effort and risk and produce a ranked shortlist.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Team AI pilot plan",
+     "kind": "practical",
+     "summary": "Design a four-week AI pilot for a real or realistic team with goals, workflows, review rules and success metrics.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The leaked draft",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "ai-powered-business-automation",
+   "title": "AI-Powered Business Automation",
+   "subtitle": "Automate operations end to end — sales, support, finance and HR — with AI and integrations.",
+   "description": "Move beyond personal productivity to department-level automation. Map business processes, quantify the return, and build automations for lead handling, support triage, invoice processing and onboarding with proper controls.",
+   "level": "intermediate",
+   "outcomes": [
+    "Map business processes and identify automation opportunities",
+    "Build a business case with costs, savings and payback period",
+    "Automate lead capture, support triage and document processing",
+    "Integrate CRMs, spreadsheets, email and AI services",
+    "Set controls, audit trails and ownership for automated processes"
+   ],
+   "requirements": [
+    "Familiarity with spreadsheets",
+    "Free accounts for an automation platform"
+   ],
+   "id": "8562e619-dae2-5b1a-aa45-790ed5a8be17",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 5,
+   "thumbnail_url": "/thumbnails/ai-powered-business-automation.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Automate operations end to end — sales, support, finance and HR — with AI and integrations. Level: Intermediate. Requirements: Familiarity with spreadsheets; Free accounts for an automation platform."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Process mapping",
+     "lessons": [
+      {
+       "title": "Swimlane process maps",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Finding bottlenecks",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Selecting processes to automate",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "The business case",
+     "lessons": [
+      {
+       "title": "Costing manual work",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Estimating savings and payback",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Presenting to decision makers",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Revenue and support automation",
+     "lessons": [
+      {
+       "title": "Lead capture and enrichment",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "AI support triage",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Follow-up sequences",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Back-office automation",
+     "lessons": [
+      {
+       "title": "Invoice and receipt extraction",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Employee onboarding flows",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Reporting automation",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Controls and scale",
+     "lessons": [
+      {
+       "title": "Audit trails and exception queues",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Ownership and documentation",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Scaling across teams",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Process improvement case",
+     "kind": "document",
+     "summary": "Answer the case questions on a distributor's order-to-cash process and recommend what to automate first.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Automation ROI model",
+     "kind": "file",
+     "summary": "Complete the ROI workbook for automating invoice processing: hours saved, tool costs, payback period and three-year value.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Department automation build",
+     "kind": "practical",
+     "summary": "Build an automation for one business process (lead routing, support triage or invoice extraction) with an exception queue.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The CFO is not convinced",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "chatgpt-claude-gemini-practical-mastery",
+   "title": "ChatGPT, Claude and Gemini — Practical AI Mastery",
+   "subtitle": "Know which assistant to use for which job, and get expert results from all three.",
+   "description": "A side-by-side, task-based course on the three leading assistants. Compare their strengths for writing, research, data, coding help and multimodal work, learn each tool's power features, and build a multi-tool workflow.",
+   "level": "intermediate",
+   "outcomes": [
+    "Compare ChatGPT, Claude and Gemini on real tasks with a fair method",
+    "Use each tool's power features: projects, custom assistants, file analysis",
+    "Choose the right tool per task and combine them in one workflow",
+    "Work with images, PDFs and spreadsheets across tools",
+    "Keep results reliable with verification habits"
+   ],
+   "requirements": [
+    "Free accounts on ChatGPT, Claude and Gemini"
+   ],
+   "id": "60970750-f94f-5b79-ae06-ecbb36f8a0a7",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 2,
+   "is_featured": false,
+   "sort_order": 6,
+   "thumbnail_url": "/thumbnails/chatgpt-claude-gemini-practical-mastery.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Know which assistant to use for which job, and get expert results from all three. Level: Intermediate. Requirements: Free accounts on ChatGPT, Claude and Gemini."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "A fair comparison method",
+     "lessons": [
+      {
+       "title": "Designing comparison tasks",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Scoring outputs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Avoiding confirmation bias",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "ChatGPT in depth",
+     "lessons": [
+      {
+       "title": "Custom GPTs and memory",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Data analysis and files",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Image generation basics",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Claude in depth",
+     "lessons": [
+      {
+       "title": "Long documents and Projects",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Artifacts",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Writing and analysis quality",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Gemini in depth",
+     "lessons": [
+      {
+       "title": "Google Workspace integration",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Search-grounded answers",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Multimodal inputs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Multi-tool workflows",
+     "lessons": [
+      {
+       "title": "Routing tasks to the right tool",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Cross-checking answers",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Building your toolkit",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Tool selection brief",
+     "kind": "document",
+     "summary": "Answer the brief's questions recommending tools for five teams with different needs and constraints.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Assistant benchmark sheet",
+     "kind": "file",
+     "summary": "Run the eight benchmark tasks in the workbook on all three assistants and score them with the rubric provided.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Multi-tool workflow",
+     "kind": "practical",
+     "summary": "Design and run a workflow that uses at least two assistants for one deliverable (for example: research in one, drafting in another, checking in a third).",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Three answers, three numbers",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "ai-tools-for-entrepreneurs",
+   "title": "AI Tools for Entrepreneurs and Startups",
+   "subtitle": "Validate ideas, build brands, sell and operate faster with a lean AI toolkit.",
+   "description": "Designed for founders and early teams. Use AI for market research, customer interviews, positioning, landing pages, pitch decks, sales outreach and lean operations — while keeping judgement and customer contact firmly human.",
+   "level": "beginner",
+   "outcomes": [
+    "Research markets and competitors quickly and critically",
+    "Turn customer interviews into insights and positioning",
+    "Create brand assets, landing pages and pitch material with AI",
+    "Run AI-assisted outreach without spamming",
+    "Set up lean AI-powered operations for a small team"
+   ],
+   "requirements": [
+    "An idea or early-stage business (real or practice)"
+   ],
+   "id": "17586f1d-3801-50ff-ae69-821b0925f802",
+   "category": "ai-automation",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 7,
+   "thumbnail_url": "/thumbnails/ai-tools-for-entrepreneurs.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Validate ideas, build brands, sell and operate faster with a lean AI toolkit. Level: Beginner. Requirements: An idea or early-stage business (real or practice)."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Research and validation",
+     "lessons": [
+      {
+       "title": "Market sizing with AI",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Competitor mapping",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Interview scripts and synthesis",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Positioning and brand",
+     "lessons": [
+      {
+       "title": "Value propositions",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Naming and messaging tests",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Visual identity with AI",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Building the storefront",
+     "lessons": [
+      {
+       "title": "Landing page copy and structure",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "No-code site builders",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Pitch deck drafting",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Selling with AI",
+     "lessons": [
+      {
+       "title": "Prospect research",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Personalised outreach at sensible scale",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Sales call preparation",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Lean operations",
+     "lessons": [
+      {
+       "title": "Customer support with AI",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Finance and admin helpers",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Your founder toolkit",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Positioning worksheet",
+     "kind": "document",
+     "summary": "Answer the positioning worksheet: customer, problem, alternatives, unique value and proof.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Market sizing workbook",
+     "kind": "file",
+     "summary": "Complete the TAM–SAM–SOM workbook for your idea using cited sources and documented assumptions.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Launch-ready landing page",
+     "kind": "practical",
+     "summary": "Create a landing page for your idea using AI for copy and visuals, and collect at least one round of feedback.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Investor asks: why now?",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "digital-marketing-mastery",
+   "title": "Digital Marketing Mastery",
+   "subtitle": "A complete, practical foundation in strategy, channels, content and measurement.",
+   "description": "Learn how digital marketing fits together: strategy, audiences, search, social, email, paid media and analytics. You build a full channel plan and run a small campaign so you can talk about results, not just theory.",
+   "level": "beginner",
+   "outcomes": [
+    "Build a marketing strategy from business goals to channel plan",
+    "Define audiences, personas and the customer journey",
+    "Run search, social, email and paid campaigns at small scale",
+    "Measure performance with the right KPIs and Google Analytics",
+    "Present a campaign plan and results with confidence"
+   ],
+   "requirements": [
+    "No prior marketing experience",
+    "A Google account"
+   ],
+   "id": "51d4b865-205a-5b51-af33-437c23d0fad7",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 8,
+   "thumbnail_url": "/thumbnails/digital-marketing-mastery.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "A complete, practical foundation in strategy, channels, content and measurement. Level: Beginner. Requirements: No prior marketing experience; A Google account."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Strategy first",
+     "lessons": [
+      {
+       "title": "Goals, KPIs and the funnel",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Audiences and personas",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Positioning and messaging",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Owned channels",
+     "lessons": [
+      {
+       "title": "Website and landing pages",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Email marketing",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Content that earns attention",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Search and social",
+     "lessons": [
+      {
+       "title": "SEO fundamentals",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Organic social",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Community and creators",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Paid media basics",
+     "lessons": [
+      {
+       "title": "Google and Meta ads overview",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Budgets and bidding",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Creative testing",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Measurement",
+     "lessons": [
+      {
+       "title": "Google Analytics 4 essentials",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Attribution basics",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Reporting results",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Marketing plan questions",
+     "kind": "document",
+     "summary": "Answer the planning questions for a D2C skincare brand launching in two cities.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Campaign performance analysis",
+     "kind": "file",
+     "summary": "Analyse the campaign dataset in the workbook: calculate CTR, CPC, conversion rate and CPA by channel and identify where to shift budget.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Run a mini campaign",
+     "kind": "practical",
+     "summary": "Plan and run a small campaign (organic or paid) for a real or practice brand for at least seven days and report results.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Traffic up, sales flat",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "ai-powered-digital-marketing",
+   "title": "AI-Powered Digital Marketing",
+   "subtitle": "Use AI across research, content, creative, ads and analytics without losing your brand voice.",
+   "description": "Bring AI into every stage of marketing: audience research, content calendars, ad creative variations, personalisation, SEO briefs and reporting. Learn workflows that keep quality, brand voice and compliance under control.",
+   "level": "intermediate",
+   "outcomes": [
+    "Use AI for audience research and insight generation",
+    "Produce on-brand content and creative variations at scale",
+    "Build AI-assisted SEO briefs and content calendars",
+    "Automate reporting and extract insights from campaign data",
+    "Set brand-voice and review standards for AI content"
+   ],
+   "requirements": [
+    "Basic digital marketing knowledge",
+    "Access to an AI assistant"
+   ],
+   "id": "a40ea0b7-ace4-52c2-ae05-c7fa39ffb262",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 9,
+   "thumbnail_url": "/thumbnails/ai-powered-digital-marketing.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Use AI across research, content, creative, ads and analytics without losing your brand voice. Level: Intermediate. Requirements: Basic digital marketing knowledge; Access to an AI assistant."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "AI for research",
+     "lessons": [
+      {
+       "title": "Audience and competitor research",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Social listening synthesis",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Insight briefs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI content systems",
+     "lessons": [
+      {
+       "title": "Brand voice guides for AI",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Content calendars",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Repurposing content",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI creative for ads",
+     "lessons": [
+      {
+       "title": "Copy variations",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Image and video creative",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Testing frameworks",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI for SEO and personalisation",
+     "lessons": [
+      {
+       "title": "Keyword clustering",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "SEO content briefs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Personalised email journeys",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI analytics",
+     "lessons": [
+      {
+       "title": "Automated reports",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Anomaly spotting",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Insight narratives",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Brand voice guide",
+     "kind": "document",
+     "summary": "Complete the brand voice guide template for a fintech app so an AI assistant can write on-brand content.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Ad variation test results",
+     "kind": "file",
+     "summary": "Analyse the A/B test workbook for 12 AI-generated ad variants and identify statistically meaningful winners.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "AI content engine",
+     "kind": "practical",
+     "summary": "Build a month's content calendar and at least eight finished posts using AI, with your review notes.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The off-brand viral post",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "performance-marketing-paid-advertising",
+   "title": "Performance Marketing & Paid Advertising",
+   "subtitle": "Plan, launch and optimise profitable Google and Meta ad campaigns.",
+   "description": "Go deep on paid acquisition: account structure, audiences, bidding, creative, landing pages, tracking and optimisation. Learn to manage budgets against unit economics so campaigns make money, not just clicks.",
+   "level": "intermediate",
+   "outcomes": [
+    "Structure Google Search, Performance Max and Meta campaigns",
+    "Set up conversion tracking and attribution correctly",
+    "Plan budgets from unit economics (CAC, AOV, margin, LTV)",
+    "Optimise bids, audiences and creative with test plans",
+    "Diagnose under-performing campaigns systematically"
+   ],
+   "requirements": [
+    "Digital marketing basics",
+    "Spreadsheet comfort"
+   ],
+   "id": "5d9a9938-88d4-5c92-a45f-e3b9895491f8",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 10,
+   "thumbnail_url": "/thumbnails/performance-marketing-paid-advertising.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Plan, launch and optimise profitable Google and Meta ad campaigns. Level: Intermediate. Requirements: Digital marketing basics; Spreadsheet comfort."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Unit economics for paid media",
+     "lessons": [
+      {
+       "title": "CAC, AOV, margin and LTV",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Break-even ROAS",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Budget planning",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Google Ads",
+     "lessons": [
+      {
+       "title": "Search campaign structure",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Keywords and match types",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Performance Max",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Meta Ads",
+     "lessons": [
+      {
+       "title": "Campaign objectives",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Audiences and Advantage+",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Creative for feed and reels",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Tracking and attribution",
+     "lessons": [
+      {
+       "title": "Pixels, tags and conversions API",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "GA4 conversions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Attribution models",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Optimisation",
+     "lessons": [
+      {
+       "title": "Test plans",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Diagnosing performance",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Scaling winners",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Account audit questions",
+     "kind": "document",
+     "summary": "Answer the audit questions about the provided Google Ads account summary and prioritise fixes.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Break-even ROAS model",
+     "kind": "file",
+     "summary": "Complete the unit-economics workbook: calculate break-even ROAS, target CAC and recommended daily budgets for three products.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Campaign build",
+     "kind": "practical",
+     "summary": "Build a complete campaign plan (structure, keywords/audiences, creative, budget, tracking) for a real or practice business; launch it if you can.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "ROAS fell from 4 to 1.8",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "seo-content-marketing",
+   "title": "SEO and Content Marketing",
+   "subtitle": "Earn compounding traffic with search-led content strategy, technical SEO and authority building.",
+   "description": "Plan content that people search for, write pages that rank and convert, fix technical issues and build authority. Includes keyword research, on-page SEO, content briefs, internal linking, technical audits and measurement.",
+   "level": "intermediate",
+   "outcomes": [
+    "Research keywords and map them to search intent",
+    "Write SEO content briefs and optimise pages on-page",
+    "Run technical SEO audits and prioritise fixes",
+    "Build internal linking and topical authority",
+    "Measure organic performance with Search Console and GA4"
+   ],
+   "requirements": [
+    "A website you can practise on (free options covered)"
+   ],
+   "id": "51911884-7474-5126-a3e5-1829955aeaea",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 11,
+   "thumbnail_url": "/thumbnails/seo-content-marketing.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Earn compounding traffic with search-led content strategy, technical SEO and authority building. Level: Intermediate. Requirements: A website you can practise on (free options covered)."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "How search works",
+     "lessons": [
+      {
+       "title": "Crawling, indexing, ranking",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Search intent",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Helpful content principles",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Keyword research",
+     "lessons": [
+      {
+       "title": "Tools and data",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Clustering and mapping",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Prioritising opportunities",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "On-page and content",
+     "lessons": [
+      {
+       "title": "Content briefs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Titles, headings and structure",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Writing for people and search",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Technical SEO",
+     "lessons": [
+      {
+       "title": "Site audits",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Speed and Core Web Vitals",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Indexing issues",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Authority and measurement",
+     "lessons": [
+      {
+       "title": "Internal links",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Digital PR and backlinks",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Search Console reporting",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Content brief",
+     "kind": "document",
+     "summary": "Complete the content brief template for a target keyword chosen from the provided list.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Keyword map",
+     "kind": "file",
+     "summary": "Cluster the 150 keywords in the workbook by intent and topic, assign each cluster to a page and prioritise by opportunity.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "SEO audit and fixes",
+     "kind": "practical",
+     "summary": "Audit a real website (yours or a practice site), prioritise ten issues and implement or mock up three fixes.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Traffic drop after redesign",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "social-media-marketing-brand-building",
+   "title": "Social Media Marketing & Brand Building",
+   "subtitle": "Build a recognisable brand and an engaged community across Instagram, LinkedIn, YouTube and X.",
+   "description": "Create a platform strategy, content pillars and a visual identity, then produce, publish and analyse content that grows reach and trust. Covers short-form video, creators, community management and social analytics.",
+   "level": "beginner",
+   "outcomes": [
+    "Define brand positioning, voice and visual identity for social",
+    "Plan content pillars and a sustainable publishing calendar",
+    "Create short-form video and carousel content that performs",
+    "Work with creators and manage community conversations",
+    "Read social analytics and improve content systematically"
+   ],
+   "requirements": [
+    "A smartphone",
+    "Free Canva account"
+   ],
+   "id": "c9934996-7b9d-56b5-a714-ea6e4272f0f0",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 12,
+   "thumbnail_url": "/thumbnails/social-media-marketing-brand-building.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Build a recognisable brand and an engaged community across Instagram, LinkedIn, YouTube and X. Level: Beginner. Requirements: A smartphone; Free Canva account."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Brand foundations",
+     "lessons": [
+      {
+       "title": "Positioning and personality",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Voice and tone",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Visual identity",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Platform strategy",
+     "lessons": [
+      {
+       "title": "Choosing platforms",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Algorithms in practice",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Content pillars",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Creating content",
+     "lessons": [
+      {
+       "title": "Short-form video",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Carousels and graphics",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Captions and hooks",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Community and creators",
+     "lessons": [
+      {
+       "title": "Community management",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Creator partnerships",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Handling negative comments",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Analytics",
+     "lessons": [
+      {
+       "title": "Metrics that matter",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Content reviews",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Iteration loops",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Brand identity questionnaire",
+     "kind": "document",
+     "summary": "Complete the brand identity questionnaire for a café chain entering a new city.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Content performance review",
+     "kind": "file",
+     "summary": "Analyse 60 days of post data in the workbook and identify which pillars, formats and hooks perform best.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Two-week content sprint",
+     "kind": "practical",
+     "summary": "Publish at least eight posts across one or two platforms using your content pillars and report what you learned.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Comment storm",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "growth-marketing-customer-acquisition",
+   "title": "Growth Marketing and Customer Acquisition",
+   "subtitle": "Run disciplined growth experiments across the full funnel to acquire and retain customers.",
+   "description": "Learn the growth model, North Star metrics, funnel analysis, experimentation and channel selection. Design and run experiments in acquisition, activation, retention and referral, and build a growth plan grounded in data.",
+   "level": "advanced",
+   "outcomes": [
+    "Build a growth model and choose a North Star metric",
+    "Analyse funnels and cohorts to find the biggest levers",
+    "Design, prioritise and run growth experiments",
+    "Select acquisition channels using economics and fit",
+    "Improve activation, retention and referral loops"
+   ],
+   "requirements": [
+    "Digital marketing fundamentals",
+    "Comfort with spreadsheets"
+   ],
+   "id": "19751b11-9576-5597-a449-937ba7180831",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 1440,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 13,
+   "thumbnail_url": "/thumbnails/growth-marketing-customer-acquisition.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Run disciplined growth experiments across the full funnel to acquire and retain customers. Level: Advanced. Requirements: Digital marketing fundamentals; Comfort with spreadsheets."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Growth models",
+     "lessons": [
+      {
+       "title": "Inputs and outputs",
+       "type": "text",
+       "minutes": 66,
+       "preview": true
+      },
+      {
+       "title": "North Star metrics",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Growth loops",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Funnels and cohorts",
+     "lessons": [
+      {
+       "title": "Funnel analysis",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Cohort retention",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Finding levers",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Experimentation",
+     "lessons": [
+      {
+       "title": "Hypotheses",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "ICE/RICE prioritisation",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Reading results",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Acquisition channels",
+     "lessons": [
+      {
+       "title": "Channel–product fit",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "CAC payback",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Partnerships and referrals",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Activation and retention",
+     "lessons": [
+      {
+       "title": "Onboarding",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Lifecycle messaging",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Reducing churn",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Experiment backlog",
+     "kind": "document",
+     "summary": "Answer the questions and score 10 experiment ideas with RICE for a meal-kit startup.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Cohort retention analysis",
+     "kind": "file",
+     "summary": "Build the cohort retention table from the transactions in the workbook and identify where retention breaks.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Run a growth experiment",
+     "kind": "practical",
+     "summary": "Design and run one real experiment (landing page, onboarding, email) with a clear hypothesis and success metric.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Growth stalled at 2,000 users",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "marketing-analytics-conversion-optimisation",
+   "title": "Marketing Analytics and Conversion Optimisation",
+   "subtitle": "Measure what matters and turn more visitors into customers with evidence-based CRO.",
+   "description": "Set up trustworthy tracking, build dashboards, analyse funnels and user behaviour, and run conversion experiments on landing pages, checkouts and forms. Learn the statistics you need without the jargon.",
+   "level": "advanced",
+   "outcomes": [
+    "Plan and implement a measurement framework and tracking plan",
+    "Build marketing dashboards in Looker Studio or Power BI",
+    "Diagnose conversion problems with funnels, heatmaps and recordings",
+    "Design A/B tests and read results correctly",
+    "Prioritise and communicate CRO opportunities"
+   ],
+   "requirements": [
+    "Marketing fundamentals",
+    "Spreadsheet skills"
+   ],
+   "id": "215c74e8-237f-5711-a21d-4bc6ffb1022b",
+   "category": "digital-marketing-growth",
+   "price_paise": 750000,
+   "duration_minutes": 1440,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 14,
+   "thumbnail_url": "/thumbnails/marketing-analytics-conversion-optimisation.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Measure what matters and turn more visitors into customers with evidence-based CRO. Level: Advanced. Requirements: Marketing fundamentals; Spreadsheet skills."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Measurement frameworks",
+     "lessons": [
+      {
+       "title": "Objectives to KPIs",
+       "type": "text",
+       "minutes": 66,
+       "preview": true
+      },
+      {
+       "title": "Tracking plans",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Data quality checks",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Dashboards",
+     "lessons": [
+      {
+       "title": "Looker Studio basics",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Designing for decisions",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Automated reporting",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Diagnosing conversion",
+     "lessons": [
+      {
+       "title": "Funnel drop-offs",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Heatmaps and recordings",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Form and checkout analysis",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Experimentation statistics",
+     "lessons": [
+      {
+       "title": "Significance and power",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Common testing mistakes",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Interpreting results",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "CRO programme",
+     "lessons": [
+      {
+       "title": "Prioritising ideas",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Writing test briefs",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Communicating wins and losses",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Tracking plan",
+     "kind": "document",
+     "summary": "Complete the tracking plan template for an online course store: events, parameters and conversions.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Funnel and A/B analysis",
+     "kind": "file",
+     "summary": "Use the workbook data to compute funnel drop-off by step and the conversion lift and significance of a checkout test.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Marketing dashboard",
+     "kind": "practical",
+     "summary": "Build a dashboard from the sample dataset (or your own) answering five business questions.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The test everyone wanted to win",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "advanced-excel-for-professionals",
+   "title": "Advanced Excel for Professionals",
+   "subtitle": "Lookups, dynamic arrays, pivots, Power Query and dashboards — the Excel that gets work done.",
+   "description": "Build fluency with the Excel skills used in finance, operations and analytics roles: modern lookups, dynamic arrays, data cleaning with Power Query, PivotTables, scenario analysis and interactive dashboards, all on realistic business workbooks.",
+   "level": "intermediate",
+   "outcomes": [
+    "Use XLOOKUP, INDEX-MATCH, FILTER, UNIQUE and LET confidently",
+    "Clean and combine data with Power Query",
+    "Summarise data with PivotTables and PivotCharts",
+    "Run what-if, scenario and goal-seek analysis",
+    "Build a clean, interactive management dashboard"
+   ],
+   "requirements": [
+    "Microsoft Excel 2021 or Microsoft 365",
+    "Comfort with basic formulas"
+   ],
+   "id": "7207ee90-31f7-5619-a9fb-13d08c1abb3d",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 15,
+   "thumbnail_url": "/thumbnails/advanced-excel-for-professionals.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Lookups, dynamic arrays, pivots, Power Query and dashboards — the Excel that gets work done. Level: Intermediate. Requirements: Microsoft Excel 2021 or Microsoft 365; Comfort with basic formulas."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Formulas that scale",
+     "lessons": [
+      {
+       "title": "Absolute and structured references",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "XLOOKUP and INDEX-MATCH",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Logical and text functions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Dynamic arrays",
+     "lessons": [
+      {
+       "title": "FILTER, SORT and UNIQUE",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "LET and LAMBDA basics",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Spill ranges in reports",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Data preparation",
+     "lessons": [
+      {
+       "title": "Excel Tables",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Power Query transformations",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Merging and appending data",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Analysis",
+     "lessons": [
+      {
+       "title": "PivotTables in depth",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "What-if and scenarios",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Goal Seek and data tables",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Dashboards",
+     "lessons": [
+      {
+       "title": "Dashboard design principles",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Slicers and interactive charts",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Protecting and sharing workbooks",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Spreadsheet review questions",
+     "kind": "document",
+     "summary": "Answer the review questions about errors and risks in a colleague's pricing model.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Sales operations workbook",
+     "kind": "file",
+     "summary": "Solve the tasks in the workbook: lookups across sheets, a FILTER-based report, a PivotTable by region and month, and a scenario table.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Management dashboard",
+     "kind": "practical",
+     "summary": "Build an interactive dashboard from the provided raw data with at least four KPIs and two slicers.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The VLOOKUP that broke",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "excel-automation-ai-integration",
+   "title": "Excel Automation and AI Integration",
+   "subtitle": "Automate repetitive spreadsheet work with macros, Office Scripts, Power Automate and AI.",
+   "description": "Stop doing the same spreadsheet tasks every week. Record and edit VBA macros, write Office Scripts, connect Excel to Power Automate, and use AI (Copilot, Claude, ChatGPT) to write formulas, explain models and draft automation code safely.",
+   "level": "advanced",
+   "outcomes": [
+    "Record, read and edit VBA macros for routine tasks",
+    "Write Office Scripts for Excel on the web",
+    "Build Power Automate flows that move data in and out of Excel",
+    "Use AI to generate and explain formulas and code responsibly",
+    "Document and test spreadsheet automations"
+   ],
+   "requirements": [
+    "Advanced Excel skills (or our Advanced Excel course)",
+    "Microsoft 365 account for Office Scripts"
+   ],
+   "id": "52e9a12e-f3ec-580b-a7c2-9f3de4485386",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 1440,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 16,
+   "thumbnail_url": "/thumbnails/excel-automation-ai-integration.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Automate repetitive spreadsheet work with macros, Office Scripts, Power Automate and AI. Level: Advanced. Requirements: Advanced Excel skills (or our Advanced Excel course); Microsoft 365 account for Office Scripts."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Automation mindset",
+     "lessons": [
+      {
+       "title": "Spotting repetitive tasks",
+       "type": "text",
+       "minutes": 66,
+       "preview": true
+      },
+      {
+       "title": "Choosing VBA, scripts or flows",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Safety and backups",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "VBA macros",
+     "lessons": [
+      {
+       "title": "Recording and editing macros",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Loops and conditions",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Buttons and user prompts",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Office Scripts and Power Automate",
+     "lessons": [
+      {
+       "title": "Office Scripts basics",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Scheduled flows",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Email and SharePoint integration",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "AI for spreadsheets",
+     "lessons": [
+      {
+       "title": "Generating formulas with AI",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Explaining inherited models",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "AI-written code: review and test",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Reliable automations",
+     "lessons": [
+      {
+       "title": "Error handling",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Documentation",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Handover and maintenance",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Code review questions",
+     "kind": "document",
+     "summary": "Review the AI-generated VBA in the brief, identify bugs and risks and answer the questions.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Macro-ready monthly report",
+     "kind": "file",
+     "summary": "Use the workbook to automate the monthly consolidation: write or record a macro (or Office Script) that combines the three regional sheets and formats the report.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Automate a real task",
+     "kind": "practical",
+     "summary": "Automate a recurring spreadsheet task from your work or studies and show before/after time.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The macro that deleted data",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "power-bi-business-intelligence",
+   "title": "Power BI and Business Intelligence",
+   "subtitle": "Model data, write DAX and design dashboards decision-makers actually use.",
+   "description": "Learn the full Power BI workflow: Power Query, star-schema modelling, DAX measures, visual design, row-level security and publishing. You build an end-to-end sales and operations report from raw data.",
+   "level": "intermediate",
+   "outcomes": [
+    "Import and transform data with Power Query",
+    "Design star-schema data models with correct relationships",
+    "Write DAX measures including time intelligence",
+    "Design clear, accessible report pages",
+    "Publish, share and secure reports in Power BI Service"
+   ],
+   "requirements": [
+    "Windows PC with Power BI Desktop (free)",
+    "Excel basics"
+   ],
+   "id": "a827b5fb-c255-5b5d-a2f0-5ff13bb60097",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 17,
+   "thumbnail_url": "/thumbnails/power-bi-business-intelligence.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Model data, write DAX and design dashboards decision-makers actually use. Level: Intermediate. Requirements: Windows PC with Power BI Desktop (free); Excel basics."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "BI foundations",
+     "lessons": [
+      {
+       "title": "What BI is for",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Power BI components",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Planning a report",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Power Query",
+     "lessons": [
+      {
+       "title": "Cleaning data",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Merging queries",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Parameters",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Data modelling",
+     "lessons": [
+      {
+       "title": "Facts and dimensions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Relationships and cardinality",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Date tables",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "DAX",
+     "lessons": [
+      {
+       "title": "Measures vs calculated columns",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "CALCULATE and filter context",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Time intelligence",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Design and delivery",
+     "lessons": [
+      {
+       "title": "Visual best practice",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Row-level security",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Publishing and refresh",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "DAX reasoning questions",
+     "kind": "document",
+     "summary": "Answer the DAX questions on filter context and time intelligence in the brief.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Star schema design",
+     "kind": "file",
+     "summary": "Use the workbook's flat sales extract to design dimension and fact tables and document keys and relationships.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Sales performance report",
+     "kind": "practical",
+     "summary": "Build a Power BI report from the provided dataset with at least six measures and three pages.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Two reports, two revenue numbers",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "financial-modelling-business-analysis",
+   "title": "Financial Modelling and Business Analysis",
+   "subtitle": "Build three-statement models, forecasts and valuations the way analysts do.",
+   "description": "Learn to read financial statements, build a linked three-statement model, forecast drivers, run scenarios and value a business with DCF and multiples. Focus on clean structure, checks and clear presentation of assumptions.",
+   "level": "advanced",
+   "outcomes": [
+    "Analyse income statements, balance sheets and cash flows",
+    "Build an integrated three-statement model with checks",
+    "Forecast revenue and costs from business drivers",
+    "Value a company using DCF and trading multiples",
+    "Present scenarios and sensitivities to decision makers"
+   ],
+   "requirements": [
+    "Strong Excel skills",
+    "Basic accounting knowledge helpful"
+   ],
+   "id": "25d05384-7f78-58f0-ac4b-cc08514bdc02",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 1440,
+   "projects_count": 3,
+   "is_featured": true,
+   "sort_order": 18,
+   "thumbnail_url": "/thumbnails/financial-modelling-business-analysis.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Build three-statement models, forecasts and valuations the way analysts do. Level: Advanced. Requirements: Strong Excel skills; Basic accounting knowledge helpful."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Statements and ratios",
+     "lessons": [
+      {
+       "title": "Reading the three statements",
+       "type": "text",
+       "minutes": 66,
+       "preview": true
+      },
+      {
+       "title": "Ratio analysis",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Quality of earnings",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Model structure",
+     "lessons": [
+      {
+       "title": "Inputs, calculations, outputs",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Formatting standards",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Error checks",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Three-statement model",
+     "lessons": [
+      {
+       "title": "Revenue and cost drivers",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Working capital and capex",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Debt and the balancing balance sheet",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Valuation",
+     "lessons": [
+      {
+       "title": "Free cash flow",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "WACC and DCF",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Comparable multiples",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Decision support",
+     "lessons": [
+      {
+       "title": "Scenarios and sensitivities",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Charts for executives",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      },
+      {
+       "title": "Model review",
+       "type": "text",
+       "minutes": 66,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Ratio analysis case",
+     "kind": "document",
+     "summary": "Answer the ratio-analysis questions on two listed retailers using the extracted statements in the brief.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Three-statement model",
+     "kind": "file",
+     "summary": "Complete the model in the workbook: forecast five years from the driver sheet so the balance sheet balances and the cash flow reconciles.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Company valuation",
+     "kind": "practical",
+     "summary": "Value a listed Indian company of your choice with a DCF and a multiples cross-check, citing sources.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "The model that always looks good",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "advanced-powerpoint-business-presentations",
+   "title": "Advanced PowerPoint and Business Presentations",
+   "subtitle": "Structure arguments and design decks that executives understand in minutes.",
+   "description": "Learn the storytelling and design habits of consulting-style decks: pyramid principle, action titles, clean data charts, master slides and delivery. Rebuild real business decks and present with confidence.",
+   "level": "intermediate",
+   "outcomes": [
+    "Structure presentations with the pyramid principle and storylines",
+    "Write action titles that carry the argument",
+    "Design clean slides with masters, grids and consistent styles",
+    "Turn data into clear charts and tables",
+    "Deliver and handle questions confidently"
+   ],
+   "requirements": [
+    "Microsoft PowerPoint or Google Slides"
+   ],
+   "id": "f89bf5ee-9059-5b57-a7ee-0fbc2b7ea348",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 2,
+   "is_featured": false,
+   "sort_order": 19,
+   "thumbnail_url": "/thumbnails/advanced-powerpoint-business-presentations.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Structure arguments and design decks that executives understand in minutes. Level: Intermediate. Requirements: Microsoft PowerPoint or Google Slides."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Thinking before slides",
+     "lessons": [
+      {
+       "title": "Audience and objective",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Pyramid principle",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Storyboarding",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Slides that argue",
+     "lessons": [
+      {
+       "title": "Action titles",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "One message per slide",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Executive summaries",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Design system",
+     "lessons": [
+      {
+       "title": "Slide masters and layouts",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Grids, alignment and white space",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Typography and colour",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Data visualisation",
+     "lessons": [
+      {
+       "title": "Choosing the right chart",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Decluttering charts",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Tables that read well",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Delivery",
+     "lessons": [
+      {
+       "title": "Rehearsal techniques",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Presenting remotely",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Handling tough questions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Storyline exercise",
+     "kind": "document",
+     "summary": "Answer the storyline questions and write the executive summary for the market-entry case in the brief.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Chart makeover data",
+     "kind": "file",
+     "summary": "Use the workbook data to build three corrected charts that fix the problems listed and export them for slides.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Board-ready deck",
+     "kind": "practical",
+     "summary": "Rebuild the provided messy 12-slide deck (or your own) into a clear, consistent 8–10 slide deck.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Five minutes with the CEO",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "data-analytics-for-business-professionals",
+   "title": "Data Analytics for Business Professionals",
+   "subtitle": "Ask better questions of data and answer them with Excel, SQL basics and clear storytelling.",
+   "description": "A practical analytics course for non-specialists: framing questions, cleaning data, descriptive statistics, SQL fundamentals, visualisation and communicating insights. Work on retail, marketing and operations datasets throughout.",
+   "level": "beginner",
+   "outcomes": [
+    "Turn business problems into answerable data questions",
+    "Clean and prepare data reliably",
+    "Use descriptive statistics and basic SQL queries",
+    "Visualise data to reveal patterns honestly",
+    "Communicate insights and recommendations clearly"
+   ],
+   "requirements": [
+    "Excel or Google Sheets",
+    "No coding required (SQL taught from scratch)"
+   ],
+   "id": "5f117d2c-e740-5ead-a134-cc5c4523975e",
+   "category": "professional-productivity",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 20,
+   "thumbnail_url": "/thumbnails/data-analytics-for-business-professionals.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Ask better questions of data and answer them with Excel, SQL basics and clear storytelling. Level: Beginner. Requirements: Excel or Google Sheets; No coding required (SQL taught from scratch)."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Thinking like an analyst",
+     "lessons": [
+      {
+       "title": "Framing questions",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Metrics and definitions",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "The analysis workflow",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Preparing data",
+     "lessons": [
+      {
+       "title": "Common data problems",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Cleaning techniques",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Documenting changes",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Describing data",
+     "lessons": [
+      {
+       "title": "Averages, spread and distributions",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Segmentation",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Correlation versus causation",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "SQL fundamentals",
+     "lessons": [
+      {
+       "title": "SELECT, WHERE, ORDER BY",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "GROUP BY and aggregates",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Joining tables",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Insight to action",
+     "lessons": [
+      {
+       "title": "Visualising honestly",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Writing insight summaries",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Recommendations",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Analysis framing questions",
+     "kind": "document",
+     "summary": "Answer the framing questions for an operations team's delivery delay problem.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Retail sales analysis",
+     "kind": "file",
+     "summary": "Clean the retail dataset in the workbook, then answer the five business questions with formulas and pivots.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Insight report",
+     "kind": "practical",
+     "summary": "Analyse a public dataset (or one we provide) and produce a two-page insight report with charts and recommendations.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Ice-cream and sunburn",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "startup-launch-business-fundamentals",
+   "title": "Startup Launch and Business Fundamentals",
+   "subtitle": "Go from idea to a validated, legally set-up business with a plan you can act on.",
+   "description": "Covers idea validation, business models, pricing, unit economics, legal structures in India (proprietorship, LLP, private limited), GST basics, funding options and a 90-day launch plan.",
+   "level": "beginner",
+   "outcomes": [
+    "Validate an idea with customer evidence before building",
+    "Design a business model and pricing strategy",
+    "Calculate unit economics and break-even",
+    "Understand Indian business structures, registrations and GST basics",
+    "Write a focused 90-day launch plan"
+   ],
+   "requirements": [
+    "A business idea (real or practice)"
+   ],
+   "id": "09a343c9-748e-58b3-ab00-6bea8f92a910",
+   "category": "entrepreneurship-business",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 21,
+   "thumbnail_url": "/thumbnails/startup-launch-business-fundamentals.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Go from idea to a validated, legally set-up business with a plan you can act on. Level: Beginner. Requirements: A business idea (real or practice)."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Validating the idea",
+     "lessons": [
+      {
+       "title": "Problem interviews",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Evidence versus opinions",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Minimum viable offers",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Business model",
+     "lessons": [
+      {
+       "title": "Business Model Canvas",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Pricing strategies",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Revenue streams",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Numbers",
+     "lessons": [
+      {
+       "title": "Unit economics",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Break-even analysis",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Simple financial forecasts",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Setting up in India",
+     "lessons": [
+      {
+       "title": "Choosing a legal structure",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Registrations and GST basics",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Contracts and compliance essentials",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Launch",
+     "lessons": [
+      {
+       "title": "Funding options",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "The 90-day plan",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Measuring traction",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Business model canvas",
+     "kind": "document",
+     "summary": "Complete the canvas questions in the brief for your idea, with evidence for each block.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Unit economics and break-even",
+     "kind": "file",
+     "summary": "Complete the workbook for a cloud-kitchen idea: contribution margin, break-even orders per month and sensitivity to price and food cost.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Validation sprint",
+     "kind": "practical",
+     "summary": "Run at least five customer conversations or a pre-sale test for your idea and summarise what you learned.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Co-founder disagreement",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "business-development-sales-mastery",
+   "title": "Business Development and Sales Mastery",
+   "subtitle": "Prospect, run discovery, pitch, negotiate and close — with a repeatable process.",
+   "description": "A structured B2B and B2C sales course: ideal customer profiles, prospecting, discovery questions, value-based pitching, objection handling, negotiation, pipeline management and partnerships. Practise with role-plays and real outreach.",
+   "level": "intermediate",
+   "outcomes": [
+    "Define ideal customer profiles and target accounts",
+    "Prospect through email, LinkedIn and calls professionally",
+    "Run discovery calls that uncover real needs",
+    "Handle objections and negotiate win–win terms",
+    "Manage a pipeline and forecast with a CRM"
+   ],
+   "requirements": [
+    "No prior sales experience required"
+   ],
+   "id": "9e059c81-965e-53c5-a518-69f357c38915",
+   "category": "entrepreneurship-business",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 22,
+   "thumbnail_url": "/thumbnails/business-development-sales-mastery.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Prospect, run discovery, pitch, negotiate and close — with a repeatable process. Level: Intermediate. Requirements: No prior sales experience required."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Sales foundations",
+     "lessons": [
+      {
+       "title": "How buyers buy",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Ideal customer profile",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Value propositions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Prospecting",
+     "lessons": [
+      {
+       "title": "Researching accounts",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Cold email and LinkedIn",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Calling with confidence",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Discovery and pitching",
+     "lessons": [
+      {
+       "title": "Discovery questions",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Tailored demos",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Proposals",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Objections and negotiation",
+     "lessons": [
+      {
+       "title": "Common objections",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Negotiation preparation",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Closing",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Pipeline and partnerships",
+     "lessons": [
+      {
+       "title": "CRM hygiene",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Forecasting",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Channel and partnership deals",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Discovery call plan",
+     "kind": "document",
+     "summary": "Answer the discovery planning questions for a SaaS sale to a 200-person logistics company.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Pipeline forecast",
+     "kind": "file",
+     "summary": "Use the CRM export in the workbook to calculate weighted pipeline by stage and forecast the quarter.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Outreach campaign",
+     "kind": "practical",
+     "summary": "Research 15 target accounts and run a personalised outreach sequence; track replies and meetings.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "'Your price is too high'",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "building-scaling-online-business",
+   "title": "Building and Scaling an Online Business",
+   "subtitle": "Launch, operate and grow an e-commerce, service or digital-product business online.",
+   "description": "Choose a model, set up a store or service site, payments, logistics and customer support, then scale with marketing, retention, automation and team-building. Includes Indian payment, logistics and compliance basics.",
+   "level": "intermediate",
+   "outcomes": [
+    "Choose and validate an online business model",
+    "Set up a store or site with payments and fulfilment",
+    "Build acquisition and retention systems",
+    "Track the metrics that drive profit",
+    "Automate operations and build a small team"
+   ],
+   "requirements": [
+    "A laptop and willingness to build a real or practice store"
+   ],
+   "id": "387419cf-cd41-58e9-a47b-8b0d1592500d",
+   "category": "entrepreneurship-business",
+   "price_paise": 750000,
+   "duration_minutes": 1200,
+   "projects_count": 3,
+   "is_featured": false,
+   "sort_order": 23,
+   "thumbnail_url": "/thumbnails/building-scaling-online-business.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Launch, operate and grow an e-commerce, service or digital-product business online. Level: Intermediate. Requirements: A laptop and willingness to build a real or practice store."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Choosing the model",
+     "lessons": [
+      {
+       "title": "E-commerce, services and digital products",
+       "type": "text",
+       "minutes": 50,
+       "preview": true
+      },
+      {
+       "title": "Niche selection",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Validation",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Building the business",
+     "lessons": [
+      {
+       "title": "Store or site setup",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Payments, GST and invoicing basics",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Logistics and returns",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Getting customers",
+     "lessons": [
+      {
+       "title": "Launch marketing",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Marketplaces versus own store",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Email and WhatsApp marketing",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Unit economics and metrics",
+     "lessons": [
+      {
+       "title": "AOV, CAC, LTV",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Contribution per order",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Dashboards",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Scaling",
+     "lessons": [
+      {
+       "title": "Automation",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Hiring and outsourcing",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      },
+      {
+       "title": "Systems and SOPs",
+       "type": "text",
+       "minutes": 50,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Business model questions",
+     "kind": "document",
+     "summary": "Answer the questions comparing marketplace selling with your own D2C store for a handloom brand.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Order economics model",
+     "kind": "file",
+     "summary": "Complete the workbook: contribution per order after shipping, payment fees, returns and ads, and the CAC you can afford.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Store or service site",
+     "kind": "practical",
+     "summary": "Set up a working store or service site (test mode is fine) with products, policies and a checkout flow.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Returns are eating profit",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  },
+  {
+   "slug": "personal-branding-linkedin-growth",
+   "title": "Personal Branding and LinkedIn Growth",
+   "subtitle": "Build a credible professional brand that brings opportunities to you.",
+   "description": "Define your positioning, optimise your LinkedIn profile, create content consistently, build relationships and turn visibility into jobs, clients or partnerships — authentically and without engagement hacks.",
+   "level": "beginner",
+   "outcomes": [
+    "Define a clear professional positioning statement",
+    "Optimise every section of your LinkedIn profile",
+    "Create a sustainable content system that reflects your expertise",
+    "Network and message professionally",
+    "Measure growth and convert visibility into opportunities"
+   ],
+   "requirements": [
+    "A LinkedIn account"
+   ],
+   "id": "1241bd74-a260-52e2-a1fd-09e3e0255e59",
+   "category": "entrepreneurship-business",
+   "price_paise": 750000,
+   "duration_minutes": 960,
+   "projects_count": 2,
+   "is_featured": false,
+   "sort_order": 24,
+   "thumbnail_url": "/thumbnails/personal-branding-linkedin-growth.svg",
+   "faqs": [
+    {
+     "question": "Who is this course for?",
+     "answer": "Build a credible professional brand that brings opportunities to you. Level: Beginner. Requirements: A LinkedIn account."
+    },
+    {
+     "question": "How are assignments evaluated?",
+     "answer": "Quizzes are marked instantly. Workbook, written, practical and scenario assignments are evaluated against a published rubric, usually about an hour after you submit. Results include marks and written feedback, and the Proofwork team can review and adjust any result."
+    },
+    {
+     "question": "How long do I have access?",
+     "answer": "Access does not expire. Learn at your own pace and come back to the material whenever you need it."
+    },
+    {
+     "question": "Is there a certificate?",
+     "answer": "You receive an internal Proofwork completion record when you finish the course requirements. It is not an accredited qualification."
+    },
+    {
+     "question": "How do I pay?",
+     "answer": "The course costs ₹7,500. Pay securely with UPI, cards, net banking or wallets through Razorpay. Access is granted as soon as your payment is verified."
+    },
+    {
+     "question": "Can I get a refund?",
+     "answer": "Yes, within 7 days of purchase if you have completed less than 25% of the course. See the refund policy for full conditions."
+    }
+   ],
+   "modules": [
+    {
+     "title": "Positioning",
+     "lessons": [
+      {
+       "title": "Your expertise and audience",
+       "type": "text",
+       "minutes": 34,
+       "preview": true
+      },
+      {
+       "title": "Positioning statement",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Proof and credibility",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Profile",
+     "lessons": [
+      {
+       "title": "Headline and About",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Experience and featured section",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Recommendations and skills",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Content",
+     "lessons": [
+      {
+       "title": "Content pillars",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Writing posts that teach",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Formats and consistency",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Relationships",
+     "lessons": [
+      {
+       "title": "Commenting with value",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Connection and messaging etiquette",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Communities and events",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    },
+    {
+     "title": "Opportunities",
+     "lessons": [
+      {
+       "title": "Inbound to conversations",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Measuring progress",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      },
+      {
+       "title": "Long-term brand",
+       "type": "text",
+       "minutes": 34,
+       "preview": false
+      }
+     ]
+    }
+   ],
+   "assignments": [
+    {
+     "title": "Positioning worksheet",
+     "kind": "document",
+     "summary": "Answer the positioning worksheet and draft your headline and About section.",
+     "module": 1,
+     "minutes": 90
+    },
+    {
+     "title": "Content analytics tracker",
+     "kind": "file",
+     "summary": "Log 30 days of posts in the tracker and calculate engagement rate, best formats and best posting times.",
+     "module": 2,
+     "minutes": 120
+    },
+    {
+     "title": "Profile and content sprint",
+     "kind": "practical",
+     "summary": "Rebuild your LinkedIn profile and publish at least six posts over three weeks.",
+     "module": 3,
+     "minutes": 180
+    },
+    {
+     "title": "Viral but irrelevant",
+     "kind": "scenario",
+     "summary": "Scenario challenge",
+     "module": 4,
+     "minutes": 60
+    }
+   ],
+   "quiz_questions": 5
+  }
+ ]
+}
