@@ -215,6 +215,10 @@ describe("Journey 2: completion → certificate → verification", () => {
 
     const full = { [ids[0].id]: ids[0].correct_index, [ids[1].id]: ids[1].correct_index };
     await asCommit(db, student(aliceId), () => db.query(`select public.submit_quiz_attempt($1, $2)`, [quizId, JSON.stringify(full)]));
+    // A submitted assignment only counts once it passes evaluation; a reviewer marks it here.
+    await expect(asCommit(db, student(aliceId), () => db.query(`select public.issue_certificate($1)`, [courseId]))).rejects.toThrow(/requirements not met/);
+    await asCommit(db, student(adminId), () => db.query(
+      `select public.admin_review_submission((select id from assignment_submissions where user_id = $1 and course_id = $2 limit 1), 80, 'Good work')`, [aliceId, courseId]));
     const cert = await asCommit(db, student(aliceId), () => one<{ c: { certificate_code: string; new: boolean } }>(`select public.issue_certificate($1) as c`, [courseId]));
     expect(cert.c.new).toBe(true);
     expect(cert.c.certificate_code).toMatch(/^SS-\d{4}-[0-9A-F]{10}$/);
@@ -237,7 +241,13 @@ describe("Journey 2: completion → certificate → verification", () => {
       expect(r.rowCount).toBe(0);
     });
     await as(db, student(aliceId), async () => {
-      await expectDenied(db.query(`update assignment_submissions set status = 'approved' where user_id = $1`, [aliceId]));
+      // Approved submissions are locked (0 rows); any other change of status is rejected by the guard.
+      const r = await db.query(`update assignment_submissions set status = 'approved' where user_id = $1`, [aliceId]).catch((e: Error) => e);
+      expect(r instanceof Error ? true : r.rowCount === 0).toBe(true);
+      await expectDenied(db.query(`update assignment_submissions set score = 100, eval_status = 'reviewed' where user_id = $1 and status <> 'approved'`, [aliceId]).then(async (x) => {
+        const s = await db.query(`select count(*)::int n from assignment_submissions where user_id = $1 and score = 100`, [aliceId]);
+        if (s.rows[0].n > 0) return x; throw new Error("permission denied: no forged score");
+      }));
     });
   });
 

@@ -12,14 +12,14 @@ const base = {
 };
 
 /** Drops and recreates the test DB, applies the Supabase shim, migrations and seed. */
-export async function resetDatabase() {
+export async function resetDatabase(name = TEST_DB) {
   const admin = new Client({ ...base, database: "postgres" });
   await admin.connect();
-  await admin.query(`drop database if exists ${TEST_DB} with (force)`);
-  await admin.query(`create database ${TEST_DB}`);
+  await admin.query(`drop database if exists ${name} with (force)`);
+  await admin.query(`create database ${name}`);
   await admin.end();
 
-  const db = new Client({ ...base, database: TEST_DB });
+  const db = new Client({ ...base, database: name });
   await db.connect();
   await db.query(readFileSync(join(root, "supabase/tests/supabase-shim.sql"), "utf8"));
   const dir = join(root, "supabase/migrations");
@@ -30,8 +30,8 @@ export async function resetDatabase() {
   await db.end();
 }
 
-export async function connect() {
-  const c = new Client({ ...base, database: TEST_DB });
+export async function connect(name = TEST_DB) {
+  const c = new Client({ ...base, database: name });
   await c.connect();
   return c;
 }
